@@ -79,7 +79,7 @@ Print:
 // gérer la définition d'une constante
 
 Assignment:
-  tID tASSIGN Expression                                                                                      {printf("Assignement\n") ;}
+  tID tASSIGN Expression                                                                                      {printf("Assignement\n") ;} // mettre à jour la table des symboles
 ;
 
 Initialisation:
