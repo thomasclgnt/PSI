@@ -8,6 +8,7 @@ struct Symbol{ // structure
     int adresse ;
     struct Symbol * precedent;
 };
+
 extern int addr ;
 extern int profondeur_globale ;
 extern struct Symbol *stack ;

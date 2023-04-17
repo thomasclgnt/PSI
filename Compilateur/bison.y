@@ -38,7 +38,6 @@ FILE* input_file ;
 Programme:
   %empty
   | Programme Function
-;
 
 Function:
   {printf ("VOID Function Start \n") ;} tVOID Declaration tLBRACE Statement tRBRACE                           {printf ("VOID Function End \n") ;}
