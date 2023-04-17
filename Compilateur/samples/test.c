@@ -18,6 +18,7 @@ void main(void) {
       int o ;
       i = i + 1;
     }
+    int x ;
   }
   int m ;
 }

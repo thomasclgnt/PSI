@@ -60,19 +60,19 @@ Statement:
   | tINT Initialisation tSEMI Statement        
   | Assignment tSEMI Statement                                                                        
   | Print                                                         
-  | While_l      {profondeur_globale -= 1 ; printf("prof fin while = %d\n", profondeur_globale);}                           
-  | If_condition {profondeur_globale -= 1 ; printf("prof fin if = %d\n", profondeur_globale);}
+  | While_l {printf("prof fin while = %d\n", profondeur_globale);}                                
+  | If_condition {printf("prof fin if = %d\n", profondeur_globale);}
 ;
 
 prof_p: %empty {profondeur_globale += 1 ; printf("prof if = %d\n", profondeur_globale); }
 
 If_condition:
-   prof_p tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE Statement  { printf("If \n") ;}
-  | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE tELSE tLBRACE Statement tRBRACE Statement        {printf("Bloc If Else \n") ;}
+   prof_p tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE Statement  { printf("If \n") ; profondeur_globale -= 1 ;}
+  | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE tELSE tLBRACE Statement tRBRACE Statement        {printf("Bloc If Else \n") ; profondeur_globale -= 1 ;}
 ;
 
 While_l:
-  {printf("while statement Start\n") ;profondeur_globale += 1 ;} tWHILE tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE Statement { printf("prof while = %d\n", profondeur_globale);printf("while statement End\n") ;}
+  {printf("while statement Start\n") ;profondeur_globale += 1 ;} tWHILE tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE Statement { profondeur_globale -= 1 ; printf("prof while = %d\n", profondeur_globale);printf("while statement End\n") ;} 
 ;
 
 // fonction printf() ayant 1 seul paramètre : la variable dont la valeur doit être affichée
@@ -93,7 +93,7 @@ Initialisation:
 ;
 
 Expression:
-    tID   {push("", 1, profondeur_globale) ; //creer var tmp
+    tID   {//push("", 1, profondeur_globale) ; //creer var tmp
           /* ajout_copy(last_addr_used,adresse de $1) (copier $1 dans cette var tm p ; */ }                                                                                                      {printf("id \n") ;}
   | tNB   { /* push("", 1, profondeur_globale) ; $$ creer var tmp  ; affect $2 dans cette var tmp ; ajout_afc(last_addr_used, $2) */ printf("nb \n") ;}
   | tID tLPAR Parameter tRPAR                                                                                 {printf("Appel fonction avec parametre\n") ;}
@@ -141,10 +141,10 @@ int main(void) {
   bool vide = false ;
   while (!vide){
     if (stack->precedent != NULL){
-      printf("%s, p = %d\n", stack->id, stack->profondeur) ;
+      printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
       stack = stack->precedent ;
     } else {
-      printf("%s, p = %d\n", stack->id, stack->profondeur) ;
+      printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
       vide = true ;
     }
   }
