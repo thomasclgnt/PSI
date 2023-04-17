@@ -6,8 +6,11 @@ bison.tab.c bison.tab.h:	bison.y
 lex.yy.c: lex.l bison.tab.h
 	flex lex.l
 
-bison: lex.yy.c bison.tab.c bison.tab.h
-	gcc -o bison bison.tab.c lex.yy.c
+%.o: %.c
+	gcc -c -o $@ $^
+
+bison: lex.yy.o bison.tab.o symboles.o
+	gcc -o bison $^
 
 clean:
 	rm bison bison.tab.c lex.yy.c bison.tab.h bison.output

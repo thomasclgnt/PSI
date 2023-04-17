@@ -15,7 +15,9 @@ void main(void) {
     i = 2;
     j = a_b_c - 10;
     while (i < j) {
+      int o ;
       i = i + 1;
     }
   }
+  int m ;
 }

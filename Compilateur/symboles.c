@@ -1,23 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include "symboles.h"
 
 // *stack : le contenu de ce sur quoi il pointe
 // stack : adresse du pointeur
 // &var : l'adresse où on a var
 
-struct Symbol{ // structure
-    char * id ;
-    int type ;
-    int profondeur ;
-    int adresse ;
-    struct Symbol * precedent;
-};
-
-
 int addr = 0 ; 
 int profondeur_globale = 0 ; // penser à faire fonction pour ajouter profondeur
 struct Symbol * stack = NULL ; // on définit le pointeur stack vers notre structure Symbol
+
 
 // insert
 void push(char * id, int type, int profondeur){
@@ -52,10 +45,13 @@ void pop(){
     struct Symbol * depile = stack;
     stack = stack->precedent ;
     free(depile) ;
+    addr -= 4 ;
 } 
 
 // get
 
+
+/*
 int main(){
     
     push("thomas", 1, 0) ;
@@ -77,4 +73,4 @@ int main(){
     
 }
 
-
+*/
