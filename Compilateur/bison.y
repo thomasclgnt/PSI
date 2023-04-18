@@ -93,11 +93,11 @@ Initialisation:
 ;
 
 Expression:
-    tID   {push("tempID", 1, profondeur_globale) ; //creer var tmp
-          /* ajout_copy(addr, adresse de $1) copier $1 dans cette var tm p ; 
+    tID   {printf("tempID is %s\n", $1) ; push("tempID", 1, profondeur_globale) ; //creer var tmp
+            ajout_copy(addr, $1) /* copier $1 dans cette var tm p ; 
           - addr = last adress used 
-          - comment on récupère l'adresse de $1 ??? */ }                                                                                                      {printf("id \n") ;}
-  | tNB   {push("tempNB", 1, profondeur_globale) ; //$$ creer var tmp  
+          - comment on récupère l'adresse de $1 ???*/ ; }                                                                                                      {printf("id \n") ;}
+  | tNB   {printf("tempNB is %d\n", $1) ; push("tempNB", 1, profondeur_globale) ; //$$ creer var tmp  
           ajout_afc(addr, $1) ; //ajout_affect $2 dans cette var tmp 
           }
   | tID tLPAR Parameter tRPAR                                                                                 {printf("Appel fonction avec parametre\n") ;}
@@ -106,7 +106,7 @@ Expression:
                                   jout_exp_arith(1, last_addr_used_moins_1, last_addr_used, lat_addr_used_moins1); */ 
                                   pop() ; // liberer dervniere var tmp pop()}  printf("addition + \n") 
                                   printf("Tête : %s\n", stack->id) ;} 
-  | Expression tSUB Expression                                                                                yy{printf("soustraction - \n") ;}
+  | Expression tSUB Expression                                                                                {printf("soustraction - \n") ;}
   | Expression tMUL Expression                                                                                {printf("multiplication * \n") ;}
   | Expression tDIV Expression                                                                                {printf("division / \n") ;}
   | Expression tLT Expression                                                                                 {printf("condition < \n") ;}
