@@ -17,4 +17,6 @@ void push(char * id, int type, int profondeur) ;
 
 void pop() ;
 
+int get(char * name) ;
+
 #endif
