@@ -60,19 +60,19 @@ Statement:
   | tINT Initialisation tSEMI Statement        
   | Assignment tSEMI Statement                                                                        
   | Print                                                         
-  | While_l {printf("prof fin while = %d\n", profondeur_globale);}                                
-  | If_condition {printf("prof fin if = %d\n", profondeur_globale);}
+  | While_l {printf("prof fin while = %d\n", profondeur_globale);}    Statement                          
+  | If_condition {printf("prof fin if = %d\n", profondeur_globale);}  Statement
 ;
 
 prof_p: %empty {profondeur_globale += 1 ; printf("prof if = %d\n", profondeur_globale); }
 
 If_condition:
-   prof_p tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE Statement  { printf("If \n") ; profondeur_globale -= 1 ;}
-  | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE tELSE tLBRACE Statement tRBRACE Statement        {printf("Bloc If Else \n") ; profondeur_globale -= 1 ;}
+   prof_p tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE  { printf("If \n") ; profondeur_globale -= 1 ;}
+  | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE tELSE tLBRACE Statement tRBRACE        {printf("Bloc If Else \n") ; profondeur_globale -= 1 ;}
 ;
 
 While_l:
-  {printf("while statement Start\n") ;profondeur_globale += 1 ;} tWHILE tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE Statement { profondeur_globale -= 1 ; printf("prof while = %d\n", profondeur_globale);printf("while statement End\n") ;} 
+  {printf("while statement Start\n") ;profondeur_globale += 1 ;} tWHILE tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE { profondeur_globale -= 1 ; printf("prof while = %d\n", profondeur_globale);printf("while statement End\n") ;} 
 ;
 
 // fonction printf() ayant 1 seul paramètre : la variable dont la valeur doit être affichée
@@ -93,13 +93,20 @@ Initialisation:
 ;
 
 Expression:
-    tID   {//push("", 1, profondeur_globale) ; //creer var tmp
-          /* ajout_copy(last_addr_used,adresse de $1) (copier $1 dans cette var tm p ; */ }                                                                                                      {printf("id \n") ;}
-  | tNB   { /* push("", 1, profondeur_globale) ; $$ creer var tmp  ; affect $2 dans cette var tmp ; ajout_afc(last_addr_used, $2) */ printf("nb \n") ;}
+    tID   {push("tempID", 1, profondeur_globale) ; //creer var tmp
+          /* ajout_copy(addr, adresse de $1) copier $1 dans cette var tm p ; 
+          - addr = last adress used 
+          - comment on récupère l'adresse de $1 ??? */ }                                                                                                      {printf("id \n") ;}
+  | tNB   {push("tempNB", 1, profondeur_globale) ; //$$ creer var tmp  
+          ajout_afc(addr, $1) ; //ajout_affect $2 dans cette var tmp 
+          }
   | tID tLPAR Parameter tRPAR                                                                                 {printf("Appel fonction avec parametre\n") ;}
   | tID tLPAR tRPAR                                                                                           {printf("Appel fonction sans paramètre \n") ;}
-  | Expression tADD Expression  { /* instructer ADD last_add_used-1 last_add_used-1 last_add_used ajout_exp_arith(1, last_addr_used_moins_1, last_addr_used, lat_addr_used_moins1); liberer dervniere var tmp pop()} */ printf("addition + \n") ;} 
-  | Expression tSUB Expression                                                                                {printf("soustraction - \n") ;}
+  | Expression tADD Expression  { /* instructer ADD last_add_used-1 last_add_used-1 last_add_used a
+                                  jout_exp_arith(1, last_addr_used_moins_1, last_addr_used, lat_addr_used_moins1); */ 
+                                  pop() ; // liberer dervniere var tmp pop()}  printf("addition + \n") 
+                                  printf("Tête : %s\n", stack->id) ;} 
+| Expression tSUB Expression                                                                                yy{printf("soustraction - \n") ;}
   | Expression tMUL Expression                                                                                {printf("multiplication * \n") ;}
   | Expression tDIV Expression                                                                                {printf("division / \n") ;}
   | Expression tLT Expression                                                                                 {printf("condition < \n") ;}

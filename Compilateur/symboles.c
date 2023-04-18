@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "symboles.h"
 
 // *stack : le contenu de ce sur quoi il pointe
@@ -48,7 +49,44 @@ void pop(){
     addr -= 4 ;
 } 
 
-// get
+// get qui retourne l'adresse de l'élément en argument
+int get(char * name) {
+    bool vide = false ;
+    bool res = false ;
+    int val_retour = -1 ;
+    struct Symbol * stack_aux = stack ;
+    
+    printf("** true while ? : %d\n", (!vide && !res)) ;
+
+    while (!vide && !res){
+
+        printf("** true if stack not vide ? : %d\n", (stack != NULL)) ;
+        if (stack->precedent != NULL){
+            // printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+            printf("** id : %s\n", stack->id);
+            printf("** name : %s\n", name) ;
+
+            printf("** true if name ? : %d\n", (name == stack->id)) ;
+            if (name == stack->id) {
+                res = true ;
+                val_retour = stack->adresse ;
+            }
+
+            stack = stack->precedent ;
+            printf("** id prec : %s\n", stack->id);
+
+        } else if (name == stack->id) {
+            res = true ;
+            val_retour = stack->adresse ;
+        }else {
+            // printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+            vide = true ;
+        }
+  }
+
+  stack = stack_aux ;
+  return val_retour ;
+}
 
 
 /*
@@ -57,9 +95,9 @@ int main(){
     push("thomas", 1, 0) ;
 
     printf("haut de la pile : %s\n", stack->id);
-
+    
     push("marie", 1, 2) ;
-
+    
     printf("haut de la pile : %s\n", stack->id);
 
     push("dylan", 0, 1) ;
@@ -70,7 +108,10 @@ int main(){
 
     printf("haut de la pile : %s\n", stack->id);
 
+    printf("0 addr get : %d\n", get("thomas")) ;    
     
-}
+    printf("4 addr get : %d\n", get("marie")) ;
 
+    printf("-1 addr get : %d\n", get("dylan")) ;
+}
 */
