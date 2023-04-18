@@ -106,7 +106,7 @@ Expression:
                                   jout_exp_arith(1, last_addr_used_moins_1, last_addr_used, lat_addr_used_moins1); */ 
                                   pop() ; // liberer dervniere var tmp pop()}  printf("addition + \n") 
                                   printf("Tête : %s\n", stack->id) ;} 
-| Expression tSUB Expression                                                                                yy{printf("soustraction - \n") ;}
+  | Expression tSUB Expression                                                                                yy{printf("soustraction - \n") ;}
   | Expression tMUL Expression                                                                                {printf("multiplication * \n") ;}
   | Expression tDIV Expression                                                                                {printf("division / \n") ;}
   | Expression tLT Expression                                                                                 {printf("condition < \n") ;}
