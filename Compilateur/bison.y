@@ -27,8 +27,9 @@ FILE* input_file ;
 %token <num> tNB
 
 %left tCOMMA
-%left tOR tAND tLT tGT tNE tEQ t tGE tLE tADD tSUB tMUL tDIV
-
+%left tADD tSUB
+%left tMUL tDIV
+%left tOR tAND tLT tGT tNE tEQ t tGE tLE
 
 %start Programme
  
@@ -83,38 +84,43 @@ Print:
 // gérer la définition d'une constante
 
 Assignment:
-  tID tASSIGN Expression                                                                                      {printf("Assignement\n") ;} // mettre à jour la table des symboles
+  tID tASSIGN Expression     {ajout_copy(get($1), addr - 4) ; pop() ; printf("Assignement\n") ;} // mettre à jour la table des symboles
+                              // afc ce qu'il y a à droite du égal, dans l'adresse de ID
 ;
 
 Initialisation:
-  tID                        {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ;}                                                                                 {printf("Initialisation \n") ;}
-  | tID tASSIGN Expression   {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ;}                                                                                {printf("Initialisation \n") ;}
+  tID                        {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ; printf("Initialisation \n") ;}
+  | tID tASSIGN Expression   {pop(); push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ; printf("Initialisation \n") ;}
   | Initialisation tCOMMA Initialisation                                                                  
 ;
 
 Expression:
     tID   {printf("tempID is %s\n", $1) ; push("tempID", 1, profondeur_globale) ; //creer var tmp
-            ajout_copy(addr, $1) /* copier $1 dans cette var tm p ; 
-          - addr = last adress used 
-          - comment on récupère l'adresse de $1 ???*/ ; }                                                                                                      {printf("id \n") ;}
+          ajout_copy(addr - 4, get($1)) /* copier $1 dans cette var tm p ; 
+          - addr = last adress used */ ; 
+          printf("id \n") ;}
   | tNB   {printf("tempNB is %d\n", $1) ; push("tempNB", 1, profondeur_globale) ; //$$ creer var tmp  
-          ajout_afc(addr, $1) ; //ajout_affect $2 dans cette var tmp 
+          ajout_afc(addr - 4, $1) ; //ajout_affect $2 dans cette var tmp 
           }
   | tID tLPAR Parameter tRPAR                                                                                 {printf("Appel fonction avec parametre\n") ;}
   | tID tLPAR tRPAR                                                                                           {printf("Appel fonction sans paramètre \n") ;}
   | Expression tADD Expression  { /* instructer ADD last_add_used-1 last_add_used-1 last_add_used a
-                                  jout_exp_arith(1, last_addr_used_moins_1, last_addr_used, lat_addr_used_moins1); */ 
+                                  jout_exp_arith(1, last_addr_used_moins_1, last_addr_used_moins_1, lat_addr_used); */ 
+                                  ajout_exp_arith(1, addr - 8, addr - 8, addr - 4) ;
                                   pop() ; // liberer dervniere var tmp pop()}  printf("addition + \n") 
                                   printf("Tête : %s\n", stack->id) ;} 
-  | Expression tSUB Expression                                                                                {printf("soustraction - \n") ;}
-  | Expression tMUL Expression                                                                                {printf("multiplication * \n") ;}
-  | Expression tDIV Expression                                                                                {printf("division / \n") ;}
-  | Expression tLT Expression                                                                                 {printf("condition < \n") ;}
-  | Expression tLE Expression                                                                                 {printf("condition <= \n") ;}  
-  | Expression tGT Expression                                                                                 {printf("condition > \n") ;}
-  | Expression tGE Expression                                                                                 {printf("condition >= \n") ;}
-  | Expression tEQ Expression                                                                                 {printf("égalité == \n") ;}
-  | Expression tNE Expression                                                                                 {printf("différence != \n") ;}    
+  | Expression tSUB Expression  { ajout_exp_arith(3, addr - 8, addr - 8, addr - 4) ;
+                                  pop() ; printf("soustraction - \n") ;}
+  | Expression tMUL Expression  { ajout_exp_arith(2, addr - 8, addr - 8, addr - 4) ;
+                                  pop() ; printf("multiplication * \n") ;}
+  | Expression tDIV Expression  { ajout_exp_arith(4, addr - 8, addr - 8, addr - 4) ;
+                                  pop() ; printf("division / \n") ;}
+  | Expression tLT Expression   { ajout_exp_arith(9, addr - 8, addr - 8, addr - 4) ; pop() ; printf("condition < \n") ;}
+  | Expression tLE Expression                                                                                 {pop() ; printf("condition <= \n") ;}  
+  | Expression tGT Expression   { ajout_exp_arith(10, addr - 8, addr - 8, addr - 4) ; pop() ; printf("condition > \n") ;}
+  | Expression tGE Expression                                                                                 {pop() ; printf("condition >= \n") ;}
+  | Expression tEQ Expression   { ajout_exp_arith(11, addr - 8, addr - 8, addr - 4) ; pop() ; printf("égalité == \n") ;}
+  | Expression tNE Expression                                                                                 {pop() ; printf("différence != \n") ;}    
 ;
 
 Expression_Log:
@@ -131,6 +137,7 @@ Parameter:
 Return:
   tRETURN tLPAR Expression tRPAR                                                                              {printf("Return\n") ;}
   | tRETURN Expression                                                                                        {printf("Return\n") ;}
+  // À LA FIN DE LA FONCTION / FICHIER, ON DEVRAIT FAIRE UN INSTRUCTION NOP 0 0 0
 ;
 
 %%
@@ -144,16 +151,12 @@ int main(void) {
   printf("---- MAIN ---- \n \n ");
   yyparse();
   printf("\n++++ SUCCESSFULLY PARSED ++++\n");
-  printf("État de la pile : \n") ;
-  bool vide = false ;
-  while (!vide){
-    if (stack->precedent != NULL){
-      printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
-      stack = stack->precedent ;
-    } else {
-      printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
-      vide = true ;
-    }
-  }
-  
+
+  printf("\nÉtat de la pile : \n") ;
+  print_stack() ;
+
+  printf("\n Tableau d'instructions ASM : \n") ;
+  print_tab() ;
+
+
 }

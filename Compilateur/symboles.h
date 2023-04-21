@@ -19,4 +19,6 @@ void pop() ;
 
 int get(char * name) ;
 
+void print_stack();
+
 #endif

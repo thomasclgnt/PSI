@@ -56,28 +56,33 @@ int get(char * name) {
     int val_retour = -1 ;
     struct Symbol * stack_aux = stack ;
     
-    printf("** true while ? : %d\n", (!vide && !res)) ;
+    // printf("** true while ? : %d\n", (!vide && !res)) ;
 
     while (!vide && !res){
 
-        printf("** true if stack not vide ? : %d\n", (stack != NULL)) ;
+        // printf("** true if stack not vide ? : %d\n", (stack != NULL)) ;
         if (stack->precedent != NULL){
-            // printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
-            printf("** id : %s\n", stack->id);
-            printf("** name : %s\n", name) ;
+            // // printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+            // printf("** id : %s\n", stack->id);
+            // printf("** name : %s\n", name) ;
 
-            printf("** true if name ? : %d\n", (name == stack->id)) ;
-            if (name == stack->id) {
+            // printf("** true if name ? : %d\n", (name == stack->id)) ;
+            // printf("** true if name strcmp ? : %d\n", (strcmp(name, stack->id))) ;
+            if (strcmp(name, stack->id) == 0) {
                 res = true ;
                 val_retour = stack->adresse ;
+                // printf("** COPY SUCCESSFULL\n");
             }
 
             stack = stack->precedent ;
-            printf("** id prec : %s\n", stack->id);
+            // printf("** id prec : %s\n", stack->id);
 
-        } else if (name == stack->id) {
+        } else if (strcmp(name, stack->id) == 0) {
+            // printf("** id : %s\n", stack->id);
+            // printf("** name : %s\n", name) ;
             res = true ;
             val_retour = stack->adresse ;
+            // printf("** COPY SUCCESSFULL\n");
         }else {
             // printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
             vide = true ;
@@ -86,6 +91,19 @@ int get(char * name) {
 
   stack = stack_aux ;
   return val_retour ;
+}
+
+void print_stack(){
+    bool vide = false ;
+    while (!vide){
+        if (stack->precedent != NULL){
+            printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+            stack = stack->precedent ;
+        } else {
+            printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+            vide = true ;
+        }
+    }
 }
 
 

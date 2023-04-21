@@ -16,12 +16,10 @@ void ajout_exp_arith(int pcode, int addr_res, int addr_op1, int addr_op2){
 
 }
 
-void ajout_copy(int addr_res, char * name) {
+void ajout_copy(int addr_res, int addr_op) {
     tab[index_asm][0] = 5;
     tab[index_asm][1] = addr_res;
-    // retrouver addr_op dans la pile
-    int addr_op = get(name) ;
-    printf("GET NAME OK\n") ;
+
     if (addr_op != -1) {
         tab[index_asm][2] = addr_op;
         index_asm++;
@@ -38,3 +36,52 @@ void ajout_afc(int addr_res, int val) {
     index_asm++;
     printf("AFC @res:%d val:%d\n", addr_res, val) ;
 }
+
+
+// GEQ, SEQ ?
+
+void jump(int addr_cible){
+    tab[index_asm][0] = 7;
+    tab[index_asm][1] = addr_cible;
+    index_asm++;
+    printf("JMP @cible:%d \n", addr_cible) ;
+}
+
+void jumpf(int addr_test, int addr_cible){
+    tab[index_asm][0] = 8;
+    tab[index_asm][1] = addr_test;
+    tab[index_asm][2] = addr_cible;
+    index_asm++;
+    // À FAIRE : gérer selon le retour du test, 0 ou 1, où est-ce qu'on saute
+    printf("JMF @test:%d @cible:%d \n", addr_test, addr_cible) ;
+}
+
+void print_tab(){
+    int row = 100 ;
+    int col = 4 ;
+    int leave = 1 ;
+    int i = 0;
+
+    while (leave && i<row) {
+        if (tab[i][0] != 0) {
+            for (int j = 0; j < col; j++) {
+                printf("%d ", tab[i][j]);
+            }
+            printf("\n");
+        } else {
+            leave = 0 ;
+        }
+        i++ ;
+    }
+}
+
+/*
+int main() {
+ajout_afc(0, 5) ;
+ajout_afc(4, 5) ;
+ajout_afc(8, 5) ;
+ajout_afc(12, 5) ;
+print_tab() ;
+
+}
+*/
