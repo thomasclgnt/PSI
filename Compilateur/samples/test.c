@@ -3,7 +3,7 @@ void main(void) {
   int b;
   int toto, mimi=5 ;
   const int fin ;
-  b = 2e8;
+  b = 28;
   a_b_c = 123 + 321 * 4 / 2 - 1;
 
   if (a_b_c == 1) {
