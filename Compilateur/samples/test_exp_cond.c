@@ -1,10 +1,9 @@
 void main(void) {
-    int a = 8 ;
+    int a = 7 ;
     if (a) {
-        a = 0 ;
-        if (a) {
-            a = 9 ;
+        int b = 8 ;
+        if (b) {
+            int c = 9 ;
         }
-        a = 7 ;
     }
 }

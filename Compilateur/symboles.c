@@ -31,7 +31,6 @@ void push(char * id, int type, int profondeur){
         // faire bouger la stack ;
         stack = new_symbol ;
     }
-    
 
     // si le nom de variable existe déjà, 
     // il faut pas l'ajouter mais déclarer une erreur 
@@ -49,45 +48,39 @@ void pop(){
     addr -= 4 ;
 } 
 
+void decrement_depth(){
+    int prof_aux = stack->profondeur ;
+    profondeur_globale -= 1 ;
+
+    // pop dans la pile jusqu'à ce que prof du truc actuellement pointé soit = nouvelle profondeur
+    while(prof_aux > profondeur_globale){
+        pop() ;
+        prof_aux = stack->profondeur;
+    }
+    
+}
+
 // get qui retourne l'adresse de l'élément en argument
 int get(char * name) {
     bool vide = false ;
     bool res = false ;
     int val_retour = -1 ;
     struct Symbol * stack_aux = stack ;
-    
-    // printf("** true while ? : %d\n", (!vide && !res)) ;
 
     while (!vide && !res){
-
-        // printf("** true if stack not vide ? : %d\n", (stack != NULL)) ;
         if (stack->precedent != NULL){
-            // // printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
-            // printf("** id : %s\n", stack->id);
-            // printf("** name : %s\n", name) ;
-
-            // printf("** true if name ? : %d\n", (name == stack->id)) ;
-            // printf("** true if name strcmp ? : %d\n", (strcmp(name, stack->id))) ;
             if (strcmp(name, stack->id) == 0) {
                 res = true ;
                 val_retour = stack->adresse ;
-                // printf("** COPY SUCCESSFULL\n");
             }
-
             stack = stack->precedent ;
-            // printf("** id prec : %s\n", stack->id);
-
         } else if (strcmp(name, stack->id) == 0) {
-            // printf("** id : %s\n", stack->id);
-            // printf("** name : %s\n", name) ;
             res = true ;
             val_retour = stack->adresse ;
-            // printf("** COPY SUCCESSFULL\n");
         }else {
-            // printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
             vide = true ;
         }
-  }
+    }
 
   stack = stack_aux ;
   return val_retour ;

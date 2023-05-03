@@ -17,6 +17,8 @@ void push(char * id, int type, int profondeur) ;
 
 void pop() ;
 
+void decrement_depth() ;
+
 int get(char * name) ;
 
 void print_stack();

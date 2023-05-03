@@ -83,16 +83,18 @@ index_jmf: %empty {// midrule $$
 If_condition:
    prof_p tIF tLPAR Expression_Log tRPAR tLBRACE index_jmf Statement tRBRACE  { // patch la bonne addr_cible pour le JMF
                                                                                 patch_jmf($7) ;
-                                                                                printf("If \n") ; profondeur_globale -= 1 ;}
+                                                                                printf("If \n") ; decrement_depth() ;}
   | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE index_jmf Statement tRBRACE tELSE tLBRACE Statement tRBRACE        {printf("Bloc If Else \n") ; profondeur_globale -= 1 ;} //a enlever si on implémente pas
+
 ;
 
 index_jmp: %empty {$$ = get_index() ;}
 
 While_l:
+
   {printf("while statement Start\n") ; profondeur_globale += 1 ;}
   tWHILE tLPAR Expression_Log tRPAR tLBRACE index_jmf index_jmp Statement {ajout_jump($8) ;} tRBRACE { patch_jmf($7) ; 
-                                                                                                      profondeur_globale -= 1 ; 
+                                                                                                      decrement_depth() ; 
                                                                                                       printf("prof while = %d\n", profondeur_globale);
                                                                                                       printf("while statement End\n") ;} 
 ;
