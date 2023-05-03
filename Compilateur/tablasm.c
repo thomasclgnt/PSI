@@ -40,20 +40,30 @@ void ajout_afc(int addr_res, int val) {
 
 // GEQ, SEQ ?
 
-void jump(int addr_cible){
+void ajout_jump(int num_instr){
     tab[index_asm][0] = 7;
-    tab[index_asm][1] = addr_cible;
+    tab[index_asm][1] = num_instr;
     index_asm++;
-    printf("JMP @cible:%d \n", addr_cible) ;
+    printf("JMP @cible:%d \n", num_instr) ;
 }
 
-void jumpf(int addr_test, int addr_cible){
+void ajout_jumpf(int addr_test, int num_instr){
     tab[index_asm][0] = 8;
     tab[index_asm][1] = addr_test;
-    tab[index_asm][2] = addr_cible;
+    tab[index_asm][2] = num_instr;
     index_asm++;
     // À FAIRE : gérer selon le retour du test, 0 ou 1, où est-ce qu'on saute
-    printf("JMF @test:%d @cible:%d \n", addr_test, addr_cible) ;
+    printf("JMF @test:%d @cible:%d \n", addr_test, num_instr) ;
+}
+
+void patch_jmf(int index){
+    tab[index][2] = index_asm ;
+    printf("je patch [%d]JMF\n", index) ;
+}
+
+int get_index() {
+    int res = index_asm -1 ;
+    return res ;
 }
 
 void print_tab(){

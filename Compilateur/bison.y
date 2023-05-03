@@ -17,7 +17,10 @@ FILE* input_file ;
 %union { 
   int num ;
   char *s ;
+  int index ;
 }
+
+%type <index> index_jmf
 
 %token tIF tELSE tWHILE tPRINT tRETURN tINT tVOID tCONST
 %token tADD tSUB tMUL tDIV tLT tGT tNE tEQ tLE tGE tASSIGN tAND tOR tNOT 
@@ -67,9 +70,20 @@ Statement:
 
 prof_p: %empty {profondeur_globale += 1 ; printf("prof if = %d\n", profondeur_globale); }
 
+index_jmf: %empty {// midrule $$  
+              // mettre instruction JMF @addr_cond -1(destinconnue ???) dans le tableau
+              ajout_jumpf(addr -4, -1);
+              // $$ = index
+              $$ = get_index() ;
+              // libérer dernière var temporaire
+              pop() ;
+              }
+
 If_condition:
-   prof_p tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE  { printf("If \n") ; profondeur_globale -= 1 ;}
-  | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE Statement tRBRACE tELSE tLBRACE Statement tRBRACE        {printf("Bloc If Else \n") ; profondeur_globale -= 1 ;}
+   prof_p tIF tLPAR Expression_Log tRPAR tLBRACE index_jmf Statement tRBRACE  { // patch la bonne addr_cible pour le JMF
+                                                                                patch_jmf($7) ;
+                                                                                printf("If \n") ; profondeur_globale -= 1 ;}
+  | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE index_jmf Statement tRBRACE tELSE tLBRACE Statement tRBRACE        {printf("Bloc If Else \n") ; profondeur_globale -= 1 ;}
 ;
 
 While_l:
@@ -83,14 +97,16 @@ Print:
 
 // gérer la définition d'une constante
 
+
 Assignment:
-  tID tASSIGN Expression     {ajout_copy(get($1), addr - 4) ; pop() ; printf("Assignement\n") ;} // mettre à jour la table des symboles
+  tID tASSIGN Expression {ajout_copy(get($1), addr - 4) ; pop() ; printf("Assignement\n") ;} // mettre à jour la table des symboles
                               // afc ce qu'il y a à droite du égal, dans l'adresse de ID
 ;
 
 Initialisation:
   tID                        {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ; printf("Initialisation \n") ;}
-  | tID tASSIGN Expression   {pop(); push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ; printf("Initialisation \n") ;}
+  | tID                      {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ;} tASSIGN Expression {ajout_copy(get($1), addr - 4) ; pop() ; 
+                                                                                                    printf("Assignement\n") ;printf("Initialisation \n") ;}
   | Initialisation tCOMMA Initialisation                                                                  
 ;
 
