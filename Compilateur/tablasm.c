@@ -3,6 +3,20 @@
 #include "tablasm.h"
 #include "symboles.h"
 
+// actions : valeurs
+/*
+0 add
+1 mul
+2 sub
+3 div
+5 : copy
+6 : AFC
+7 : JUMP
+8 : JUMPF
+9 : inf
+10 : sup
+11 : equal
+*/
 int tab[1024][4] ;
 int index_asm = 0;
 
@@ -15,6 +29,7 @@ void ajout_exp_arith(int pcode, int addr_res, int addr_op1, int addr_op2){
     index_asm++;
 
 }
+// GEQ, SEQ ?
 
 void ajout_copy(int addr_res, int addr_op) {
     tab[index_asm][0] = 5;
@@ -38,7 +53,7 @@ void ajout_afc(int addr_res, int val) {
 }
 
 
-// GEQ, SEQ ?
+
 
 void ajout_jump(int num_instr){
     tab[index_asm][0] = 7;
