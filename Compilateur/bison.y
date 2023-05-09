@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "symboles.h"
 #include "tablasm.h"
+#include "interpreteur.h"
 
 extern FILE* yyin ;
 FILE* input_file ;
@@ -64,7 +65,7 @@ Statement:
   | tCONST tINT Initialisation tSEMI Statement                                                                {printf("Constant initialisation \n") ;}
   | tINT Initialisation tSEMI Statement        
   | Assignment tSEMI Statement                                                                        
-  | Print                                                         
+  | Print Statement                                                        
   | While_l {printf("prof fin while = %d\n", profondeur_globale);}    Statement                          
   | If_condition {printf("prof fin if = %d\n", profondeur_globale);}  Statement
 ;
@@ -101,7 +102,7 @@ While_l:
 
 // fonction printf() ayant 1 seul paramètre : la variable dont la valeur doit être affichée
 Print:
-  tPRINT tLPAR tID tRPAR tSEMI Statement                                                               {printf("Print \n") ;}
+  tPRINT tLPAR tID tRPAR tSEMI { ajout_print(get($3)) ;}                                                               {printf("Print \n") ;}
 ;
 
 // gérer la définition d'une constante
@@ -183,5 +184,8 @@ int main(void) {
   printf("\n Tableau d'instructions ASM : \n") ;
   print_tab() ;
 
+  export_file() ;
+
+  // execute() ; PROBLÈMES À RÉGLER
 
 }

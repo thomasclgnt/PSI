@@ -15,8 +15,12 @@
 8 : JUMPF
 9 : inf
 10 : sup
-11 : equal
+11 : equ
+12 : pri
 */
+
+// GEQ, SEQ ? IF ELSE ?
+
 int tab[1024][4] ;
 int index_asm = 0;
 
@@ -29,11 +33,12 @@ void ajout_exp_arith(int pcode, int addr_res, int addr_op1, int addr_op2){
     index_asm++;
 
 }
-// GEQ, SEQ ?
 
 void ajout_copy(int addr_res, int addr_op) {
     tab[index_asm][0] = 5;
     tab[index_asm][1] = addr_res;
+    tab[index_asm][2] = -1;
+    tab[index_asm][3] = -1;
 
     if (addr_op != -1) {
         tab[index_asm][2] = addr_op;
@@ -48,16 +53,16 @@ void ajout_afc(int addr_res, int val) {
     tab[index_asm][0] = 6;
     tab[index_asm][1] = addr_res;
     tab[index_asm][2] = val;
+    tab[index_asm][3] = -1;
     index_asm++;
     printf("AFC @res:%d val:%d\n", addr_res, val) ;
 }
 
-
-
-
 void ajout_jump(int num_instr){
     tab[index_asm][0] = 7;
     tab[index_asm][1] = num_instr;
+    tab[index_asm][2] = -1;
+    tab[index_asm][3] = -1;
     index_asm++;
     printf("JMP @cible:%d \n", num_instr) ;
 }
@@ -66,9 +71,19 @@ void ajout_jumpf(int addr_test, int num_instr){
     tab[index_asm][0] = 8;
     tab[index_asm][1] = addr_test;
     tab[index_asm][2] = num_instr;
+    tab[index_asm][3] = -1;
     index_asm++;
     // À FAIRE : gérer selon le retour du test, 0 ou 1, où est-ce qu'on saute
     printf("JMF @test:%d @cible:%d \n", addr_test, num_instr) ;
+}
+
+void ajout_print(int addr_res){
+    tab[index_asm][0] = 12;
+    tab[index_asm][1] = addr_res;
+    tab[index_asm][2] = -1;
+    tab[index_asm][3] = -1;
+    printf("PRI @var:%d \n", addr_res) ;
+    index_asm++;
 }
 
 void patch_jmf(int index){
@@ -93,11 +108,46 @@ void print_tab(){
                 printf("%d ", tab[i][j]);
             }
             printf("\n");
-        } else {
+        } else {            
+            for (int j = 0; j < col; j++) {
+                printf("%d ", tab[i][j]);
+            }
+            printf("\n");
             leave = 0 ;
         }
         i++ ;
     }
+}
+
+void export_file(){
+
+    FILE * file ;
+    file = fopen("instructions.txt", "w") ;
+    int row = 1024 ;
+    int col = 4 ;
+    int leave = 1 ;
+    int i = 0;
+    
+    // parcourir le tableau et rentrer chaque instruction dans le fichier
+
+    while (leave && i<row) {
+        if (tab[i][0] != 0) {
+            for (int j = 0; j < col; j++) {
+                fprintf(file, "%d ", tab[i][j]);
+            }
+            fprintf(file, "\n");
+        } else {
+            for (int j = 0; j < col; j++) {
+                fprintf(file, "%d ", tab[i][j]);
+            }
+            fprintf(file, "\n");
+            leave = 0 ;
+        }
+        i++ ;
+    }
+
+    fclose(file);
+
 }
 
 /*
