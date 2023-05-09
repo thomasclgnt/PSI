@@ -39,62 +39,62 @@ end ALU;
 
 architecture Behavioral of ALU is
 --Déclaration des composants
-
+constant zero_9b : bit_vector(8 downto 0):="000000000";
 --Declaration des signaux
 signal aux_add : STD_LOGIC_VECTOR(8 downto 0);
 signal aux_sous : STD_LOGIC_VECTOR(8 downto 0);
-signal aux_mul : STD_LOGIC_VECTOR(16 downto 0);
+signal aux_mul : STD_LOGIC_VECTOR(15 downto 0);
 
 
 
 begin
 
-    process
+    process(A, B, Ctr_Alu)
     -- Partie déclarative
     begin
     --Corps du programme
     
     if (Ctr_Alu = "000") then
-    -- addition
+    -- ADDITION
     --aux <= A + B ;
         aux_add <= std_logic_vector(A+B);
         
-        if (aux_add > "011111111") then
+        if (aux_add(8) = '1') then --retenue sur le 8° bit
             C <= '1' ;
         end if ;
-    
+        
+        if (aux_add = "000000000") then -- zéro
+            Z <= '1' ;
+        end if ;
+        
+        S <= aux_add ;
     
     elsif (Ctr_Alu = "001") then
-    -- soustraction, faut des signés
-    aux <= A - B ;
-    aux <= std_logic_vector(A-B);
+    -- SOUSTRACTION
+        aux_sous <= A - B ;
+        
+        if (aux_sous > "011111111") then -- négatif
+            N <= '1' ;
+            end if ;
     
+        S <= aux_sous ;
+        
     elsif (Ctr_Alu = "010") then
     -- multiplication
-    aux <= A * B ;
-    aux <= std_logic_vector(A*B);
+        aux_mul <= std_logic_vector(A*B);
+        
+        if (aux_mul > "0000000011111111") then --overflow
+            C <= '1' ;
+        end if ;
+        -- garder que les 8 premiers bits pour mettre dans S
+        S <= aux_mul(7 downto 0) ;
     
     elsif (Ctr_Alu = "011") then
     --division
-    aux <= A/B ;
-    
     
     end if ;
     
-    if (aux = "00000000") then
-        Z <= '1' ;
-    end if ;
-    
-    if (aux > "11111111") then
-            O <= '1' ;
-    end if ;
-    
-    if (aux < "00000000") then
-            N <= '1' ;
-    end if ;
-    
-    S <= aux ;
-     
+
     
     end process;
 
