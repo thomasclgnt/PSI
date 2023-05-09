@@ -13,10 +13,14 @@ void ajout_jump(int num_instr);
 
 void ajout_jumpf(int addr_test, int num_instr) ;
 
+void ajout_print(int addr_res) ;
+
 void patch_jmf(int index) ;
 
 int get_index() ;
 
 void print_tab() ;
+
+void export_file() ;
 
 #endif
