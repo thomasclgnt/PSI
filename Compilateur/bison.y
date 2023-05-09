@@ -186,6 +186,6 @@ int main(void) {
 
   export_file() ;
 
-  // execute() ; PROBLÈMES À RÉGLER
+  execute() ;
 
 }

@@ -100,7 +100,12 @@ void read_file(){
 
 
 void execute(){
+
+    printf("start execute\n") ;
+
     read_file(); // on remplit tab_rom à partir du fichier généré
+
+    printf("file read\n") ;
 
     // parcourir tab_rom jusqu'au NOP
     while (tab_rom[index_rom][0] != 0){
@@ -160,5 +165,6 @@ void execute(){
 
     }
 
+    printf("end while\n") ;
 
 }
