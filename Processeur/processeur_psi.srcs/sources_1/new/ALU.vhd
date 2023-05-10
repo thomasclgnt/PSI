@@ -21,7 +21,6 @@
 
 library IEEE, STD;
 use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.STD_LOGIC_ARITH.ALL;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
@@ -41,9 +40,10 @@ architecture Behavioral of ALU is
 --Déclaration des composants
 constant zero_9b : bit_vector(8 downto 0):="000000000";
 --Declaration des signaux
-signal aux_add : STD_LOGIC_VECTOR(8 downto 0);
+signal aux_add : STD_LOGIC_VECTOR(7 downto 0);
 signal aux_sous : STD_LOGIC_VECTOR(8 downto 0);
 signal aux_mul : STD_LOGIC_VECTOR(15 downto 0);
+signal aux_div : STD_LOGIC_VECTOR(7 downto 0) ;
 
 
 
@@ -54,12 +54,16 @@ begin
     begin
     --Corps du programme
     
-    if (Ctr_Alu = "000") then
+    if (Ctr_Alu = 0) then
     -- ADDITION
+        report "JE suis dans l'addition" ;
     --aux <= A + B ;
-        aux_add <= std_logic_vector(A+B);
-        
-        if (aux_add(8) = '1') then --retenue sur le 8° bit
+        report "valeur a et b : " & integer'image(to_integer(unsigned(A))) & ", " & integer'image(to_integer(unsigned(B))) ;
+        report "Valeur somme : " & integer'image(to_integer(unsigned(A)) + to_integer(unsigned(B))) ;
+        -- aux_add <= ('0' & A) + ('0' & B) ;
+        aux_add <= A + B ;
+        report "VALEUR DE L'AUX : " & integer'image(to_integer(unsigned(aux_add))) ;
+        if (aux_add(7) = '1') then --retenue sur le 8° bit
             C <= '1' ;
         end if ;
         
@@ -67,31 +71,32 @@ begin
             Z <= '1' ;
         end if ;
         
-        S <= aux_add ;
+        S <= aux_add(7 downto 0) ;
     
     elsif (Ctr_Alu = "001") then
     -- SOUSTRACTION
-        aux_sous <= A - B ;
+        aux_sous <= ('0' & A) - ('0' & B) ;
         
-        if (aux_sous > "011111111") then -- négatif
+        if (to_integer(unsigned(B)) > to_integer(unsigned(A))) then -- négatif
             N <= '1' ;
             end if ;
     
-        S <= aux_sous ;
+        S <= aux_sous(7 downto 0) ;
         
-    elsif (Ctr_Alu = "010") then
-    -- multiplication
+    elsif (Ctr_Alu = 2) then
+    -- MULTIPLICATION
         aux_mul <= std_logic_vector(A*B);
         
         if (aux_mul > "0000000011111111") then --overflow
-            C <= '1' ;
+            O <= '1' ;
         end if ;
         -- garder que les 8 premiers bits pour mettre dans S
         S <= aux_mul(7 downto 0) ;
     
     elsif (Ctr_Alu = "011") then
     --division
-    
+    --aux_div <= shift_right(unsigned(A), to_integer(unsigned(B))) ;
+    aux_div <= std_logic_vector((unsigned(A))/to_integer(unsigned(B))) ; 
     end if ;
     
 
