@@ -91,6 +91,11 @@ void patch_jmf(int index){
     printf("je patch [%d]JMF\n", index) ;
 }
 
+void patch_jmp(int index){
+    tab[index][1] = index_asm ;
+    printf("je patch [%d]JMP\n", index) ;
+}
+
 int get_index() {
     int res = index_asm -1 ;
     return res ;

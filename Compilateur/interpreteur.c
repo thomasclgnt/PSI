@@ -36,7 +36,7 @@ void jmp(int num_instr){
 }
 
 void jmf(int addr_cond, int num_instr){
-    if (tab_ram[addr_cond] = 0) {
+    if (tab_ram[addr_cond] == 0) {
         index_rom = num_instr - 1 ;
     }
 }
@@ -165,6 +165,6 @@ void execute(){
 
     }
 
-    printf("end while\n") ;
+    printf("end execution\n") ;
 
 }

@@ -16,4 +16,4 @@ clean:
 	rm bison bison.tab.c lex.yy.c bison.tab.h bison.output
 
 test: all
-	cat samples/test_interpret.c | ./bison
+	cat samples/test_functions.c | ./bison

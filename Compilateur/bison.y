@@ -23,6 +23,7 @@ FILE* input_file ;
 
 %type <index> index_jmf
 %type <index> index_jmp
+%type <index> tIF
 
 %token tIF tELSE tWHILE tPRINT tRETURN tINT tVOID tCONST
 %token tADD tSUB tMUL tDIV tLT tGT tNE tEQ tLE tGE tASSIGN tAND tOR tNOT 
@@ -55,7 +56,8 @@ Declaration:
 ;
 
 Argument:
-  tVOID                                                                                                       {printf("Argument f Void \n") ;}
+  %empty
+  | tVOID                                                                                                       {printf("Argument f Void \n") ;}
   | tINT tID                                                                                                  {printf("Argument f integer \n") ;}
   | tINT tID tCOMMA Argument                                                                                  {printf(",Argument f integer \n") ;}
 ;
@@ -74,18 +76,24 @@ prof_p: %empty {profondeur_globale += 1 ; printf("prof if = %d\n", profondeur_gl
 
 index_jmf: %empty {// midrule $$  
               // mettre instruction JMF @addr_cond -1(destinconnue ???) dans le tableau
-              ajout_jumpf(addr -4, -1);
+              ajout_jumpf(addr -4, -2);
               // $$ = index
               $$ = get_index() ;
               // libérer dernière var temporaire
               pop() ;
               }
+    
 
 If_condition:
    prof_p tIF tLPAR Expression_Log tRPAR tLBRACE index_jmf Statement tRBRACE  { // patch la bonne addr_cible pour le JMF
                                                                                 patch_jmf($7) ;
                                                                                 printf("If \n") ; decrement_depth() ;}
-  | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE index_jmf Statement tRBRACE tELSE tLBRACE Statement tRBRACE        {printf("Bloc If Else \n") ; profondeur_globale -= 1 ;} //a enlever si on implémente pas
+  | prof_p  tIF tLPAR Expression_Log tRPAR tLBRACE index_jmf Statement tRBRACE { // jmp puis patch jmf ? 
+                                                                                ajout_jump(-2) ;
+                                                                                $2 = get_index() ; // on stocke l'index de l'instruction jump dans le tIF
+                                                                                patch_jmf($7) ; } 
+            tELSE tLBRACE Statement tRBRACE  { patch_jmp($2) ;
+              printf("Bloc If Else \n") ; decrement_depth() ;} //a enlever si on implémente pas
 
 ;
 

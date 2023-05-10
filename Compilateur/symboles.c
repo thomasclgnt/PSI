@@ -46,6 +46,7 @@ void pop(){
     stack = stack->precedent ;
     free(depile) ;
     addr -= 4 ;
+    printf("Pop successful\n") ;
 } 
 
 void decrement_depth(){
@@ -55,7 +56,14 @@ void decrement_depth(){
     // pop dans la pile jusqu'à ce que prof du truc actuellement pointé soit = nouvelle profondeur
     while(prof_aux > profondeur_globale){
         pop() ;
-        prof_aux = stack->profondeur;
+        printf("Pop decrease\n") ;
+        if (stack != NULL) {
+            prof_aux = stack->profondeur;
+            printf("stack ok\n") ;
+        } else {
+            printf("argh jsp\n") ;
+            prof_aux = profondeur_globale ;
+        }
     }
     
 }
@@ -89,13 +97,19 @@ int get(char * name) {
 void print_stack(){
     bool vide = false ;
     while (!vide){
-        if (stack->precedent != NULL){
+        if (stack != NULL) {
+            if (stack->precedent != NULL){
             printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
             stack = stack->precedent ;
+            } else {
+                printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+                vide = true ;
+            }
         } else {
-            printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+            printf("La pile est vide \n");
             vide = true ;
         }
+        
     }
 }
 

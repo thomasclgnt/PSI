@@ -17,6 +17,8 @@ void ajout_print(int addr_res) ;
 
 void patch_jmf(int index) ;
 
+void patch_jmp(int index) ;
+
 int get_index() ;
 
 void print_tab() ;

@@ -3,8 +3,15 @@ void main(void) {
     i =3 ;
     j=4 ;
     k=8 ;
-    printf(i) ;
-    r = i+k/j ;
-    r = r * i+j ;
-    printf(r) ;
+    if ( i < 3 ) {
+        printf(i) ;
+    }
+    if ( i > k ) {
+        printf(k) ;
+    } else {
+        r = i+k/j ;
+        r = r * i+j ;
+        printf(r) ;
+    }
+    
 }
