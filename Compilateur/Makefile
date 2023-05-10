@@ -9,7 +9,7 @@ lex.yy.c: lex.l bison.tab.h
 %.o: %.c
 	gcc -c -o $@ $^
 
-bison: lex.yy.o bison.tab.o symboles.o tablasm.o interpreteur.o
+bison: lex.yy.o bison.tab.o symboles.o tablasm.o tablfunctions.o interpreteur.o
 	gcc -o bison $^
 
 clean:

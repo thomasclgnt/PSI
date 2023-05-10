@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include "symboles.h"
 #include "tablasm.h"
+#include "tablfunctions.h"
 #include "interpreteur.h"
 
 extern FILE* yyin ;
