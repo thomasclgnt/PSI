@@ -1,23 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1683719681">
-  <File Type="PA-TCL" Name="ALU.tcl"/>
-  <File Type="REPORTS-TCL" Name="ALU_reports.tcl"/>
-  <File Type="RDS-RDS" Name="ALU.vds"/>
-  <File Type="RDS-DCP" Name="ALU.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="ALU_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="ALU_utilization_synth.rpt"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1684156292">
+  <File Type="VDS-TIMING-PB" Name="Instruction_mem_timing_summary_synth.pb"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="Instruction_mem_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="Instruction_mem.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="Instruction_mem_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="Instruction_mem_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="Instruction_mem_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="Instruction_mem.vds"/>
+  <File Type="REPORTS-TCL" Name="Instruction_mem_reports.tcl"/>
+  <File Type="PA-TCL" Name="Instruction_mem.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/Instruction_mem.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Data_mem.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Banc_registre.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/ALU.vhd">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="ALU"/>
-      <Option Name="TopAutoSet" Val="TRUE"/>
+      <Option Name="TopModule" Val="Instruction_mem"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
