@@ -24,7 +24,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
-use IEEE.NUMERIC_STD.ALL;
+--use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx leaf cells in this code.
@@ -51,37 +51,23 @@ signal registre : tab ;
 
 begin
 
-    process
+    process(CLK)
     
     begin
         wait until CLK'event and CLK='1' ;
         
         if RST = '0' then
         -- initialiser le contenu du banc de registre à 0x00
-            registre(0 to 15) <= (others => (others => '0'));
+            
         end if ;
         
-        QA <= registre(to_integer(unsigned(addrA))) ;
-        QB <= registre(to_integer(unsigned(addrB))) ;
+        QA <= registre(to_integer(addrA)) ;
+        QB <= registre(to_integer(addrB)) ;
     
         if W = '1' then
-            if addrW = addrA then
-            -- protection si essai de lecture / écriture sur le même registre A
-                registre(to_integer(unsigned(addrA))) <= Data ;
-                QA <= Data ;
-            elsif addrW = addrB then
-            -- protection si essai de lecture / écriture sur le même registre B
-                registre(to_integer(unsigned(addrB))) <= Data ;
-                QB <= Data ;
-            else
-            -- écriture sur un registre différent
-                registre(to_integer(unsigned(addrW))) <= Data ;
-                
-            end if ;
-             
+            registre(to_integer(addrW)) <= Data ;
         end if ;
-        
-        
+    
     end process ;
 
 end Behavioral;

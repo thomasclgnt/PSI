@@ -25,11 +25,11 @@ set_param synth.vivado.isSynthRun true
 set_property webtalk.parent_dir /home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.cache/wt [current_project]
 set_property parent.project_path /home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
-set_property target_language Verilog [current_project]
+set_property target_language VHDL [current_project]
 set_property board_part digilentinc.com:basys3:part0:1.1 [current_project]
 set_property ip_output_repo /home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-read_vhdl -library xil_defaultlib /home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.srcs/sources_1/new/ALU.vhd
+read_vhdl -library xil_defaultlib /home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.srcs/sources_1/new/Banc_registre.vhd
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
 # design are intentionally left as such for best results. Dcp files will be
@@ -44,12 +44,12 @@ set_property used_in_implementation false [get_files /home/caylagin/Bureau/PSI/P
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 
-synth_design -top ALU -part xc7a35tcpg236-1
+synth_design -top Banc_registre -part xc7a35tcpg236-1
 
 
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef ALU.dcp
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file ALU_utilization_synth.rpt -pb ALU_utilization_synth.pb"
+write_checkpoint -force -noxdef Banc_registre.dcp
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file Banc_registre_utilization_synth.rpt -pb Banc_registre_utilization_synth.pb"
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

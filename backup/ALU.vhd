@@ -55,8 +55,7 @@ begin
     
     res <=  aux_add(7 downto 0) when Ctr_Alu = "000" else -- addition
             aux_sous when Ctr_Alu = "001" else -- soustraction
-            aux_mul(7 downto 0) when Ctr_Alu = "010" else
-            "00000000"; -- multiplication
+            aux_mul(7 downto 0) when Ctr_Alu = "010"; -- multiplication
             
      C <= aux_add(8) when Ctr_Alu = "000" else '0' ; --retenue sur l'addition
      Z <= '1' when res = 0 else '0'; -- zéro
