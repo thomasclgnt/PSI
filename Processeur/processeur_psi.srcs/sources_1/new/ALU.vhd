@@ -33,75 +33,36 @@ entity ALU is
            N : out STD_LOGIC; --flag : resultat negatif
            O : out STD_LOGIC; --flag : overflow (plus de 8 bits)
            Z : out STD_LOGIC; --flag : sortie nulle
-           C : out STD_LOGIC); --flag ! retenue addition ou multiplication
+           C : out STD_LOGIC); --flag ! retenue addition
 end ALU;
 
 architecture Behavioral of ALU is
 --Déclaration des composants
-constant zero_9b : bit_vector(8 downto 0):="000000000";
+
 --Declaration des signaux
-signal aux_add : STD_LOGIC_VECTOR(7 downto 0);
-signal aux_sous : STD_LOGIC_VECTOR(8 downto 0);
+signal aux_add : STD_LOGIC_VECTOR(8 downto 0);
+signal aux_sous : STD_LOGIC_VECTOR(7 downto 0);
 signal aux_mul : STD_LOGIC_VECTOR(15 downto 0);
-signal aux_div : STD_LOGIC_VECTOR(7 downto 0) ;
 
-
+signal res : STD_LOGIC_VECTOR(7 DOWNTO 0) ;
 
 begin
+    
+    aux_add <= ('0' & A) + ('0' & B) ;
+    aux_sous <= A - B ; 
+    aux_mul <= A*B;
+    
+    
+    res <=  aux_add(7 downto 0) when Ctr_Alu = "000" else -- addition
+            aux_sous when Ctr_Alu = "001" else -- soustraction
+            aux_mul(7 downto 0) when Ctr_Alu = "010"; -- multiplication
+            
+     C <= aux_add(8) when Ctr_Alu = "000" else '0' ; --retenue sur l'addition
+     Z <= '1' when res = 0 else '0'; -- zéro
+     N <= '1' when A < B and Ctr_Alu = "001" else '0' ; -- négatif
+     O <= '1' when aux_mul > "0000000011111111" else --overflow
+          '1' when aux_add(8)='1'and Ctr_Alu = "000" else '0' ;
 
-    process(A, B, Ctr_Alu)
-    -- Partie déclarative
-    begin
-    --Corps du programme
+    S <= res ;
     
-    if (Ctr_Alu = 0) then
-    -- ADDITION
-        report "JE suis dans l'addition" ;
-    --aux <= A + B ;
-        report "valeur a et b : " & integer'image(to_integer(unsigned(A))) & ", " & integer'image(to_integer(unsigned(B))) ;
-        report "Valeur somme : " & integer'image(to_integer(unsigned(A)) + to_integer(unsigned(B))) ;
-        -- aux_add <= ('0' & A) + ('0' & B) ;
-        aux_add <= A + B ;
-        report "VALEUR DE L'AUX : " & integer'image(to_integer(unsigned(aux_add))) ;
-        if (aux_add(7) = '1') then --retenue sur le 8° bit
-            C <= '1' ;
-        end if ;
-        
-        if (aux_add = "000000000") then -- zéro
-            Z <= '1' ;
-        end if ;
-        
-        S <= aux_add(7 downto 0) ;
-    
-    elsif (Ctr_Alu = "001") then
-    -- SOUSTRACTION
-        aux_sous <= ('0' & A) - ('0' & B) ;
-        
-        if (to_integer(unsigned(B)) > to_integer(unsigned(A))) then -- négatif
-            N <= '1' ;
-            end if ;
-    
-        S <= aux_sous(7 downto 0) ;
-        
-    elsif (Ctr_Alu = 2) then
-    -- MULTIPLICATION
-        aux_mul <= std_logic_vector(A*B);
-        
-        if (aux_mul > "0000000011111111") then --overflow
-            O <= '1' ;
-        end if ;
-        -- garder que les 8 premiers bits pour mettre dans S
-        S <= aux_mul(7 downto 0) ;
-    
-    elsif (Ctr_Alu = "011") then
-    --division
-    --aux_div <= shift_right(unsigned(A), to_integer(unsigned(B))) ;
-    aux_div <= std_logic_vector((unsigned(A))/to_integer(unsigned(B))) ; 
-    end if ;
-    
-
-    
-    end process;
-
-
 end Behavioral;

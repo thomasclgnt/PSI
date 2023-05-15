@@ -63,8 +63,8 @@ begin
     uut: Alu port map (A=>A, B=>B, S=>S, Ctr_Alu=>Ctr_Alu, N=>N, O=>O, Z=>Z, C=>C);
     
     A <= "00000010";
-    B <= "00000001";
-    Ctr_Alu<="000"; --addition test
+    B <= "00000011";
+    Ctr_Alu<="001";
     
 
 end Behavioral;
