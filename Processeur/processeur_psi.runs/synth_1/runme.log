@@ -1,6 +1,6 @@
 
 *** Running vivado
-    with args -log Instruction_mem.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Instruction_mem.tcl
+    with args -log Banc_registre.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Banc_registre.tcl
 
 
 ****** Vivado v2018.2 (64-bit)
@@ -8,126 +8,20 @@
   **** IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
     ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 
-source Instruction_mem.tcl -notrace
-Command: synth_design -top Instruction_mem -part xc7a35tcpg236-1
+source Banc_registre.tcl -notrace
+Command: synth_design -top Banc_registre -part xc7a35tcpg236-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 4732 
+INFO: Helper process launched with PID 12387 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1255.266 ; gain = 83.699 ; free physical = 59023 ; free virtual = 70503
+Starting RTL Elaboration : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 1255.270 ; gain = 83.699 ; free physical = 54366 ; free virtual = 67261
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'Instruction_mem' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:40]
-
-Warning: Trying to implement RAM in registers. Block RAM or DRAM implementation is not possible for one or more of the following reasons :
-	1: Unable to determine number of words or word size in RAM. 
-	2: No valid read/write found for RAM. 
-RAM dissolved into registers
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-WARNING: [Synth 8-3848] Net memory in module/entity Instruction_mem does not have driver. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:43]
-INFO: [Common 17-14] Message 'Synth 8-3848' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-INFO: [Synth 8-256] done synthesizing module 'Instruction_mem' (1#1) [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/sources_1/new/Instruction_mem.vhd:40]
+INFO: [Synth 8-638] synthesizing module 'Banc_registre' [/home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.srcs/sources_1/new/Banc_registre.vhd:46]
+INFO: [Synth 8-256] done synthesizing module 'Banc_registre' (1#1) [/home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.srcs/sources_1/new/Banc_registre.vhd:46]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1299.891 ; gain = 128.324 ; free physical = 59024 ; free virtual = 70504
+Finished RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 1299.895 ; gain = 128.324 ; free physical = 54486 ; free virtual = 67383
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -140,43 +34,43 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1299.891 ; gain = 128.324 ; free physical = 59026 ; free virtual = 70506
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 1299.895 ; gain = 128.324 ; free physical = 54487 ; free virtual = 67384
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1299.891 ; gain = 128.324 ; free physical = 59026 ; free virtual = 70506
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:04 . Memory (MB): peak = 1299.895 ; gain = 128.324 ; free physical = 54487 ; free virtual = 67384
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/constrs_1/new/ALU.xdc]
-Finished Parsing XDC File [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.srcs/constrs_1/new/ALU.xdc]
+Parsing XDC File [/home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.srcs/constrs_1/new/ALU.xdc]
+Finished Parsing XDC File [/home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.srcs/constrs_1/new/ALU.xdc]
 Completed Processing XDC Constraints
 
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 WARNING: [Constraints 18-5210] No constraint will be written out.
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.08 . Memory (MB): peak = 1571.273 ; gain = 0.000 ; free physical = 58741 ; free virtual = 70254
+Constraint Validation Runtime : Time (s): cpu = 00:00:00.04 ; elapsed = 00:00:00.08 . Memory (MB): peak = 1648.293 ; gain = 1.000 ; free physical = 53942 ; free virtual = 66888
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:20 . Memory (MB): peak = 1571.273 ; gain = 399.707 ; free physical = 58808 ; free virtual = 70321
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:22 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54102 ; free virtual = 67048
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:20 . Memory (MB): peak = 1571.273 ; gain = 399.707 ; free physical = 58808 ; free virtual = 70321
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:22 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54102 ; free virtual = 67048
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:20 . Memory (MB): peak = 1571.273 ; gain = 399.707 ; free physical = 58808 ; free virtual = 70321
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54103 ; free virtual = 67050
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:21 . Memory (MB): peak = 1571.273 ; gain = 399.707 ; free physical = 58810 ; free virtual = 70323
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:23 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54086 ; free virtual = 67033
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -189,7 +83,10 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Registers : 
-	               32 Bit    Registers := 1     
+	                8 Bit    Registers := 18    
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 101   
+	   2 Input      1 Bit        Muxes := 96    
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -197,10 +94,13 @@ Finished RTL Component Statistics
 Start RTL Hierarchical Component Statistics 
 ---------------------------------------------------------------------------------
 Hierarchical RTL Component report 
-Module Instruction_mem 
+Module Banc_registre 
 Detailed RTL Component Info : 
 +---Registers : 
-	               32 Bit    Registers := 1     
+	                8 Bit    Registers := 18    
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 101   
+	   2 Input      1 Bit        Muxes := 96    
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
 ---------------------------------------------------------------------------------
@@ -217,41 +117,8 @@ Finished Part Resource Summary
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
 Warning: Parallel synthesis criteria is not met 
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[0]' (FD) to 'OUT_instr_reg[1]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[1]' (FD) to 'OUT_instr_reg[2]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[2]' (FD) to 'OUT_instr_reg[3]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[3]' (FD) to 'OUT_instr_reg[4]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[4]' (FD) to 'OUT_instr_reg[5]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[5]' (FD) to 'OUT_instr_reg[6]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[6]' (FD) to 'OUT_instr_reg[7]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[7]' (FD) to 'OUT_instr_reg[8]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[8]' (FD) to 'OUT_instr_reg[9]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[9]' (FD) to 'OUT_instr_reg[10]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[10]' (FD) to 'OUT_instr_reg[11]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[11]' (FD) to 'OUT_instr_reg[12]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[12]' (FD) to 'OUT_instr_reg[13]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[13]' (FD) to 'OUT_instr_reg[14]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[14]' (FD) to 'OUT_instr_reg[15]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[15]' (FD) to 'OUT_instr_reg[16]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[16]' (FD) to 'OUT_instr_reg[17]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[17]' (FD) to 'OUT_instr_reg[18]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[18]' (FD) to 'OUT_instr_reg[19]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[19]' (FD) to 'OUT_instr_reg[20]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[20]' (FD) to 'OUT_instr_reg[21]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[21]' (FD) to 'OUT_instr_reg[22]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[22]' (FD) to 'OUT_instr_reg[23]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[23]' (FD) to 'OUT_instr_reg[24]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[24]' (FD) to 'OUT_instr_reg[25]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[25]' (FD) to 'OUT_instr_reg[26]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[26]' (FD) to 'OUT_instr_reg[27]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[27]' (FD) to 'OUT_instr_reg[28]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[28]' (FD) to 'OUT_instr_reg[29]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[29]' (FD) to 'OUT_instr_reg[30]'
-INFO: [Synth 8-3886] merging instance 'OUT_instr_reg[30]' (FD) to 'OUT_instr_reg[31]'
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\OUT_instr_reg[31] )
-WARNING: [Synth 8-3332] Sequential element (OUT_instr_reg[31]) is unused and will be removed from module Instruction_mem.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:10 ; elapsed = 00:00:22 . Memory (MB): peak = 1571.273 ; gain = 399.707 ; free physical = 58795 ; free virtual = 70312
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:11 ; elapsed = 00:00:24 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54068 ; free virtual = 67018
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -263,13 +130,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1583.258 ; gain = 411.691 ; free physical = 58687 ; free virtual = 70210
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:31 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54007 ; free virtual = 66963
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1583.258 ; gain = 411.691 ; free physical = 58687 ; free virtual = 70210
+Finished Timing Optimization : Time (s): cpu = 00:00:15 ; elapsed = 00:00:31 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54007 ; free virtual = 66963
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -281,7 +148,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:14 ; elapsed = 00:00:28 . Memory (MB): peak = 1583.258 ; gain = 411.691 ; free physical = 58687 ; free virtual = 70210
+Finished Technology Mapping : Time (s): cpu = 00:00:15 ; elapsed = 00:00:31 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 53995 ; free virtual = 66952
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -305,7 +172,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1583.258 ; gain = 411.691 ; free physical = 58687 ; free virtual = 70210
+Finished IO Insertion : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54004 ; free virtual = 66961
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -318,7 +185,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1584.258 ; gain = 412.691 ; free physical = 58687 ; free virtual = 70210
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54004 ; free virtual = 66961
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -330,25 +197,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1584.258 ; gain = 412.691 ; free physical = 58687 ; free virtual = 70210
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54004 ; free virtual = 66961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1584.258 ; gain = 412.691 ; free physical = 58687 ; free virtual = 70210
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54004 ; free virtual = 66961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1584.258 ; gain = 412.691 ; free physical = 58687 ; free virtual = 70210
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54004 ; free virtual = 66961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1584.258 ; gain = 412.691 ; free physical = 58687 ; free virtual = 70210
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54004 ; free virtual = 66961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -361,36 +228,45 @@ Report BlackBoxes:
 +-+--------------+----------+
 
 Report Cell Usage: 
-+------+-----+------+
-|      |Cell |Count |
-+------+-----+------+
-|1     |OBUF |    32|
-+------+-----+------+
++------+------+------+
+|      |Cell  |Count |
++------+------+------+
+|1     |BUFG  |     1|
+|2     |LUT4  |   148|
+|3     |LUT5  |    17|
+|4     |LUT6  |    81|
+|5     |MUXF7 |    32|
+|6     |FDRE  |   144|
+|7     |IBUF  |    23|
+|8     |OBUF  |    16|
++------+------+------+
 
 Report Instance Areas: 
 +------+---------+-------+------+
 |      |Instance |Module |Cells |
 +------+---------+-------+------+
-|1     |top      |       |    32|
+|1     |top      |       |   462|
 +------+---------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1584.258 ; gain = 412.691 ; free physical = 58687 ; free virtual = 70210
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54004 ; free virtual = 66961
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:09 ; elapsed = 00:00:13 . Memory (MB): peak = 1584.258 ; gain = 141.309 ; free physical = 58738 ; free virtual = 70261
-Synthesis Optimization Complete : Time (s): cpu = 00:00:15 ; elapsed = 00:00:29 . Memory (MB): peak = 1584.266 ; gain = 412.691 ; free physical = 58753 ; free virtual = 70276
+Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:10 ; elapsed = 00:00:15 . Memory (MB): peak = 1648.293 ; gain = 128.324 ; free physical = 54059 ; free virtual = 67016
+Synthesis Optimization Complete : Time (s): cpu = 00:00:16 ; elapsed = 00:00:32 . Memory (MB): peak = 1648.293 ; gain = 476.723 ; free physical = 54061 ; free virtual = 67017
 INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 55 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-44 Infos, 102 Warnings, 0 Critical Warnings and 0 Errors encountered.
+13 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:16 ; elapsed = 00:00:29 . Memory (MB): peak = 1600.258 ; gain = 440.445 ; free physical = 58735 ; free virtual = 70258
+synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:33 . Memory (MB): peak = 1656.301 ; gain = 496.484 ; free physical = 54059 ; free virtual = 67017
 WARNING: [Constraints 18-5210] No constraint will be written out.
-INFO: [Common 17-1381] The checkpoint '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.runs/synth_1/Instruction_mem.dcp' has been generated.
-INFO: [runtcl-4] Executing : report_utilization -file Instruction_mem_utilization_synth.rpt -pb Instruction_mem_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.10 . Memory (MB): peak = 1600.258 ; gain = 0.000 ; free physical = 58732 ; free virtual = 70255
-INFO: [Common 17-206] Exiting Vivado at Wed May 17 09:38:59 2023...
+INFO: [Common 17-1381] The checkpoint '/home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.runs/synth_1/Banc_registre.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file Banc_registre_utilization_synth.rpt -pb Banc_registre_utilization_synth.pb
+report_utilization: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.18 . Memory (MB): peak = 1680.312 ; gain = 0.000 ; free physical = 54057 ; free virtual = 67014
+INFO: [Common 17-206] Exiting Vivado at Wed May 17 10:22:49 2023...
