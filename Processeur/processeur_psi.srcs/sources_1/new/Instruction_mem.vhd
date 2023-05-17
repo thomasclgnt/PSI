@@ -39,7 +39,7 @@ end Instruction_mem;
 
 architecture Behavioral of Instruction_mem is
 
-    type type_memory is array (255 downto 0) of STD_LOGIC_VECTOR (7 downto 0) ; -- 4096 octets car dans compilateur tableau de 1024 symboles/instructions et 4 octets chacun
+    type type_memory is array (255 downto 0) of STD_LOGIC_VECTOR (31 downto 0) ; -- 4096 octets car dans compilateur tableau de 1024 symboles/instructions et 4 octets chacun
     signal memory : type_memory ;
 
 begin
