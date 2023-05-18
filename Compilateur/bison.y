@@ -53,7 +53,7 @@ Function:
 ;
 
 Declaration:
-  tID tLPAR Argument tRPAR {}                                                                                   {printf("Declaration \n") ;}
+  tID tLPAR Argument tRPAR {/*ajout instrc*/ ; add_funct(get($2), get_index());}                                                                                   {printf("Declaration \n") ;}
 ;
 
 Argument:
@@ -172,7 +172,6 @@ Parameter:
 Return:
   tRETURN tLPAR Expression tRPAR                                                                              {printf("Return\n") ;}
   | tRETURN Expression                                                                                        {printf("Return\n") ;}
-  // À LA FIN DE LA FONCTION / FICHIER, ON DEVRAIT FAIRE UN INSTRUCTION NOP 0 0 0
 ;
 
 %%
