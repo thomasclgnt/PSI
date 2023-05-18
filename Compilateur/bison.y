@@ -53,7 +53,7 @@ Function:
 ;
 
 Declaration:
-  tID tLPAR Argument tRPAR                                                                                    {printf("Declaration \n") ;}
+  tID tLPAR Argument tRPAR {}                                                                                   {printf("Declaration \n") ;}
 ;
 
 Argument:
