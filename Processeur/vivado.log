@@ -1,0 +1,37 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:02:38 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Wed May 17 09:48:13 2023
+# Process ID: 9186
+# Current directory: /home/caylagin/Bureau/PSI/PSI/Processeur
+# Command line: vivado
+# Log file: /home/caylagin/Bureau/PSI/PSI/Processeur/vivado.log
+# Journal file: /home/caylagin/Bureau/PSI/PSI/Processeur/vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project /home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.xpr
+INFO: [Project 1-313] Project file moved from '/home/mecaliff/Bureau/4A/S8/PSI/Processeur' since last save.
+Scanning sources...
+Finished scanning sources
+ERROR: [Project 1-510] Parsing generated run data failed
+open_project /home/caylagin/Bureau/4IR/4IR_S8/Archi_materielle/TD1_Compteur/Compteur_td1/Compteur_td1.xpr
+Scanning sources...
+Finished scanning sources
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1704] No user IP repositories specified
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/usr/local/insa/Xilinx.VIVADO/Vivado/2018.2/data/ip'.
+update_compile_order -fileset sources_1
+close_project
+open_project /home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.xpr
+INFO: [Project 1-313] Project file moved from '/home/mecaliff/Bureau/4A/S8/PSI/Processeur' since last save.
+Scanning sources...
+Finished scanning sources
+ERROR: [Project 1-510] Parsing generated run data failed
+open_project /home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.xpr
+INFO: [Project 1-313] Project file moved from '/home/mecaliff/Bureau/4A/S8/PSI/Processeur' since last save.
+Scanning sources...
+Finished scanning sources
+ERROR: [Project 1-510] Parsing generated run data failed
+exit
+INFO: [Common 17-206] Exiting Vivado at Wed May 17 10:10:41 2023...

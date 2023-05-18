@@ -3,7 +3,11 @@
 <!--The data in this file is primarily intended for consumption by Xilinx tools.
 The structure and the elements are likely to change over the next few releases.
 This means code written to parse this file will need to be revisited each subsequent release.-->
+<<<<<<< HEAD
 <application name="pa" timeStamp="Wed May 17 11:38:43 2023">
+=======
+<application name="pa" timeStamp="Wed May 17 10:22:04 2023">
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
 <section name="Project Information" visible="false">
 <property name="ProjectID" value="a1bb6123c7674233afabe5c890b535a2" type="ProjectID"/>
 <property name="ProjectIteration" value="2" type="ProjectIteration"/>
@@ -23,8 +27,13 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="OpenProject" value="2" type="JavaHandler"/>
 <property name="RunImplementation" value="1" type="JavaHandler"/>
 <property name="RunSchematic" value="1" type="JavaHandler"/>
+<<<<<<< HEAD
 <property name="RunSynthesis" value="14" type="JavaHandler"/>
 <property name="SetTopNode" value="4" type="JavaHandler"/>
+=======
+<property name="RunSynthesis" value="12" type="JavaHandler"/>
+<property name="SetTopNode" value="2" type="JavaHandler"/>
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
 <property name="ShowView" value="10" type="JavaHandler"/>
 <property name="SimulationRun" value="3" type="JavaHandler"/>
 <property name="TimingConstraintsWizard" value="3" type="JavaHandler"/>
@@ -34,11 +43,16 @@ This means code written to parse this file will need to be revisited each subseq
 </item>
 <item name="Gui Handlers">
 <property name="AbstractCombinedPanel_REMOVE_SELECTED_ELEMENTS" value="1" type="GuiHandlerData"/>
+<<<<<<< HEAD
 <property name="AddSrcWizard_SPECIFY_SIMULATION_SPECIFIC_HDL_FILES" value="1" type="GuiHandlerData"/>
 <property name="BaseDialog_CANCEL" value="4" type="GuiHandlerData"/>
 <property name="BaseDialog_OK" value="33" type="GuiHandlerData"/>
 <property name="CmdMsgDialog_MESSAGES" value="3" type="GuiHandlerData"/>
 <property name="CmdMsgDialog_OK" value="3" type="GuiHandlerData"/>
+=======
+<property name="BaseDialog_CANCEL" value="2" type="GuiHandlerData"/>
+<property name="BaseDialog_OK" value="29" type="GuiHandlerData"/>
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
 <property name="CommandsInput_TYPE_TCL_COMMAND_HERE" value="2" type="GuiHandlerData"/>
 <property name="ConstraintsChooserPanel_CREATE_FILE" value="1" type="GuiHandlerData"/>
 <property name="ConstraintsChooserPanel_FILE_TABLE" value="1" type="GuiHandlerData"/>
@@ -47,8 +61,13 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="CreateSrcFileDialog_FILE_NAME" value="3" type="GuiHandlerData"/>
 <property name="CreateSrcFileDialog_FILE_TYPE" value="3" type="GuiHandlerData"/>
 <property name="DefineModulesDialog_DEFINE_MODULES_AND_SPECIFY_IO_PORTS" value="68" type="GuiHandlerData"/>
+<<<<<<< HEAD
 <property name="FileSetPanel_FILE_SET_PANEL_TREE" value="68" type="GuiHandlerData"/>
 <property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="23" type="GuiHandlerData"/>
+=======
+<property name="FileSetPanel_FILE_SET_PANEL_TREE" value="30" type="GuiHandlerData"/>
+<property name="FlowNavigatorTreePanel_FLOW_NAVIGATOR_TREE" value="18" type="GuiHandlerData"/>
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
 <property name="GettingStartedView_OPEN_PROJECT" value="1" type="GuiHandlerData"/>
 <property name="MainMenuMgr_CHECKPOINT" value="1" type="GuiHandlerData"/>
 <property name="MainMenuMgr_EDIT" value="16" type="GuiHandlerData"/>
@@ -98,9 +117,9 @@ This means code written to parse this file will need to be revisited each subseq
 <property name="TimingConstraintsWizard_VIEW_TIMING_CONSTRAINTS" value="1" type="GuiHandlerData"/>
 </item>
 <item name="Other">
-<property name="GuiMode" value="3" type="GuiMode"/>
+<property name="GuiMode" value="17" type="GuiMode"/>
 <property name="BatchMode" value="0" type="BatchMode"/>
-<property name="TclMode" value="1" type="TclMode"/>
+<property name="TclMode" value="13" type="TclMode"/>
 </item>
 </section>
 </application>

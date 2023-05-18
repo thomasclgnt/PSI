@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="38" Path="/home/mecaliff/Bureau/4A/S8/PSI/Processeur/processeur_psi.xpr">
+<Project Version="7" Minor="38" Path="/home/caylagin/Bureau/PSI/PSI/Processeur/processeur_psi.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="114e3cbde0304178a006f074fb24c5c7"/>
@@ -60,27 +60,39 @@
   <FileSets Version="1" Minor="31">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
       <Filter Type="Srcs"/>
+<<<<<<< HEAD
       <File Path="$PSRCDIR/sources_1/new/Data_mem.vhd">
-        <FileInfo>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/new/Instruction_mem.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
+=======
       <File Path="$PSRCDIR/sources_1/new/Banc_registre.vhd">
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+<<<<<<< HEAD
+      <File Path="$PSRCDIR/sources_1/new/Instruction_mem.vhd">
+=======
+      <File Path="$PSRCDIR/sources_1/new/ALU.vhd">
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
-      <File Path="$PSRCDIR/sources_1/new/ALU.vhd">
+<<<<<<< HEAD
+      <File Path="$PSRCDIR/sources_1/new/Banc_registre.vhd">
+=======
+      <File Path="$PSRCDIR/sources_1/new/Instruction_mem.vhd">
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/Data_mem.vhd">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -89,7 +101,11 @@
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
+<<<<<<< HEAD
         <Option Name="TopModule" Val="data_memory"/>
+=======
+        <Option Name="TopModule" Val="Banc_registre"/>
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
       </Config>
     </FileSet>
     <FileSet Name="constrs_1" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
@@ -107,6 +123,7 @@
     </FileSet>
     <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1">
       <Filter Type="Srcs"/>
+<<<<<<< HEAD
       <File Path="$PSRCDIR/sim_1/new/Test_InstrMem.vhd">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -114,6 +131,9 @@
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sim_1/new/Test_DataMem.vhd">
+=======
+      <File Path="$PSRCDIR/sim_1/new/Test_Banc_registre.vhd">
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -129,7 +149,11 @@
       </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
+<<<<<<< HEAD
         <Option Name="TopModule" Val="Test_InstrMem"/>
+=======
+        <Option Name="TopModule" Val="Test_Banc_registre"/>
+>>>>>>> 0b825ef008e6f2d74c4387fc0c2e5fd7ec069ace
         <Option Name="TopLib" Val="xil_defaultlib"/>
         <Option Name="TransportPathDelay" Val="0"/>
         <Option Name="TransportIntDelay" Val="0"/>
