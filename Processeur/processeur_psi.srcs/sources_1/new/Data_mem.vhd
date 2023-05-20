@@ -54,10 +54,11 @@ begin
             -- reset
             if RST='0' then
                 -- mettre la memoire à O
-                memory<= (others => "0000000") ;
+                memory<= (others => "00000000") ;
             else
             
                 if RW='1' then -- lecture
+                    report "je suis dedans";
                     OUT_data <= memory(to_integer(unsigned(addr))) ;               
                 elsif RW='0' then -- ecriture
                    memory(to_integer(unsigned(addr))) <= IN_data ;

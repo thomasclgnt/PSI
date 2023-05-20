@@ -44,6 +44,18 @@ architecture Behavioral of Instruction_mem is
 
 begin
 
+    -- remplir memory
+    -- de la forme (x"00" & x"aa" & x"bb" & x"cc") OU x"00aabbcc",
+    -- avec "OO" = pcode, et le reste = @
+    
+    memory <= (
+            1 => x"06040200", -- AFC 4 2 0
+            2 => x"01000004", -- MUL 0 0 4
+            3 => x"06080200", -- AFC 8 2 0
+            4 => x"05040800", -- COP 4 8 0
+            others => x"00000000"
+    ) ;
+
     process
     begin
         wait until CLK'event and CLK='1';
