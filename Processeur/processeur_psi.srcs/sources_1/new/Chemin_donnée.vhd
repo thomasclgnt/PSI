@@ -77,22 +77,23 @@ architecture Behavioral of Processeur is
             Op_in : in STD_LOGIC_VECTOR (7 downto 0);
             B_in : in STD_LOGIC_VECTOR (7 downto 0);
             C_in : in STD_LOGIC_VECTOR (7 downto 0);
-            A_out : in STD_LOGIC_VECTOR (7 downto 0);
-            Op_out : in STD_LOGIC_VECTOR (7 downto 0);
-            B_out : in STD_LOGIC_VECTOR (7 downto 0);
-            C_out : in STD_LOGIC_VECTOR (7 downto 0)
+            A_out : out STD_LOGIC_VECTOR (7 downto 0);
+            Op_out : out STD_LOGIC_VECTOR (7 downto 0);
+            B_out : out STD_LOGIC_VECTOR (7 downto 0);
+            C_out : out STD_LOGIC_VECTOR (7 downto 0);
+            CLK : in STD_LOGIC
             );
         end component;
         
     -- DECLARATION DES SIGNAUX
-    signal instruction : STD_LOGIC_VECTOR(31 downto 0) ; --pas utilisé
+    signal instruction : STD_LOGIC_VECTOR(31 downto 0) ; -- instruction sortie de mémoire d'instruction, qu'on découpe en 4
     signal instruction_A : STD_LOGIC_VECTOR(7 downto 0) ;
     signal instruction_B : STD_LOGIC_VECTOR(7 downto 0) ;
     signal instruction_C : STD_LOGIC_VECTOR(7 downto 0) ;
     signal instruction_Op : STD_LOGIC_VECTOR(7 downto 0) ;
     
     type instr_record is record
-        Op : STD_LOGIC_VECTOR(3 downto 0) ;
+        Op : STD_LOGIC_VECTOR(7 downto 0) ;
         A : STD_LOGIC_VECTOR(7 downto 0);
         B : STD_LOGIC_VECTOR(7 downto 0);
         C: STD_LOGIC_VECTOR(7 downto 0) ;
@@ -113,7 +114,8 @@ begin
     A_out => lidi2diex.A,
     Op_out => lidi2diex.Op,
     B_out => lidi2diex.B,
-    C_out => lidi2diex.C
+    C_out => lidi2diex.C,
+    CLK => CLK
     );
     
     pip_diex : Pipeline Port map (A_in => lidi2diex.A,
@@ -123,7 +125,8 @@ begin
         A_out => diex2exmem.A,
         Op_out => diex2exmem.Op,
         B_out => diex2exmem.B,
-        C_out => diex2exmem.C
+        C_out => diex2exmem.C,
+        CLK => CLK
         );
      
      pip_exmem : Pipeline Port map (A_in => diex2exmem.A,
@@ -133,7 +136,8 @@ begin
                 A_out => exmem2memre.A,
                 Op_out => exmem2memre.Op,
                 B_out => exmem2memre.B,
-                C_out => exmem2memre.C
+                C_out => exmem2memre.C,
+                CLK => CLK
                 );
     
     pip_memre : Pipeline Port map (A_in => exmem2memre.A,
@@ -143,10 +147,11 @@ begin
                                 A_out => memre2bancreg.A,
                                 Op_out => memre2bancreg.Op,
                                 B_out => memre2bancreg.B,
-                                C_out => memre2bancreg.C
+                                C_out => memre2bancreg.C,
+                                CLK => CLK
                                 );
 
-    main_banc_reg : banc_registre Port map (addrW => memre2bancreg.A,
+    main_banc_reg : banc_registre Port map (addrW => memre2bancreg.A (3 downto 0), --A fait 8 bits et rentre dans @W qui en fait 4
                     Data => memre2bancreg.B,
                     W => LC, 
                     addrA => "0000",

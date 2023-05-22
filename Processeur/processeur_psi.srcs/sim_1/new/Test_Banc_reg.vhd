@@ -31,13 +31,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Test_Banc_Registre is
+entity Test_Banc_reg is
 --  Port ( );
-end Test_Banc_Registre;
+end Test_Banc_reg;
 
-architecture Behavioral of Test_Banc_Registre is
+architecture Behavioral of Test_Banc_reg is
 
-Component Banc_registre is
+Component Banc_reg is
         Port ( A : in STD_LOGIC_VECTOR (7 downto 0); --opérande 1
               B : in STD_LOGIC_VECTOR (7 downto 0); --opérande 2
               S : out STD_LOGIC_VECTOR (7 downto 0); --resultat

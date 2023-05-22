@@ -31,7 +31,7 @@ use IEEE.NUMERIC_STD.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity Banc_registre is
+entity Banc_reg is
     Port ( addrA : in STD_LOGIC_VECTOR (3 downto 0);
            addrB : in STD_LOGIC_VECTOR (3 downto 0);
            addrW : in STD_LOGIC_VECTOR (3 downto 0);
@@ -41,9 +41,9 @@ entity Banc_registre is
            CLK : in STD_LOGIC;
            QA : out STD_LOGIC_VECTOR (7 downto 0);
            QB : out STD_LOGIC_VECTOR (7 downto 0));
-end Banc_registre;
+end Banc_reg;
 
-architecture Behavioral of Banc_registre is
+architecture Behavioral of Banc_reg is
 
 --Declaration des signaux
 type tab is array(0 to 15) of STD_LOGIC_VECTOR(7 downto 0) ;
