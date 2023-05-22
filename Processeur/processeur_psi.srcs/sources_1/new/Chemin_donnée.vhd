@@ -32,7 +32,9 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity Processeur is
-    Port ( CLK : in STD_LOGIC);
+    Port ( CLK : in STD_LOGIC;
+            IP : in STD_LOGIC_VECTOR(7 downto 0)
+            );
 end Processeur;
 
 
@@ -85,6 +87,13 @@ architecture Behavioral of Processeur is
             );
         end component;
         
+        component Instruction_mem is
+            Port ( addr : in STD_LOGIC_VECTOR (7 downto 0);
+            CLK : in STD_LOGIC;
+            OUT_instr : out STD_LOGIC_VECTOR (31 downto 0)
+            );
+        end component ;
+        
     -- DECLARATION DES SIGNAUX
     signal instruction : STD_LOGIC_VECTOR(31 downto 0) ; -- instruction sortie de mémoire d'instruction, qu'on découpe en 4
     signal instruction_A : STD_LOGIC_VECTOR(7 downto 0) ;
@@ -107,6 +116,12 @@ architecture Behavioral of Processeur is
     signal LC : STD_LOGIC ;
     
 begin
+
+    main_instruction_mem : Instruction_mem Port map (addr => IP,
+    CLK => CLK,
+    OUT_instr => instruction
+    );
+    
     pip_lidi : Pipeline Port map (A_in => instruction_A,
     Op_in => instruction_Op,
     B_in => instruction_B,
@@ -129,7 +144,7 @@ begin
         CLK => CLK
         );
      
-     pip_exmem : Pipeline Port map (A_in => diex2exmem.A,
+    pip_exmem : Pipeline Port map (A_in => diex2exmem.A,
                 Op_in => diex2exmem.Op,
                 B_in => diex2exmem.B,
                 C_in => diex2exmem.C,
@@ -139,18 +154,19 @@ begin
                 C_out => exmem2memre.C,
                 CLK => CLK
                 );
-    
-    pip_memre : Pipeline Port map (A_in => exmem2memre.A,
-                                Op_in => exmem2memre.Op,
-                                B_in => exmem2memre.B,
-                                C_in => exmem2memre.C,
-                                A_out => memre2bancreg.A,
-                                Op_out => memre2bancreg.Op,
-                                B_out => memre2bancreg.B,
-                                C_out => memre2bancreg.C,
-                                CLK => CLK
-                                );
 
+    pip_memre : Pipeline Port map (A_in => exmem2memre.A,
+                                   Op_in => exmem2memre.Op,
+                                   B_in => exmem2memre.B,
+                                   C_in => exmem2memre.C,
+                                   A_out => memre2bancreg.A,
+                                   Op_out => memre2bancreg.Op,
+                                   B_out => memre2bancreg.B,
+                                   C_out => memre2bancreg.C,
+                                   CLK => CLK
+                                   );
+
+                   
     main_banc_reg : banc_registre Port map (addrW => memre2bancreg.A (3 downto 0), --A fait 8 bits et rentre dans @W qui en fait 4
                     Data => memre2bancreg.B,
                     W => LC, 
@@ -159,11 +175,11 @@ begin
                     RST => '0',
                     CLK => CLK --signal clock du processeur
                     );
-                   
+                    
+                    
 --LC : signal que prend W dans le banc de reg., à 1 quand on veut écrire
 -- donc à 1 pour AFC 
-    LC <= '1' when memre2bancreg.Op = x"06" else '0' ; -- AFC, écriture
-    
-
+LC <= '1' when memre2bancreg.Op = x"06" else '0' ; -- AFC, écriture
+                        
     
 end Behavioral;
