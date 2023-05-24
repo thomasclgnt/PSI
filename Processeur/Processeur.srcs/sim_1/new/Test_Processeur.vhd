@@ -39,19 +39,22 @@ architecture Behavioral of Test_Processeur is
     component Processeur is
     
         Port ( CLK : in STD_LOGIC ;
+               RST : in STD_LOGIC ;
                IP : in STD_LOGIC_VECTOR(7 downto 0)
         );
         
     end component;
     
     signal CLK : STD_LOGIC := '0' ;
+    signal RST : STD_LOGIC := '0' ;
     signal IP : STD_LOGIC_VECTOR(7 downto 0) ;
     
 begin
     
-     uut : Processeur port map (CLK => CLK, IP => IP) ;
+     uut : Processeur port map (CLK => CLK, RST => RST, IP => IP) ;
      
-     IP <= "00000011" ;
+     IP <= "00000011" after 10ns, "00000100" after 100ns ; -- afc puis copy
+     RST <= '0' after 10ns, '1' after 100ns;
      
      process
      begin

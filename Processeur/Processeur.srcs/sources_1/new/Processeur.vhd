@@ -33,6 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Processeur is
     Port ( CLK : in STD_LOGIC;
+           RST : in STD_LOGIC;
             IP : in STD_LOGIC_VECTOR(7 downto 0)
             );
 end Processeur;
@@ -113,7 +114,10 @@ architecture Behavioral of Processeur is
     signal exmem2memre : instr_record ;
     signal memre2bancreg : instr_record ;
     
+    signal QA_Banc_Reg : STD_LOGIC_VECTOR(7 downto 0) ;
+    
     signal LC : STD_LOGIC ;
+    signal MUX : STD_LOGIC_VECTOR(7 downto 0) ;
     
 begin
 
@@ -138,10 +142,11 @@ begin
     -- C_out => lidi2diex.C,
     CLK => CLK
     );
+     
     
     pip_diex : Pipeline Port map (A_in => lidi2diex.A,
         Op_in => lidi2diex.Op,
-        B_in => lidi2diex.B,
+        B_in => MUX,
         C_in => "00000000",
         A_out => diex2exmem.A,
         Op_out => diex2exmem.Op,
@@ -176,16 +181,20 @@ begin
     main_banc_reg : Banc_Registre Port map (addrW => memre2bancreg.A (3 downto 0), --A fait 8 bits et rentre dans @W qui en fait 4
                     Data => memre2bancreg.B,
                     W => LC, 
-                    addrA => "0000",
+                    addrA => lidi2diex.B (3 downto 0) ,
                     addrB => "0000",
-                    RST => '0',
-                    CLK => CLK --signal clock du processeur
+                    RST => RST,
+                    CLK => CLK, --signal clock du processeur
+                    QA => QA_Banc_Reg
                     );
                     
                     
 --LC : signal que prend W dans le banc de reg., à 1 quand on veut écrire
 -- donc à 1 pour AFC 
-LC <= '1' when memre2bancreg.Op = x"06" else '0' ; -- AFC, écriture
-                        
+LC <= '1' when (memre2bancreg.Op = x"06" or memre2bancreg.Op = x"05") else '0' ; -- AFC ou COPY, écriture
+
+-- MUX pour banc de registre, instruction COPY
+MUX <= QA_Banc_Reg when lidi2diex.Op = x"05" else lidi2diex.B ; -- quand c'est un copy, on va chercher la valeur à l'adresse donné par instr.B
+                    
     
 end Behavioral;
