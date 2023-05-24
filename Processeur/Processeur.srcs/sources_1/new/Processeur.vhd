@@ -119,8 +119,14 @@ begin
 
     main_instruction_mem : Instruction_Memory Port map (addr => IP,
     CLK => CLK,
-    OUT_instr => instruction
+    OUT_instr => instruction -- sort une instruction sur 32 bits
     );
+    
+    
+    instruction_C <= instruction(7 downto 0) ;
+    instruction_B <= instruction(15 downto 8) ;
+    instruction_A <= instruction(23 downto 16) ;
+    instruction_Op <= instruction(31 downto 24) ;
     
     pip_lidi : Pipeline Port map (A_in => instruction_A,
     Op_in => instruction_Op,
@@ -129,40 +135,40 @@ begin
     A_out => lidi2diex.A,
     Op_out => lidi2diex.Op,
     B_out => lidi2diex.B,
-    C_out => lidi2diex.C,
+    -- C_out => lidi2diex.C,
     CLK => CLK
     );
     
     pip_diex : Pipeline Port map (A_in => lidi2diex.A,
         Op_in => lidi2diex.Op,
         B_in => lidi2diex.B,
-        C_in => lidi2diex.C,
+        C_in => "00000000",
         A_out => diex2exmem.A,
         Op_out => diex2exmem.Op,
         B_out => diex2exmem.B,
-        C_out => diex2exmem.C,
+        -- C_out => "00000000",
         CLK => CLK
         );
      
     pip_exmem : Pipeline Port map (A_in => diex2exmem.A,
                 Op_in => diex2exmem.Op,
                 B_in => diex2exmem.B,
-                C_in => diex2exmem.C,
+                C_in => "00000000",
                 A_out => exmem2memre.A,
                 Op_out => exmem2memre.Op,
                 B_out => exmem2memre.B,
-                C_out => exmem2memre.C,
+                -- C_out => "00000000",
                 CLK => CLK
                 );
 
     pip_memre : Pipeline Port map (A_in => exmem2memre.A,
                                    Op_in => exmem2memre.Op,
                                    B_in => exmem2memre.B,
-                                   C_in => exmem2memre.C,
+                                   C_in => "00000000",
                                    A_out => memre2bancreg.A,
                                    Op_out => memre2bancreg.Op,
                                    B_out => memre2bancreg.B,
-                                   C_out => memre2bancreg.C,
+                                   -- C_out => "00000000",
                                    CLK => CLK
                                    );
 
