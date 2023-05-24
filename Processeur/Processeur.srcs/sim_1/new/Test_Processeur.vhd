@@ -53,7 +53,8 @@ begin
     
      uut : Processeur port map (CLK => CLK, RST => RST, IP => IP) ;
      
-     IP <= "00000001" after 10ns, "00000011" after 100ns, "00000101" after 200ns ; -- afc puis copy
+     -- IP <= "00000001" after 10ns, "00000011" after 100ns, "00000101" after 200ns ; -- afc puis copy
+     IP <= "00000110" ;
      RST <= '0' after 10ns, '1' after 100ns;
      
      process

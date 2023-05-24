@@ -17,6 +17,7 @@ Compiling architecture behavioral of entity xil_defaultlib.Instruction_Memory [i
 Compiling architecture behavioral of entity xil_defaultlib.Pipeline [pipeline_default]
 Compiling architecture behavioral of entity xil_defaultlib.Banc_Registre [banc_registre_default]
 Compiling architecture behavioral of entity xil_defaultlib.ALU [alu_default]
+Compiling architecture behavioral of entity xil_defaultlib.Data_Memory [data_memory_default]
 Compiling architecture behavioral of entity xil_defaultlib.Processeur [processeur_default]
 Compiling architecture behavioral of entity xil_defaultlib.test_processeur
 Built simulation snapshot Test_Processeur_behav

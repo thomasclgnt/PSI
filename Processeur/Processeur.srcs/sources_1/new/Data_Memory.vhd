@@ -54,7 +54,12 @@ begin
             -- reset
             if RST='0' then
                 -- mettre la memoire à O
-                memory<= (others => "00000000") ;
+                -- PENSER À ENLEVER, JUSTE POUR LE TEST DU LOAD ICI :
+                memory <= (
+                        0 => x"04",
+                        others => "00000000"
+                ) ;
+                -- memory<= (others => "00000000") ;
             else
             
                 if RW='1' then -- lecture

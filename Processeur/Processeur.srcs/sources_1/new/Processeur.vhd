@@ -117,11 +117,14 @@ architecture Behavioral of Processeur is
     signal QA_Banc_Reg : STD_LOGIC_VECTOR(7 downto 0) ;
     signal QB_Banc_Reg : STD_LOGIC_VECTOR(7 downto 0) ;
     signal Res_ALU : STD_LOGIC_VECTOR(7 downto 0) ;
+    signal Out_Data_Mem : STD_LOGIC_VECTOR(7 downto 0) ;
     
     signal memre2bancreg_LC : STD_LOGIC ;
     signal lidi2diex_MUX : STD_LOGIC_VECTOR(7 downto 0) ;
     signal diex2exmem_LC : STD_LOGIC_VECTOR (2 downto 0);
     signal diex2exmem_MUX : STD_LOGIC_VECTOR(7 downto 0) ;
+    signal exmem2memre_LC : STD_LOGIC ;
+    signal exmem2memre_MUX : STD_LOGIC_VECTOR(7 downto 0) ;
     
 begin
 
@@ -172,7 +175,7 @@ begin
 
     pip_memre : Pipeline Port map (A_in => exmem2memre.A,
                                    Op_in => exmem2memre.Op,
-                                   B_in => exmem2memre.B,
+                                   B_in => exmem2memre_MUX,
                                    C_in => "00000000",
                                    A_out => memre2bancreg.A,
                                    Op_out => memre2bancreg.Op,
@@ -198,11 +201,19 @@ begin
                    S => Res_ALU,
                    Ctr_Alu => diex2exmem_LC
   );
+  
+    main_data_mem : Data_Memory Port map ( addr => exmem2memre.B,
+                 IN_data => "00000000",
+                 RW => exmem2memre_LC,
+                 RST => RST,
+                 CLK => CLK,
+                 OUT_data => Out_Data_Mem
+    );
                     
                     
 --LC : signal que prend W dans le banc de reg., à 1 quand on veut écrire
 -- donc à 1 pour AFC, COPY, ou expr de l'ALU
-memre2bancreg_LC <= '1' when (memre2bancreg.Op = x"06" or memre2bancreg.Op = x"05" or memre2bancreg.Op = x"01" or memre2bancreg.Op = x"02" or memre2bancreg.Op = x"03") else '0' ; -- AFC ou COPY, écriture
+memre2bancreg_LC <= '1' when (memre2bancreg.Op = x"06" or memre2bancreg.Op = x"05" or memre2bancreg.Op = x"01" or memre2bancreg.Op = x"02" or memre2bancreg.Op = x"03" or memre2bancreg.Op = x"0d") else '0' ; -- AFC ou COPY, écriture
 
 -- MUX pour banc de registre, instruction COPY
 -- quand c'est un copy OU expr de l'ALU, on va chercher la valeur à l'adresse donné par instr.B
@@ -217,6 +228,9 @@ diex2exmem_LC <= "001" when diex2exmem.Op = x"01" else "010" when diex2exmem.Op 
 -- MUX en sortie de l'ALU
 diex2exmem_MUX <= Res_ALU when (diex2exmem.Op = x"01" or diex2exmem.Op = x"02" or diex2exmem.Op = x"03") else diex2exmem.B;
 
+exmem2memre_LC <= '1' when exmem2memre.Op = x"0d" else '0' when exmem2memre.Op = x"0e" ; -- LOAD : 0d, lecture donc LC = 1
+
+exmem2memre_MUX <= Out_Data_Mem when exmem2memre.Op = x"0d" else exmem2memre.B ;
                     
     
 end Behavioral;
