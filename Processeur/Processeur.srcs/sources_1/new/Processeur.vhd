@@ -115,9 +115,13 @@ architecture Behavioral of Processeur is
     signal memre2bancreg : instr_record ;
     
     signal QA_Banc_Reg : STD_LOGIC_VECTOR(7 downto 0) ;
+    signal QB_Banc_Reg : STD_LOGIC_VECTOR(7 downto 0) ;
+    signal Res_ALU : STD_LOGIC_VECTOR(7 downto 0) ;
     
-    signal LC : STD_LOGIC ;
-    signal MUX : STD_LOGIC_VECTOR(7 downto 0) ;
+    signal memre2bancreg_LC : STD_LOGIC ;
+    signal lidi2diex_MUX : STD_LOGIC_VECTOR(7 downto 0) ;
+    signal diex2exmem_LC : STD_LOGIC_VECTOR (2 downto 0);
+    signal diex2exmem_MUX : STD_LOGIC_VECTOR(7 downto 0) ;
     
 begin
 
@@ -133,38 +137,38 @@ begin
     instruction_Op <= instruction(31 downto 24) ;
     
     pip_lidi : Pipeline Port map (A_in => instruction_A,
-    Op_in => instruction_Op,
-    B_in => instruction_B,
-    C_in => instruction_C,
-    A_out => lidi2diex.A,
-    Op_out => lidi2diex.Op,
-    B_out => lidi2diex.B,
-    -- C_out => lidi2diex.C,
-    CLK => CLK
+        Op_in => instruction_Op,
+        B_in => instruction_B,
+        C_in => instruction_C,
+        A_out => lidi2diex.A,
+        Op_out => lidi2diex.Op,
+        B_out => lidi2diex.B,
+        C_out => lidi2diex.C,
+        CLK => CLK
     );
      
     
     pip_diex : Pipeline Port map (A_in => lidi2diex.A,
         Op_in => lidi2diex.Op,
-        B_in => MUX,
-        C_in => "00000000",
+        B_in => lidi2diex_MUX,
+        C_in => QB_Banc_Reg,
         A_out => diex2exmem.A,
         Op_out => diex2exmem.Op,
         B_out => diex2exmem.B,
-        -- C_out => "00000000",
+        C_out => diex2exmem.C,
         CLK => CLK
-        );
+   );
      
     pip_exmem : Pipeline Port map (A_in => diex2exmem.A,
-                Op_in => diex2exmem.Op,
-                B_in => diex2exmem.B,
-                C_in => "00000000",
-                A_out => exmem2memre.A,
-                Op_out => exmem2memre.Op,
-                B_out => exmem2memre.B,
-                -- C_out => "00000000",
-                CLK => CLK
-                );
+        Op_in => diex2exmem.Op,
+        B_in => diex2exmem_MUX,
+        C_in => "00000000",
+        A_out => exmem2memre.A,
+        Op_out => exmem2memre.Op,
+        B_out => exmem2memre.B,
+        -- C_out => "00000000",
+        CLK => CLK
+    );
 
     pip_memre : Pipeline Port map (A_in => exmem2memre.A,
                                    Op_in => exmem2memre.Op,
@@ -180,21 +184,39 @@ begin
                    
     main_banc_reg : Banc_Registre Port map (addrW => memre2bancreg.A (3 downto 0), --A fait 8 bits et rentre dans @W qui en fait 4
                     Data => memre2bancreg.B,
-                    W => LC, 
-                    addrA => lidi2diex.B (3 downto 0) ,
-                    addrB => "0000",
+                    W => memre2bancreg_LC, 
+                    addrA => lidi2diex.B(3 downto 0),
+                    addrB => lidi2diex.C(3 downto 0),
                     RST => RST,
                     CLK => CLK, --signal clock du processeur
-                    QA => QA_Banc_Reg
-                    );
+                    QA => QA_Banc_Reg,
+                    QB => QB_Banc_Reg
+   );
+   
+   main_alu : ALU Port map (A => diex2exmem.B,
+                   B => diex2exmem.C,
+                   S => Res_ALU,
+                   Ctr_Alu => diex2exmem_LC
+  );
                     
                     
 --LC : signal que prend W dans le banc de reg., à 1 quand on veut écrire
--- donc à 1 pour AFC 
-LC <= '1' when (memre2bancreg.Op = x"06" or memre2bancreg.Op = x"05") else '0' ; -- AFC ou COPY, écriture
+-- donc à 1 pour AFC, COPY, ou expr de l'ALU
+memre2bancreg_LC <= '1' when (memre2bancreg.Op = x"06" or memre2bancreg.Op = x"05" or memre2bancreg.Op = x"01" or memre2bancreg.Op = x"02" or memre2bancreg.Op = x"03") else '0' ; -- AFC ou COPY, écriture
 
 -- MUX pour banc de registre, instruction COPY
-MUX <= QA_Banc_Reg when lidi2diex.Op = x"05" else lidi2diex.B ; -- quand c'est un copy, on va chercher la valeur à l'adresse donné par instr.B
+-- quand c'est un copy OU expr de l'ALU, on va chercher la valeur à l'adresse donné par instr.B
+lidi2diex_MUX <= QA_Banc_Reg when (lidi2diex.Op = x"05" or lidi2diex.Op = x"01" or lidi2diex.Op = x"02" or lidi2diex.Op = x"03") else lidi2diex.B ; 
+
+
+-- GESTION OP ALU : 
+-- côté processeur : 001 = addition, 010 = multiplication, 011 = soustraction
+-- côté compilateur/instructions :  1 = add, 2 = mul, 3 = sub
+diex2exmem_LC <= "001" when diex2exmem.Op = x"01" else "010" when diex2exmem.Op = x"02" else "011" when diex2exmem.Op = x"03" ;
+
+-- MUX en sortie de l'ALU
+diex2exmem_MUX <= Res_ALU when (diex2exmem.Op = x"01" or diex2exmem.Op = x"02" or diex2exmem.Op = x"03") else diex2exmem.B;
+
                     
     
 end Behavioral;

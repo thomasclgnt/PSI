@@ -30,6 +30,7 @@ set_property board_part digilentinc.com:basys3:part0:1.1 [current_project]
 set_property ip_output_repo /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_vhdl -library xil_defaultlib {
+  /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/ALU.vhd
   /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Banc_Registre.vhd
   /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Instruction_Memory.vhd
   /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd

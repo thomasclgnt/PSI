@@ -41,7 +41,8 @@ architecture Behavioral of Test_Instruction_Memory is
            CLK : in STD_LOGIC;
            OUT_instr : out STD_LOGIC_VECTOR (31 downto 0));
     end component ;
-signal addr : STD_LOGIC_VECTOR (7 downto 0);
+    
+signal addr : STD_LOGIC_VECTOR (7 downto 0)  ; -- = "00000011";
 signal CLK : STD_LOGIC := '0';
 signal OUT_instr : STD_LOGIC_VECTOR (31 downto 0) ;
 
@@ -55,6 +56,6 @@ begin
         wait for 10 ns ;
     end process ;
 
-    addr <= "00000001";
+    -- addr <= "00000011";
   
 end Behavioral;

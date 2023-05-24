@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1684919320">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1684942460">
   <File Type="VDS-TIMING-PB" Name="Processeur_timing_summary_synth.pb"/>
   <File Type="VDS-TIMINGSUMMARY" Name="Processeur_timing_summary_synth.rpt"/>
   <File Type="RDS-DCP" Name="Processeur.dcp"/>
@@ -11,6 +11,12 @@
   <File Type="PA-TCL" Name="Processeur.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/ALU.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
     <File Path="$PSRCDIR/sources_1/new/Banc_Registre.vhd">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -35,13 +41,6 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/new/ALU.vhd">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PSRCDIR/sources_1/new/Data_Memory.vhd">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
@@ -62,9 +61,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

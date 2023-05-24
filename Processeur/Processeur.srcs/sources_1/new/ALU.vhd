@@ -53,16 +53,16 @@ begin
     aux_mul <= A*B;
     
     
-    res <=  aux_add(7 downto 0) when Ctr_Alu = "000" else -- addition
-            aux_sous when Ctr_Alu = "001" else -- soustraction
-            aux_mul(7 downto 0) when Ctr_Alu = "010" else
-            "00000000"; -- multiplication
+    res <=  aux_add(7 downto 0) when Ctr_Alu = "001" else -- addition
+            aux_mul(7 downto 0) when Ctr_Alu = "010" else -- multiplication
+            aux_sous when Ctr_Alu = "011" else --soustraction
+            "00000000"; -- division
             
-     C <= aux_add(8) when Ctr_Alu = "000" else '0' ; --retenue sur l'addition
+     C <= aux_add(8) when Ctr_Alu = "001" else '0' ; --retenue sur l'addition
      Z <= '1' when res = 0 else '0'; -- zéro
-     N <= '1' when A < B and Ctr_Alu = "001" else '0' ; -- négatif
-     O <= '1' when aux_mul > "0000000011111111" else --overflow
-          '1' when aux_add(8)='1'and Ctr_Alu = "000" else '0' ;
+     N <= '1' when A < B and Ctr_Alu = "011" else '0' ; -- négatif en soustraction
+     O <= '1' when aux_mul > "0000000011111111" else --overflow sur multiplication
+          '1' when aux_add(8)='1'and Ctr_Alu = "001" else '0' ; --overflow sur addition
 
     S <= res ;
     

@@ -49,17 +49,22 @@ begin
     -- avec "OO" = pcode, et le reste = @
     
     memory <= (
-            1 => x"06040200", -- AFC 4 2 0
+            1 => x"06040300", -- AFC 4 3 0
             2 => x"01000004", -- MUL 0 0 4
             3 => x"06080200", -- AFC 8 2 0
-            4 => x"05040800", -- COP 4 8 0
+            4 => x"05030800", -- COP 3 8 0
+            5 => x"02020408", -- ADD 2 4 8    
             others => x"00000000"
     ) ;
-
     process
+        -- variable ip : integer := to_integer(unsigned(addr)) ;
     begin
         wait until CLK'event and CLK='1';
-            OUT_instr <= memory(to_integer(unsigned(addr)));
+        -- report "valeur ip : " & integer'image(ip);
+            OUT_instr <= memory(to_integer(unsigned(addr))); -- memory(ip);
+            -- if not(ip = 254) then 
+                -- ip := ip + 1 ;
+            -- end if;
     end process ;
 
 
