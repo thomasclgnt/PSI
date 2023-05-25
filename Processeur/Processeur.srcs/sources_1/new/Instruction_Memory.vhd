@@ -61,14 +61,9 @@ begin
             others => x"00000000"
     ) ;
     process
-        -- variable ip : integer := to_integer(unsigned(addr)) ;
     begin
         wait until CLK'event and CLK='1';
-        -- report "valeur ip : " & integer'image(ip);
-            OUT_instr <= memory(to_integer(unsigned(addr))); -- memory(ip);
-            -- if not(ip = 254) then 
-                -- ip := ip + 1 ;
-            -- end if;
+            OUT_instr <= memory(to_integer(unsigned(addr)));
     end process ;
 
 

@@ -33,8 +33,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Processeur is
 	Port ( CLK : in STD_LOGIC;
-       	RST : in STD_LOGIC;
-        	IP : in STD_LOGIC_VECTOR(7 downto 0)
+       	RST : in STD_LOGIC
         	);
 end Processeur;
 
@@ -88,12 +87,19 @@ architecture Behavioral of Processeur is
         	);
     	end component;
    	 
-    	component Instruction_Memory is
-        	Port ( addr : in STD_LOGIC_VECTOR (7 downto 0);
-        	CLK : in STD_LOGIC;
-        	OUT_instr : out STD_LOGIC_VECTOR (31 downto 0)
-        	);
-    	end component ;
+    component Instruction_Memory is
+        Port ( addr : in STD_LOGIC_VECTOR (7 downto 0);
+        CLK : in STD_LOGIC;
+        OUT_instr : out STD_LOGIC_VECTOR (31 downto 0)
+        );
+    end component ;
+    
+    component Compteur_IP is
+              Port ( CLK : in STD_LOGIC;
+              IP_Out : out STD_LOGIC_VECTOR (7 downto 0)
+              );
+    end component ;
+       
    	 
 	-- DECLARATION DES SIGNAUX
 	signal instruction : STD_LOGIC_VECTOR(31 downto 0) ; -- instruction sortie de mémoire d'instruction, qu'on découpe en 4
@@ -118,6 +124,8 @@ architecture Behavioral of Processeur is
 	signal QB_Banc_Reg : STD_LOGIC_VECTOR(7 downto 0) ;
 	signal Res_ALU : STD_LOGIC_VECTOR(7 downto 0) ;
 	signal Out_Data_Mem : STD_LOGIC_VECTOR(7 downto 0) ;
+	
+	signal IP : STD_LOGIC_VECTOR(7 downto 0) ;
     
 	signal memre2bancreg_LC : STD_LOGIC ;
 	signal lidi2diex_MUX : STD_LOGIC_VECTOR(7 downto 0) ;
@@ -201,15 +209,20 @@ begin
                	B => diex2exmem.C,
                	S => Res_ALU,
                	Ctr_Alu => diex2exmem_LC
-  );
+    );
  
-	main_data_mem : Data_Memory Port map ( addr => exmem2datamem_MUX,
+    main_data_mem : Data_Memory Port map ( addr => exmem2datamem_MUX,
              	IN_data => exmem2memre.B,
              	RW => exmem2memre_LC,
              	RST => RST,
              	CLK => CLK,
              	OUT_data => Out_Data_Mem
 	);
+	
+	main_ip : Compteur_IP Port map ( CLK => CLK,
+              IP_Out => IP
+    );
+
                	 
                	 
 --LC : signal que prend W dans le banc de reg., à 1 quand on veut écrire
