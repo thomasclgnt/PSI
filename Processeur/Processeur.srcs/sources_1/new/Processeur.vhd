@@ -170,7 +170,7 @@ begin
     	A_out => exmem2memre.A,
     	Op_out => exmem2memre.Op,
     	B_out => exmem2memre.B,
-    	-- C_out => "00000000",
+    	C_out => open,
     	CLK => CLK
 	);
 
@@ -181,7 +181,7 @@ begin
                                	A_out => memre2bancreg.A,
                                	Op_out => memre2bancreg.Op,
                                	B_out => memre2bancreg.B,
-                               	-- C_out => "00000000",
+                               	C_out => open,
                                	CLK => CLK
                                	);
 
