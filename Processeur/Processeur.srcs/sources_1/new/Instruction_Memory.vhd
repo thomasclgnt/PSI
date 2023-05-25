@@ -57,6 +57,7 @@ begin
             4 => x"05030800", -- COP 3 8 0
             5 => x"02020408", -- ADD 2 4 8  
             6 => X"0d010000", -- LOAD 1 0 0 (addr1 dans registre et addr0 dans data mem)
+            7 => x"0e040100", -- STORE 4 1 0 (store addresse1 registre4) 
             others => x"00000000"
     ) ;
     process

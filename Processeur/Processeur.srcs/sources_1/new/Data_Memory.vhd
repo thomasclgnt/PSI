@@ -63,13 +63,13 @@ begin
             else
             
                 if RW='1' then -- lecture
-                    report "je suis dedans";
-                    OUT_data <= memory(to_integer(unsigned(addr))) ;               
+                    report "je suis dedans";             
                 elsif RW='0' then -- ecriture
                    memory(to_integer(unsigned(addr))) <= IN_data ;
                 end if ; 
            end if;
 
      end process;  
+     OUT_data <= memory(to_integer(unsigned(addr))) ;  
 
 end Behavioral;
