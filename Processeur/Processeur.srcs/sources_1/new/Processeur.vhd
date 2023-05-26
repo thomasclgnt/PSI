@@ -148,23 +148,30 @@ architecture Behavioral of Processeur is
 	signal exmem_write : STD_LOGIC ;
 	signal alea_diex : STD_LOGIC ;
 	signal alea_exmem : STD_LOGIC ;
+	signal alea_memre : STD_LOGIC ;
 	signal alea : STD_LOGIC :=  '0'; -- HMMMMM
 	signal instr_arithm : STD_LOGIC ;
     
 begin
 
     -- détection des aléas
-	instr_arithm <= '1' when (lidi2diex.Op = x"01" or lidi2diex.Op = x"02" or lidi2diex.Op = x"03") else '0' ;
-    lidi_read <= '1' when (instr_arithm = '1' or lidi2diex.Op = x"05" or lidi2diex.Op = x"0e") else '0'; -- instructions de l'ALU, STORE, COPY
-    diex_write <= '1' when (diex2exmem.Op = x"01" or diex2exmem.Op = x"02" or diex2exmem.Op = x"03" or diex2exmem.Op = x"06" or diex2exmem.Op = x"0d") else '0'; -- instrus de l'ALU, LOAD,, COP, AFC
-    exmem_write <= '1' when (exmem2memre.Op = x"01" or exmem2memre.Op = x"02" or exmem2memre.Op = x"03" or exmem2memre.Op = x"06" or exmem2memre.Op = x"0d" ) else '0';
+	instr_arithm <= '1' when (instruction_Op = x"01" or instruction_Op = x"02" or instruction_Op = x"03") else '0' ;
+    lidi_read <= '1' when (instr_arithm = '1' or instruction_Op = x"05" or instruction_Op = x"0e") else '0'; -- instructions de l'ALU, STORE, COPY
+    diex_write <= '1' when (lidi2diex.Op = x"01" or lidi2diex.Op = x"02" or lidi2diex.Op = x"03" or lidi2diex.Op = x"06" or lidi2diex.Op = x"0d") else '0'; -- instrus de l'ALU, LOAD,, COP, AFC
+    exmem_write <= '1' 
+        when (diex2exmem.Op = x"01" or diex2exmem.Op = x"02" or diex2exmem.Op = x"03" or diex2exmem.Op = x"06" or diex2exmem.Op = x"0d" ) 
+        or (exmem2memre.Op = x"01" or exmem2memre.Op = x"02" or exmem2memre.Op = x"03" or exmem2memre.Op = x"06" or exmem2memre.Op = x"0d" ) else '0';
+    
     alea_diex <= '1'
-        when (lidi_read = '1' and diex_write = '1' and instr_arithm = '0' and lidi2diex.B = diex2exmem.A)
-        or (lidi_read = '1' and diex_write = '1' and instr_arithm = '1' and (lidi2diex.B = diex2exmem.A or lidi2diex.C = diex2exmem.A)) else '0';
+        when (lidi_read = '1' and diex_write = '1' and instr_arithm = '0' and instruction_B = lidi2diex.A)
+        or (lidi_read = '1' and diex_write = '1' and instr_arithm = '1' and (instruction_B = lidi2diex.A or instruction_C = lidi2diex.A)) else '0';
     alea_exmem <= '1'
-        when (lidi_read = '1' and exmem_write = '1' and instr_arithm = '0' and lidi2diex.B = exmem2memre.A)
-        or (lidi_read = '1' and exmem_write = '1' and instr_arithm = '1' and (lidi2diex.B = exmem2memre.A or lidi2diex.C = exmem2memre.A)) else '0';
-    alea <= '1' when alea_diex = '1' or  alea_exmem = '1' else '0';
+        when (lidi_read = '1' and exmem_write = '1' and instr_arithm = '0' and instruction_B = diex2exmem.A)
+        or (lidi_read = '1' and exmem_write = '1' and instr_arithm = '1' and (instruction_B = diex2exmem.A or instruction_C = diex2exmem.A)) else '0';
+    -- alea_memre <= '1'
+        -- when (lidi_read = '1' and exmem_write = '1' and instr_arithm = '0' and instruction_B = exmem2memre.A)
+        -- or (lidi_read = '1' and exmem_write = '1' and instr_arithm = '1' and (instruction_B = exmem2memre.A or instruction_C = exmem2memre.A)) else '0';
+    alea <= '1' when alea_diex = '1' or  alea_exmem = '1' else '0'; -- or alea_memre = '1' 
 
     
     -- À FAIRE :
@@ -190,7 +197,7 @@ begin
     
 	pip_lidi : Pipeline Port map (
 	    enable => alea,
-	    nop => '0',
+	    nop => alea,
 	    A_in => instruction_A,
     	Op_in => instruction_Op,
     	B_in => instruction_B,
@@ -204,8 +211,8 @@ begin
 	 
     
 	pip_diex : Pipeline Port map (
-		enable => alea, -- SE BLOQUE DANS TOUS LES CAS enable => alea_diex,
-        nop => alea_diex,
+		enable => '0', -- SE BLOQUE DANS TOUS LES CAS enable => alea_diex,
+        nop => '0', 
 	    A_in => lidi2diex.A,
     	Op_in => lidi2diex.Op,
     	B_in => lidi2diex_MUX,
@@ -218,8 +225,8 @@ begin
    );
 	 
 	pip_exmem : Pipeline Port map (
-		enable => alea_exmem,
-        nop => alea_exmem, 
+		enable => '0',
+        nop => '0', 
 	    A_in => diex2exmem.A,
     	Op_in => diex2exmem.Op,
     	B_in => diex2exmem_MUX,

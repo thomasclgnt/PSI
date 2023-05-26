@@ -67,18 +67,17 @@ begin
     process
         begin
             CLK <= not CLK;
-            wait for 100 ns;
+            wait for 10 ns;
         end process;
 
-
-    W<= '1';
-    RST<='0';
-    Data <= "11110000";
+	W<= '1'after 100ns;
+	RST <= '0' after 10ns, '1' after 100ns;
+	Data <= "00000010"after 100ns;
 
 --lecture
-addrW<="0000";
-addrA<="0000";
-addrB<="1111";
+addrW<="1000" after 100ns;
+addrA<="1000" after 100ns;
+addrB<="1111" after 100ns;
 
 
 

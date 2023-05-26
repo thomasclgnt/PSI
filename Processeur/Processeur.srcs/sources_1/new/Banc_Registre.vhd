@@ -54,34 +54,24 @@ begin
     process
     
     begin
+        -- wait until CLK'event and CLK='1' ;
+        
         wait until CLK'event and CLK='1' ;
         
-        if RST = '0' then
-        -- initialiser le contenu du banc de registre à 0x00
-            registre(0 to 15) <= (others => (others => '0'));
-        end if ;
-        
-        QA <= registre(to_integer(unsigned(addrA))) ;
-        QB <= registre(to_integer(unsigned(addrB))) ;
-    
-        if W = '1' then
-            if addrW = addrA then
-            -- protection si essai de lecture / écriture sur le même registre A
-                registre(to_integer(unsigned(addrA))) <= Data ;
-                QA <= Data ;
-            elsif addrW = addrB then
-            -- protection si essai de lecture / écriture sur le même registre B
-                registre(to_integer(unsigned(addrB))) <= Data ;
-                QB <= Data ;
-            else
-            -- écriture sur un registre différent
-                registre(to_integer(unsigned(addrW))) <= Data ;
+            if RST = '0' then
+            -- initialiser le contenu du banc de registre à 0x00
+                registre(0 to 15) <= (others => (others => '0'));
+            else 
+            
+                if W = '1' then
+                    registre(to_integer(unsigned(addrW))) <= Data ;
+                end if ;
                 
             end if ;
-             
-        end if ;
-        
-        
+    
     end process ;
+    
+    QA <= registre(to_integer(unsigned(addrA))) when addrW /= addrA or W = '0' else DATA;
+    QB <= registre(to_integer(unsigned(addrB))) when addrW /= addrB or W = '0' else DATA;
 
 end Behavioral;

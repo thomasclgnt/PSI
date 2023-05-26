@@ -40,7 +40,9 @@ Note: enabled
 Time: 80 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_exmem/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
 Note: enabled
 Time: 80 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_memre/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
-Note: enabled
+Note: disabled : '1'
+Time: 100 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_lidi/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
+Note: je fais un NOPPPP
 Time: 100 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_lidi/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
 Note: enabled
 Time: 100 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_diex/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
@@ -56,23 +58,19 @@ Note: enabled
 Time: 120 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_exmem/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
 Note: enabled
 Time: 120 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_memre/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
-Note: disabled : '0'
+Note: enabled
 Time: 140 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_lidi/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
-Note: disabled : '1'
-Time: 140 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_diex/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
-Note: je fais un NOPPPP
+Note: enabled
 Time: 140 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_diex/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
 Note: enabled
 Time: 140 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_exmem/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
 Note: enabled
 Time: 140 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_memre/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
-Note: disabled : '0'
+Note: enabled
 Time: 160 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_lidi/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
-Note: disabled : '0'
+Note: enabled
 Time: 160 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_diex/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
-Note: disabled : '1'
-Time: 160 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_exmem/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
-Note: je fais un NOPPPP
+Note: enabled
 Time: 160 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_exmem/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
 Note: enabled
 Time: 160 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_memre/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
@@ -360,3 +358,5 @@ Note: enabled
 Time: 880 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_lidi/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
 Note: enabled
 Time: 880 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_diex/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
+Note: enabled
+Time: 880 ns  Iteration: 1  Process: /Test_Processeur/uut/pip_exmem/line__53  File: /home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd
