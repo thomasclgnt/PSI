@@ -1,67 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1685003453">
-  <File Type="VDS-TIMING-PB" Name="Compteur_IP_timing_summary_synth.pb"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="Compteur_IP_timing_summary_synth.rpt"/>
-  <File Type="RDS-DCP" Name="Compteur_IP.dcp"/>
-  <File Type="RDS-UTIL-PB" Name="Compteur_IP_utilization_synth.pb"/>
-  <File Type="RDS-UTIL" Name="Compteur_IP_utilization_synth.rpt"/>
-  <File Type="RDS-PROPCONSTRS" Name="Compteur_IP_drc_synth.rpt"/>
-  <File Type="RDS-RDS" Name="Compteur_IP.vds"/>
-  <File Type="REPORTS-TCL" Name="Compteur_IP_reports.tcl"/>
-  <File Type="PA-TCL" Name="Compteur_IP.tcl"/>
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1685100720">
+  <File Type="VDS-TIMING-PB" Name="Processeur_timing_summary_synth.pb"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="Processeur_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="Processeur.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="Processeur_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="Processeur_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="Processeur_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="Processeur.vds"/>
+  <File Type="REPORTS-TCL" Name="Processeur_reports.tcl"/>
+  <File Type="PA-TCL" Name="Processeur.tcl"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
     <Filter Type="Srcs"/>
-    <File Path="$PSRCDIR/sources_1/new/Compteur_IP.vhd">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PSRCDIR/sources_1/new/ALU.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/Banc_Registre.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Compteur_IP.vhd">
+      <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/Data_Memory.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/Instruction_Memory.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/Pipeline.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <File Path="$PSRCDIR/sources_1/new/Processeur.vhd">
       <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="Compteur_IP"/>
+      <Option Name="TopModule" Val="Processeur"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">

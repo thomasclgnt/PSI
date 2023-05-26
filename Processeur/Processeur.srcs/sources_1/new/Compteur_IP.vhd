@@ -33,7 +33,8 @@ use IEEE.NUMERIC_STD.ALL;
 
 entity Compteur_IP is
 --  Port ( );
-  Port (CLK : in STD_LOGIC ;
+  Port ( enable : in STD_LOGIC ;
+        CLK : in STD_LOGIC ;
         IP_Out : out STD_LOGIC_VECTOR(7 downto 0)
           );
 end Compteur_IP;
@@ -47,7 +48,9 @@ begin
     process
     begin
         wait until CLK'event and CLK='1';
+        if enable = '0' then
             aux <= aux + 1 ;
+        end if ;
     end process ;
 
 end Behavioral;

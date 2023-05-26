@@ -66,7 +66,8 @@ architecture Behavioral of Processeur is
  	end Component ;
 	 
  	component Data_Memory is
-     	Port ( addr : in STD_LOGIC_VECTOR (7 downto 0);
+     	Port ( 
+     	    addr : in STD_LOGIC_VECTOR (7 downto 0);
            	IN_data : in STD_LOGIC_VECTOR (7 downto 0);
            	RW : in STD_LOGIC;
            	RST : in STD_LOGIC;
@@ -75,7 +76,9 @@ architecture Behavioral of Processeur is
  	end component ;
 	 
  	component Pipeline is
-    	Port (A_in : in STD_LOGIC_VECTOR (7 downto 0);
+    	Port ( enable : in STD_LOGIC;
+    	    nop : in STD_LOGIC;
+    	    A_in : in STD_LOGIC_VECTOR (7 downto 0);
         	Op_in : in STD_LOGIC_VECTOR (7 downto 0);
         	B_in : in STD_LOGIC_VECTOR (7 downto 0);
         	C_in : in STD_LOGIC_VECTOR (7 downto 0);
@@ -88,14 +91,17 @@ architecture Behavioral of Processeur is
     	end component;
    	 
     component Instruction_Memory is
-        Port ( addr : in STD_LOGIC_VECTOR (7 downto 0);
+        Port ( 
+        enable : in STD_LOGIC ;
+        addr : in STD_LOGIC_VECTOR (7 downto 0);
         CLK : in STD_LOGIC;
         OUT_instr : out STD_LOGIC_VECTOR (31 downto 0)
         );
     end component ;
     
     component Compteur_IP is
-              Port ( CLK : in STD_LOGIC;
+              Port ( enable : in STD_LOGIC ;
+              CLK : in STD_LOGIC ;
               IP_Out : out STD_LOGIC_VECTOR (7 downto 0)
               );
     end component ;
@@ -134,12 +140,45 @@ architecture Behavioral of Processeur is
 	signal exmem2memre_LC : STD_LOGIC ;
 	signal exmem2datamem_MUX : STD_LOGIC_VECTOR(7 downto 0) ;
 	signal datamem2memre_MUX : STD_LOGIC_VECTOR(7 downto 0) ;
+	
+	-- gestion d'aléas
+	
+	signal lidi_read : STD_LOGIC ;
+	signal diex_write : STD_LOGIC ;
+	signal exmem_write : STD_LOGIC ;
+	signal alea_diex : STD_LOGIC ;
+	signal alea_exmem : STD_LOGIC ;
+	signal alea : STD_LOGIC :=  '0'; -- HMMMMM
+	signal instr_arithm : STD_LOGIC ;
     
 begin
 
-	main_instruction_mem : Instruction_Memory Port map (addr => IP,
-	CLK => CLK,
-	OUT_instr => instruction -- sort une instruction sur 32 bits
+    -- détection des aléas
+    instr_arithm <= '1' when (lidi2diex.Op = x"01" or lidi2diex.Op = x"02" or lidi2diex.Op = x"03") else '0' ;
+    lidi_read <= '1' when (instr_arithm = '1' or lidi2diex.Op = x"05" or lidi2diex.Op = x"0e") else '0'; -- instructions de l'ALU, STORE, COPY
+    diex_write <= '1' when (diex2exmem.Op = x"01" or diex2exmem.Op = x"02" or diex2exmem.Op = x"03" or diex2exmem.Op = x"06" or diex2exmem.Op = x"0d") else '0'; -- instrus de l'ALU, LOAD,, COP, AFC
+    exmem_write <= '1' when (exmem2memre.Op = x"01" or exmem2memre.Op = x"02" or exmem2memre.Op = x"03" or exmem2memre.Op = x"06" or exmem2memre.Op = x"0d" ) else '0';
+    alea_diex <= '1' 
+        when (lidi_read = '1' and diex_write = '1' and instr_arithm = '0' and lidi2diex.B = diex2exmem.A) 
+        or (lidi_read = '1' and diex_write = '1' and instr_arithm = '1' and (lidi2diex.B = diex2exmem.A or lidi2diex.C = diex2exmem.A)) else '0';
+    alea_exmem <= '1' 
+        when (lidi_read = '1' and exmem_write = '1' and instr_arithm = '0' and lidi2diex.B = exmem2memre.A) 
+        or (lidi_read = '1' and exmem_write = '1' and instr_arithm = '1' and (lidi2diex.B = exmem2memre.A or lidi2diex.C = exmem2memre.A)) else '0';
+    alea <= '1' when alea_diex = '1' or  alea_exmem = '1' else '0';
+    
+    -- À FAIRE :
+
+            -- bloquer IP => entree enable (qui recoit alea) : DONE
+            -- bloauer mi => entree enable (qui recoit alea) : DONE
+            -- bloauer lidi => entree enable (qui recoit alea) : DONE
+            -- inserer un nop dans diex => entree nop (qui recoit alea pour diex) : DONE
+
+
+	main_instruction_mem : Instruction_Memory Port map (
+        enable => alea,
+        addr => IP,
+        CLK => CLK,
+        OUT_instr => instruction -- sort une instruction sur 32 bits
 	);
     
     
@@ -148,7 +187,10 @@ begin
 	instruction_A <= instruction(23 downto 16) ;
 	instruction_Op <= instruction(31 downto 24) ;
     
-	pip_lidi : Pipeline Port map (A_in => instruction_A,
+	pip_lidi : Pipeline Port map (
+	    enable => alea,
+	    nop => '0',
+	    A_in => instruction_A,
     	Op_in => instruction_Op,
     	B_in => instruction_B,
     	C_in => instruction_C,
@@ -160,7 +202,10 @@ begin
 	);
 	 
     
-	pip_diex : Pipeline Port map (A_in => lidi2diex.A,
+	pip_diex : Pipeline Port map (
+		enable => alea_diex,
+        nop => alea_diex,
+	    A_in => lidi2diex.A,
     	Op_in => lidi2diex.Op,
     	B_in => lidi2diex_MUX,
     	C_in => QB_Banc_Reg,
@@ -171,7 +216,10 @@ begin
     	CLK => CLK
    );
 	 
-	pip_exmem : Pipeline Port map (A_in => diex2exmem.A,
+	pip_exmem : Pipeline Port map (
+		enable => alea_exmem,
+        nop => alea_exmem, 
+	    A_in => diex2exmem.A,
     	Op_in => diex2exmem.Op,
     	B_in => diex2exmem_MUX,
     	C_in => "00000000",
@@ -182,16 +230,19 @@ begin
     	CLK => CLK
 	);
 
-	pip_memre : Pipeline Port map (A_in => exmem2memre.A,
-                               	Op_in => exmem2memre.Op,
-                               	B_in => datamem2memre_MUX,
-                               	C_in => "00000000",
-                               	A_out => memre2bancreg.A,
-                               	Op_out => memre2bancreg.Op,
-                               	B_out => memre2bancreg.B,
-                               	C_out => open,
-                               	CLK => CLK
-                               	);
+	pip_memre : Pipeline Port map (
+	    enable => '0',
+        nop => '0',
+        A_in => exmem2memre.A,
+        Op_in => exmem2memre.Op,
+        B_in => datamem2memre_MUX,
+        C_in => "00000000",
+        A_out => memre2bancreg.A,
+        Op_out => memre2bancreg.Op,
+        B_out => memre2bancreg.B,
+        C_out => open,
+        CLK => CLK
+    );
 
               	 
 	main_banc_reg : Banc_Registre Port map (addrW => memre2bancreg.A (3 downto 0), --A fait 8 bits et rentre dans @W qui en fait 4
@@ -211,7 +262,8 @@ begin
                	Ctr_Alu => diex2exmem_LC
     );
  
-    main_data_mem : Data_Memory Port map ( addr => exmem2datamem_MUX,
+    main_data_mem : Data_Memory Port map (
+                addr => exmem2datamem_MUX,
              	IN_data => exmem2memre.B,
              	RW => exmem2memre_LC,
              	RST => RST,
@@ -219,8 +271,10 @@ begin
              	OUT_data => Out_Data_Mem
 	);
 	
-	main_ip : Compteur_IP Port map ( CLK => CLK,
-              IP_Out => IP
+	main_ip : Compteur_IP Port map ( 
+	           enable => alea,
+	           CLK => CLK,
+               IP_Out => IP
     );
 
                	 
