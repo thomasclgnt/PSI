@@ -50,6 +50,13 @@ architecture Behavioral of Pipeline is
 
 begin
 
+    -- rajouter qqch du style :
+    -- if jmp = '1' then
+    --      BLOQUER, donc IN et OUT ne bouge pas
+    --      et au tour d'après, 
+    --      la valeur actuellement en IN qui représente le jump
+    --      sera écrasée par la valeur de l'instruction à laquelle on a sauté
+
     process
     begin
         wait until CLK'event and CLK='1';

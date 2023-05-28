@@ -74,6 +74,9 @@ begin
             6 => x"0d060000", -- LOAD R6, MEM0 ; R6 = Valeur en mémoire 0 = 4
             7 => x"03040403", -- SUB R4, R4, R3 ; R4 = R4 - R3 = 15 - 2 = 13
             8 => x"0e010400", -- STORE R4, MEM1 ; Stocke la valeur de R4 dans la mémoire1
+            
+      -- JUMPS ET ALÉAS DE BRANCHEMENT
+            -- 9 => x"0f040000", -- JMP ADDR_INSTR 4
             others => x"ffffffff"
     ) ;
     process

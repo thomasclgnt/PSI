@@ -9,11 +9,11 @@ lex.yy.c: lex.l bison.tab.h
 %.o: %.c
 	gcc -c -o $@ $^
 
-bison: lex.yy.o bison.tab.o symboles.o tablasm.o tablfunctions.o interpreteur.o
+bison: lex.yy.o bison.tab.o symboles.o tablasm.o interpreteur.o cross-assembleur.o
 	gcc -o bison $^
 
 clean:
 	rm bison bison.tab.c lex.yy.c bison.tab.h bison.output
 
 test: all
-	cat samples/test_functions.c | ./bison
+	cat samples/test_afc_copy.c | ./bison

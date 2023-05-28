@@ -6,6 +6,7 @@
 #include "tablasm.h"
 #include "tablfunctions.h"
 #include "interpreteur.h"
+#include "cross-assembleur.h"
 
 extern FILE* yyin ;
 FILE* input_file ;
@@ -195,6 +196,8 @@ int main(void) {
 
   export_file() ;
 
-  execute() ;
+  execute() ; // interpréteur
+
+  execute_cross(); // cross-assembleur
 
 }

@@ -180,11 +180,18 @@ begin
             -- bloauer mi => entree enable (qui recoit alea) : DONE
             -- bloauer lidi => entree enable (qui recoit alea) : DONE
             -- inserer un nop dans diex => entree nop (qui recoit alea pour diex) : DONE
+            
+    -- GESTION DES ALÉAS DE BRANCHEMENT : 
+    -- création d'un signal ou d'un composant à part ?
+    -- decalage <= +1 when alea = '1' ;
 
 
 	main_instruction_mem : Instruction_Memory Port map (
         enable => alea,
-        addr => IP,
+        addr => IP, -- addr => addr_jmp où addr_jmp est un signal comme alea, qui ressemblerait à ça :
+        -- addr_jmp <= instruction_A when jmp = '1' else IP ;
+        -- AVEC GESTION D'ALÉA DE BRANCHEMENT : 
+        -- addr_jmp <= instruction_A + decalage when jmp = '1' else IP ;
         CLK => CLK,
         OUT_instr => instruction -- sort une instruction sur 32 bits
 	);
@@ -198,6 +205,8 @@ begin
 	pip_lidi : Pipeline Port map (
 	    enable => alea,
 	    nop => alea,
+	    -- rajouter une entrée du style et adapter le comportement de LiDi :
+	    -- jmp <= '1' when instruction_Op = x"0f"
 	    A_in => instruction_A,
     	Op_in => instruction_Op,
     	B_in => instruction_B,
