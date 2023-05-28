@@ -304,7 +304,9 @@ diex2exmem_LC <= "001" when diex2exmem.Op = x"01" else "010" when diex2exmem.Op 
 -- MUX en sortie de l'ALU
 diex2exmem_MUX <= Res_ALU when (diex2exmem.Op = x"01" or diex2exmem.Op = x"02" or diex2exmem.Op = x"03") else diex2exmem.B;
 
-exmem2memre_LC <= '1' when exmem2memre.Op = x"0d" else '0' when exmem2memre.Op = x"0e" ; -- LOAD : 0d, lecture donc LC = 1
+-- exmem2memre_LC <= '1' when exmem2memre.Op = x"0d" else '0' when exmem2memre.Op = x"0e" ; -- LOAD : 0d, lecture donc LC = 1
+exmem2memre_LC <= '0' when exmem2memre.Op = x"0e" else '1' ;
+
 
 datamem2memre_MUX <= Out_Data_Mem when exmem2memre.Op = x"0d" else exmem2memre.B ;
 

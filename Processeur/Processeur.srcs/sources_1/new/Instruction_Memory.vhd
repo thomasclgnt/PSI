@@ -62,9 +62,18 @@ begin
             -- 7 => x"0e040100", -- STORE 4 1 0 (store addresse1 registre4) 
             -- 5 => x"01060709",
      -- TEST 2 ALEAS
-            1 => x"06080200", -- AFC 8 2 0
-            2 => x"01000005", -- ADD 0 0 5
-            3 => x"05030800", -- COP 3 8 0
+            -- 1 => x"06080200", -- AFC 8 2 0
+            -- 2 => x"01000005", -- ADD 0 0 5
+            -- 3 => x"05030800", -- COP 3 8 0
+     -- TEST 3 ALÉAS
+            1 => x"06011000", -- AFC R1, 10 ; R1 = 10
+            2 => x"06020500", -- AFC R2, 5 ; R2 = 5
+            3 => x"06030200", -- AFC R3, 2 ; R3 = 2
+            4 => x"01040102", -- ADD R4, R1, R2 ; R4 = R1 + R2 = 10 + 5 = 15
+            5 => x"05050400", -- COPY R5, R4 ; R5 = R4 = 15
+            6 => x"0d060000", -- LOAD R6, MEM0 ; R6 = Valeur en mémoire 0 = 4
+            7 => x"03040403", -- SUB R4, R4, R3 ; R4 = R4 - R3 = 15 - 2 = 13
+            8 => x"0e010400", -- STORE R4, MEM1 ; Stocke la valeur de R4 dans la mémoire1
             others => x"ffffffff"
     ) ;
     process
