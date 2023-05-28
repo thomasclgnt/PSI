@@ -32,8 +32,8 @@ use IEEE.NUMERIC_STD.ALL;
 --use UNISIM.VComponents.all;
 
 entity Pipeline is
-    Port (enable : in STD_LOGIC ;
-            nop : in STD_LOGIC ;
+    Port (alea : in STD_LOGIC ;
+            jump : in STD_LOGIC ;
             A_in : in STD_LOGIC_VECTOR (7 downto 0);
             Op_in : in STD_LOGIC_VECTOR (7 downto 0);
             B_in : in STD_LOGIC_VECTOR (7 downto 0);
@@ -60,15 +60,12 @@ begin
     process
     begin
         wait until CLK'event and CLK='1';
-        if enable = '1' then
-            report "disabled : " & STD_LOGIC'image(nop) ;
-            if nop = '1' then
-                report "je fais un NOPPPP" ;
-                A_out <= x"00" ;
-                B_out <= x"00" ;
-                C_out <= x"00" ;
-                Op_out <= x"00" ;
-            end if ;
+        if alea = '1' or jump = '1' then
+            report "je fais un NOPPPP" ;
+            A_out <= x"00" ;
+            B_out <= x"00" ;
+            C_out <= x"00" ;
+            Op_out <= x"00" ;
         else
             report "enabled" ;
             A_out <= A_in ;

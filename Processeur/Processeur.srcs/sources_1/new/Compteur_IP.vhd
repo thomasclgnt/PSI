@@ -34,7 +34,9 @@ use IEEE.NUMERIC_STD.ALL;
 entity Compteur_IP is
 --  Port ( );
   Port ( enable : in STD_LOGIC ;
+        jmp : in STD_LOGIC ;
         CLK : in STD_LOGIC ;
+        IP_JMP : in STD_LOGIC_VECTOR(7 downto 0) ;
         IP_Out : out STD_LOGIC_VECTOR(7 downto 0)
           );
 end Compteur_IP;
@@ -44,12 +46,14 @@ architecture Behavioral of Compteur_IP is
 signal aux : integer := 0 ;
 
 begin
-    IP_Out <= STD_LOGIC_VECTOR(to_unsigned(aux -1, 8)) ;
+    -- IP_Out <= STD_LOGIC_VECTOR(to_unsigned(aux -1, 8)) ;
+    IP_Out <= IP_JMP when jmp = '1' else STD_LOGIC_VECTOR(to_unsigned(aux -1, 8)) ;
+    
     process
     begin
         wait until CLK'event and CLK='1';
         if enable = '0' then
-            aux <= aux + 1 ;
+                aux <= aux + 1 ;
         end if ;
     end process ;
 

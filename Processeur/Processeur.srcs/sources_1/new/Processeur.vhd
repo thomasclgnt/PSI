@@ -76,8 +76,8 @@ architecture Behavioral of Processeur is
  	end component ;
 	 
  	component Pipeline is
-    	Port ( enable : in STD_LOGIC;
-    	    nop : in STD_LOGIC;
+    	Port ( alea : in STD_LOGIC;
+    	    jump : in STD_LOGIC;
     	    A_in : in STD_LOGIC_VECTOR (7 downto 0);
         	Op_in : in STD_LOGIC_VECTOR (7 downto 0);
         	B_in : in STD_LOGIC_VECTOR (7 downto 0);
@@ -101,9 +101,11 @@ architecture Behavioral of Processeur is
     
     component Compteur_IP is
               Port ( enable : in STD_LOGIC ;
+              jmp : in STD_LOGIC ;
               CLK : in STD_LOGIC ;
-              IP_Out : out STD_LOGIC_VECTOR (7 downto 0)
-              );
+              IP_JMP : in STD_LOGIC_VECTOR ;
+              IP_Out : out STD_LOGIC_VECTOR (7 downto 0) 
+    );
     end component ;
        
    	 
@@ -151,6 +153,7 @@ architecture Behavioral of Processeur is
 	signal alea_memre : STD_LOGIC ;
 	signal alea : STD_LOGIC :=  '0'; -- HMMMMM
 	signal instr_arithm : STD_LOGIC ;
+	signal jmp : STD_LOGIC := '0' ;
     
 begin
 
@@ -168,10 +171,9 @@ begin
     alea_exmem <= '1'
         when (lidi_read = '1' and exmem_write = '1' and instr_arithm = '0' and instruction_B = diex2exmem.A)
         or (lidi_read = '1' and exmem_write = '1' and instr_arithm = '1' and (instruction_B = diex2exmem.A or instruction_C = diex2exmem.A)) else '0';
-    -- alea_memre <= '1'
-        -- when (lidi_read = '1' and exmem_write = '1' and instr_arithm = '0' and instruction_B = exmem2memre.A)
-        -- or (lidi_read = '1' and exmem_write = '1' and instr_arithm = '1' and (instruction_B = exmem2memre.A or instruction_C = exmem2memre.A)) else '0';
-    alea <= '1' when alea_diex = '1' or  alea_exmem = '1' else '0'; -- or alea_memre = '1' 
+    alea <= '1' when alea_diex = '1' or  alea_exmem = '1' else '0';
+    
+    jmp <= '1' when instruction_Op = x"07" else '0' ;
 
     
     -- À FAIRE :
@@ -181,17 +183,10 @@ begin
             -- bloauer lidi => entree enable (qui recoit alea) : DONE
             -- inserer un nop dans diex => entree nop (qui recoit alea pour diex) : DONE
             
-    -- GESTION DES ALÉAS DE BRANCHEMENT : 
-    -- création d'un signal ou d'un composant à part ?
-    -- decalage <= +1 when alea = '1' ;
-
 
 	main_instruction_mem : Instruction_Memory Port map (
         enable => alea,
-        addr => IP, -- addr => addr_jmp où addr_jmp est un signal comme alea, qui ressemblerait à ça :
-        -- addr_jmp <= instruction_A when jmp = '1' else IP ;
-        -- AVEC GESTION D'ALÉA DE BRANCHEMENT : 
-        -- addr_jmp <= instruction_A + decalage when jmp = '1' else IP ;
+        addr => IP,
         CLK => CLK,
         OUT_instr => instruction -- sort une instruction sur 32 bits
 	);
@@ -203,10 +198,9 @@ begin
 	instruction_Op <= instruction(31 downto 24) ;
     
 	pip_lidi : Pipeline Port map (
-	    enable => alea,
-	    nop => alea,
+	    alea => alea,
+	    jump => jmp,
 	    -- rajouter une entrée du style et adapter le comportement de LiDi :
-	    -- jmp <= '1' when instruction_Op = x"0f"
 	    A_in => instruction_A,
     	Op_in => instruction_Op,
     	B_in => instruction_B,
@@ -220,8 +214,8 @@ begin
 	 
     
 	pip_diex : Pipeline Port map (
-		enable => '0', -- SE BLOQUE DANS TOUS LES CAS enable => alea_diex,
-        nop => '0', 
+		alea => '0', -- SE BLOQUE DANS TOUS LES CAS enable => alea_diex,
+        jump => '0', 
 	    A_in => lidi2diex.A,
     	Op_in => lidi2diex.Op,
     	B_in => lidi2diex_MUX,
@@ -234,8 +228,8 @@ begin
    );
 	 
 	pip_exmem : Pipeline Port map (
-		enable => '0',
-        nop => '0', 
+		alea => '0',
+        jump => '0', 
 	    A_in => diex2exmem.A,
     	Op_in => diex2exmem.Op,
     	B_in => diex2exmem_MUX,
@@ -248,8 +242,8 @@ begin
 	);
 
 	pip_memre : Pipeline Port map (
-	    enable => '0',
-        nop => '0',
+	    alea => '0',
+        jump => '0',
         A_in => exmem2memre.A,
         Op_in => exmem2memre.Op,
         B_in => datamem2memre_MUX,
@@ -290,7 +284,9 @@ begin
 	
 	main_ip : Compteur_IP Port map ( 
 	           enable => alea,
+	           jmp => jmp,
 	           CLK => CLK,
+	           IP_JMP => instruction_A,
                IP_Out => IP
     );
 
@@ -313,7 +309,7 @@ diex2exmem_LC <= "001" when diex2exmem.Op = x"01" else "010" when diex2exmem.Op 
 -- MUX en sortie de l'ALU
 diex2exmem_MUX <= Res_ALU when (diex2exmem.Op = x"01" or diex2exmem.Op = x"02" or diex2exmem.Op = x"03") else diex2exmem.B;
 
--- exmem2memre_LC <= '1' when exmem2memre.Op = x"0d" else '0' when exmem2memre.Op = x"0e" ; -- LOAD : 0d, lecture donc LC = 1
+-- en écriture seulement pour le store
 exmem2memre_LC <= '0' when exmem2memre.Op = x"0e" else '1' ;
 
 
