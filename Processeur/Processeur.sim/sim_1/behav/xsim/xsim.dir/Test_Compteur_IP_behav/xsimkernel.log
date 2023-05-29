@@ -1,0 +1,7 @@
+Running: xsim.dir/Test_Compteur_IP_behav/xsimk -simmode gui -wdb Test_Compteur_IP_behav.wdb -simrunnum 0 -socket 52975
+Design successfully loaded
+Design Loading Memory Usage: 32648 KB (Peak: 32708 KB)
+Design Loading CPU Usage: 20 ms
+Simulation completed
+Simulation Memory Usage: 118484 KB (Peak: 179920 KB)
+Simulation CPU Usage: 20 ms

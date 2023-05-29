@@ -136,7 +136,7 @@ void execute(){
                afc(tab_rom[index_rom][1], tab_rom[index_rom][2]);
                break;
            case 7:
-           // JMP
+           // JMPnum_instr
                jmp(tab_rom[index_rom][1]) ;
                break;
            case 8:
@@ -165,6 +165,6 @@ void execute(){
 
     }
 
-    printf("end execution\n") ;
+    printf("end execution\n \n") ;
 
 }

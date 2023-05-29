@@ -5,10 +5,10 @@
 
 // actions : valeurs
 /*
-0 add
-1 mul
-2 sub
-3 div
+1 add
+2 mul
+3 sub
+4 div
 5 : copy
 6 : AFC
 7 : JUMP
