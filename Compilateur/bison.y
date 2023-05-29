@@ -28,7 +28,6 @@ FILE* input_file ;
 %type <index> index_jmp
 %type <index> tIF
 %type <index> tLPAR
-%type <index> aux
 
 %token tIF tELSE tWHILE tPRINT tRETURN tINT tVOID tCONST
 %token tADD tSUB tMUL tDIV tLT tGT tNE tEQ tLE tGE tASSIGN tAND tOR tNOT 
@@ -151,7 +150,10 @@ Initialisation:
 
 Expression:
     tID   {printf("tempID is %s\n", $1) ; push("tempID", 1, profondeur_globale) ; //creer var tmp
-          printf("COPY 5\n"); ajout_copy(addr - 4, get($1)) /* copier $1 dans cette var tm p ; 
+          printf("COPY 5\n"); printf("\nÉtat de la pile : \n") ;
+          // print_stack() ; printf("\n") ; 
+          printf("je cherche : %s @%d", $1, get($1)) ;
+          ajout_copy(addr - 4, get($1)) /* copier $1 dans cette var tm p ; 
           - addr = last adress used */ ; 
           printf("id \n") ;}
   | tNB   {printf("tempNB is %d\n", $1) ; push("tempNB", 1, profondeur_globale) ; //$$ creer var tmp  
@@ -161,18 +163,23 @@ Expression:
   | tID tLPAR {$2 = current_size() ; 
             push("!ADR", 1, profondeur_globale) ; 
             push("!VAL", 1, profondeur_globale) ;} Parameter tRPAR 
-                {ajout_push($2) ; // prepare frame for callee function
-                ajout_call(get_addr_funct($1)) ; // add call to the called function
-                pop(); // free tmp variables = param ???
-                // $3 = get()// save return value in aux
-                ajout_pop($2) ; // restore the frame for the callee function
-                ajout_copy(addr - 8, get("!VAL")) ; // save return value
-                pop();
-                printf("Appel fonction avec parametre\n") ;}
+                    {ajout_push($2) ; // prepare frame for callee function
+                    ajout_call(get_addr_funct($1)) ; // add call to the called function
+                    pop(); // free tmp variables = param ???
+                    ajout_pop($2) ; // restore the frame for the callee function
+                    ajout_copy(addr - 8, get("!VAL")) ; // save return value
+                    pop();
+                    printf("Appel fonction avec parametre\n") ;}
   | tID tLPAR {$2 = current_size() ; 
             push("!ADR", 1, profondeur_globale) ; 
             push("!VAL", 1, profondeur_globale) ;} tRPAR 
-                {printf("Appel fonction sans paramètre \n") ;}
+                    {ajout_push($2) ; // prepare frame for callee function
+                    ajout_call(get_addr_funct($1)) ; // add call to the called function
+                    // PAS DE FREE TMP VARIABLES CAR PAS DE PARAM ????
+                    ajout_pop($2) ; // restore the frame for the callee function
+                    ajout_copy(addr - 8, get("!VAL")) ; // save return value
+                    pop();
+                    printf("Appel fonction sans paramètre \n") ;}
   | Expression tADD Expression  { /* instructer ADD last_add_used-1 last_add_used-1 last_add_used a
                                   jout_exp_arith(1, last_addr_used_moins_1, last_addr_used_moins_1, lat_addr_used); */ 
                                   ajout_exp_arith(1, addr - 8, addr - 8, addr - 4) ;
@@ -185,11 +192,14 @@ Expression:
   | Expression tDIV Expression  { ajout_exp_arith(4, addr - 8, addr - 8, addr - 4) ;
                                   pop() ; printf("division / \n") ;}
   | Expression tLT Expression   { ajout_exp_arith(9, addr - 8, addr - 8, addr - 4) ; pop() ; printf("condition < \n") ;}
-  | Expression tLE Expression                                                                                 {pop() ; printf("condition <= \n") ;}  
+  | Expression tLE Expression   { ajout_exp_arith(16, addr - 8, addr - 8, addr - 4) ;
+                                  pop() ; printf("condition <= \n") ;}  
   | Expression tGT Expression   { ajout_exp_arith(10, addr - 8, addr - 8, addr - 4) ; pop() ; printf("condition > \n") ;}
-  | Expression tGE Expression                                                                                 {pop() ; printf("condition >= \n") ;}
+  | Expression tGE Expression   { ajout_exp_arith(15, addr - 8, addr - 8, addr - 4) ;
+                                  pop() ; printf("condition => \n") ;} 
   | Expression tEQ Expression   { ajout_exp_arith(11, addr - 8, addr - 8, addr - 4) ; pop() ; printf("égalité == \n") ;}
-  | Expression tNE Expression                                                                                 {pop() ; printf("différence != \n") ;}    
+  | Expression tNE Expression   { ajout_exp_arith(21, addr - 8, addr - 8, addr - 4) ;
+                                  pop() ; printf("différence != \n") ;}    
 ;
 
 Expression_Log:

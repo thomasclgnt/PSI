@@ -25,6 +25,7 @@
 18 : PUSH
 19 : CALL
 20 : POP
+21 : NEQ
 */
 
 // GEQ, SEQ ? IF ELSE ?

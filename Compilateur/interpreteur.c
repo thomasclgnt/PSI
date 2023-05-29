@@ -53,6 +53,18 @@ void equ(int addr_res, int addr_op1, int addr_op2){
     tab_ram[addr_res] = (tab_ram[addr_op1] == tab_ram[addr_op2]) ? 1 : 0 ;
 }
 
+void geq(int addr_res, int addr_op1, int addr_op2){
+    tab_ram[addr_res] = (tab_ram[addr_op1] >= tab_ram[addr_op2]) ? 1 : 0 ;
+}
+
+void seq(int addr_res, int addr_op1, int addr_op2){
+    tab_ram[addr_res] = (tab_ram[addr_op1] <= tab_ram[addr_op2]) ? 1 : 0 ;
+}
+
+void neq(int addr_res, int addr_op1, int addr_op2){
+    tab_ram[addr_res] = (tab_ram[addr_op1] != tab_ram[addr_op2]) ? 1 : 0 ;
+}
+
 void pri(int addr_res){
     printf("%d\n", tab_ram[addr_res]) ;
 }
@@ -158,6 +170,18 @@ void execute(){
            case 12:
            // PRI
                 pri(tab_rom[index_rom][1]) ;
+                break;
+            case 15:
+            // GEQ
+                geq(tab_rom[index_rom][1], tab_rom[index_rom][2], tab_rom[index_rom][3]);
+                break;
+            case 16:
+            // SEQ
+                seq(tab_rom[index_rom][1], tab_rom[index_rom][2], tab_rom[index_rom][3]);
+                break;
+            case 21:
+            // NEQ
+                neq(tab_rom[index_rom][1], tab_rom[index_rom][2], tab_rom[index_rom][3]);
                 break;
         }
 

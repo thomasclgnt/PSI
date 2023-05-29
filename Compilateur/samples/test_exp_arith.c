@@ -4,5 +4,5 @@ void main(void) {
   b = 6 ;
   c = 8 ;
   a = b + c * 2 ;
-  b = a - c/1 ;
+  // b = a - c/1 ;
 }

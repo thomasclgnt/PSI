@@ -70,28 +70,42 @@ void decrement_depth(){
 
 // get qui retourne l'adresse de l'élément en argument
 int get(char * name) {
-    bool vide = false ;
-    bool res = false ;
-    int val_retour = -1 ;
-    struct Symbol * stack_aux = stack ;
+    bool vide = false;
+    bool res = false;
+    int val_retour = -1;
+    struct Symbol * stack_aux = stack;
+
+    printf("Je fait un get de %s\n", name) ;
+    // printf("\n COPIE État de la pile : \n") ; print_stack() ; printf("\n") ;
+    // printf("stack : %s\n", stack->id) ;
 
     while (!vide && !res){
+        //  printf("je rentre\n") ;
+        //  printf("stack : %s\n", stack->id) ;
         if (stack->precedent != NULL){
             if (strcmp(name, stack->id) == 0) {
-                res = true ;
-                val_retour = stack->adresse ;
+                res = true;
+                // printf("je rentre ici\n") ;
+                val_retour = stack->adresse;
             }
-            stack = stack->precedent ;
+            stack = stack->precedent;
         } else if (strcmp(name, stack->id) == 0) {
-            res = true ;
-            val_retour = stack->adresse ;
-        }else {
-            vide = true ;
+            res = true;
+            // printf("je rentre là\n") ;
+            val_retour = stack->adresse;
+        } else {
+            // printf("stack vide\n") ;
+            vide = true;
         }
     }
 
-  stack = stack_aux ;
-  return val_retour ;
+    if (stack_aux != NULL) {
+        stack = stack_aux;
+    }
+
+    printf("J'ai trouvé : %d\n", val_retour) ;
+  
+    return val_retour;
 }
 
 int current_size(){
@@ -100,6 +114,7 @@ int current_size(){
 
 void print_stack(){
     bool vide = false ;
+    struct Symbol * stack_aux = stack;
     while (!vide){
         if (stack != NULL) {
             if (stack->precedent != NULL){
@@ -115,6 +130,8 @@ void print_stack(){
         }
         
     }
+    // on remet la pile au début
+    stack = stack_aux;
 }
 
 
