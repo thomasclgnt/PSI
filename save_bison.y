@@ -27,8 +27,6 @@ FILE* input_file ;
 %type <index> index_jmf
 %type <index> index_jmp
 %type <index> tIF
-%type <index> tLPAR
-%type <index> aux
 
 %token tIF tELSE tWHILE tPRINT tRETURN tINT tVOID tCONST
 %token tADD tSUB tMUL tDIV tLT tGT tNE tEQ tLE tGE tASSIGN tAND tOR tNOT 
@@ -54,31 +52,28 @@ Programme:
   | Programme Function
 
 Function:
-  {printf ("VOID Function Start \n") ;} tVOID Declaration tLBRACE {profondeur_globale += 1 ;} //ICI
-            Statement { decrement_depth() ; // profondeur_globale -= 1 ; //ICI 
-            } tRBRACE {printf ("VOID Function End \n") ; ajout_ret() ; decrement_depth() ; } // profondeur_globale -= 1 ; //ICI 
-  |  {printf ("INT Function Start \n") ;} tINT Declaration tLBRACE {profondeur_globale += 1 ;} //ICI
-            Statement Return tSEMI {decrement_depth() ; // profondeur_globale -= 1 ; //ICI
-            } tRBRACE {printf ("INT Function End \n") ; decrement_depth() ; } // profondeur_globale -= 1 ; //ICI                                   
+  {printf ("VOID Function Start \n") ; } tVOID Declaration tLBRACE { printf("Profondeur : %d\n", profondeur_globale) ; } Statement {printf("\n 1 État de la pile : \n") ; print_stack() ; printf("\n") ; decrement_depth() ;} tRBRACE { 
+                                                                      ajout_ret() ; decrement_depth(); printf ("VOID Function End \n") ;}
+  |  {printf ("INT Function Start \n") ; } tINT Declaration tLBRACE { printf("Profondeur : %d\n", profondeur_globale) ; } Statement {printf("\n 1 État de la pile : \n") ; print_stack() ; printf("\n") ;} Return tSEMI  {decrement_depth() ;} tRBRACE { 
+                                                                      decrement_depth() ; printf ("INT Function End \n") ;}                                 
 ;
 
 Declaration:
-  tID tLPAR { profondeur_globale += 1 ; //ICI
+  tID tLPAR {profondeur_globale += 1 ; printf("Profondeur : %d\n", profondeur_globale) ; printf("\n 1 État de la pile : \n") ; print_stack() ; printf("\n") ; printf("Nouvelle fonction : %s\n", $1) ;
             add_funct($1, get_index() + 1); // ajout de la fonction à la table
             push("?ADR", 1, profondeur_globale) ; // maj de la pile : ajout de la valeur et de l'addr de retour
             push("?VAL", 1, profondeur_globale) ;
             if (strcmp($1, "main") == 0){
                 patch_jmp(0) ; // on patch le jump d'initialisation
-            }                                     
-            printf("Declaration \n") ;} 
-      Argument tRPAR                                                                                   {printf("Declaration \n") ;}
+            }                                       
+            printf("Declaration \n") ;} Argument tRPAR { profondeur_globale += 1 ;}
 ;
 
 Argument:
   %empty
-  | tVOID               {printf("Argument f Void \n") ;}
-  | tINT tID            {push($2, 1, profondeur_globale) ; printf("Argument f integer \n") ;}
-  | tINT tID tCOMMA     {push($2, 1, profondeur_globale) ;} Argument {printf(",Argument f integer \n") ;}
+  | tVOID                        {printf("Argument f Void \n") ;}
+  | tINT tID                     {push($2, 1, profondeur_globale) ; printf("Argument f integer \n") ;}
+  | tINT tID tCOMMA {push($2, 1, profondeur_globale) ;} Argument     {printf(",Argument f integer \n") ;}
 ;
 
 Statement:
@@ -136,43 +131,27 @@ Print:
 
 
 Assignment:
-  tID tASSIGN Expression {printf("COPY 3\n"); ajout_copy(get($1), addr - 4) ; pop() ; printf("Assignement\n") ;} // mettre à jour la table des symboles
+  tID tASSIGN Expression {ajout_copy(get($1), addr - 4) ; pop() ; printf("Assignement\n") ;} // mettre à jour la table des symboles
                               // afc ce qu'il y a à droite du égal, dans l'adresse de ID
 ;
 
 Initialisation:
-  tID    {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ; printf("Initialisation \n") ;}
-  | tID  {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ;} 
-          tASSIGN Expression {printf("COPY 4\n"); ajout_copy(get($1), addr - 4) ; pop() ; printf("Assignement\n") ;printf("Initialisation \n") ;}
+  tID                        {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ; printf("Initialisation \n") ;}
+  | tID                      {push($1, 1, profondeur_globale) ; printf("Tête : %s\n", stack->id) ;} tASSIGN Expression {ajout_copy(get($1), addr - 4) ; pop() ; 
+                                                                                                    printf("Assignement\n") ;printf("Initialisation \n") ;}
   | Initialisation tCOMMA Initialisation                                                                  
 ;
 
-// aux: %empty
-
 Expression:
     tID   {printf("tempID is %s\n", $1) ; push("tempID", 1, profondeur_globale) ; //creer var tmp
-          printf("COPY 5\n"); ajout_copy(addr - 4, get($1)) /* copier $1 dans cette var tm p ; 
+          ajout_copy(addr - 4, get($1)) /* copier $1 dans cette var tm p ; 
           - addr = last adress used */ ; 
           printf("id \n") ;}
   | tNB   {printf("tempNB is %d\n", $1) ; push("tempNB", 1, profondeur_globale) ; //$$ creer var tmp  
           ajout_afc(addr - 4, $1) ; //ajout_affect $2 dans cette var tmp 
           }
-          // APPELS DE FONCTIONS : JE PUSH !VAL ET !ADR, JE SAVE LA TAILLE ACTUELLE DE LA PILE DANS tLPAR
-  | tID tLPAR {$2 = current_size() ; 
-            push("!ADR", 1, profondeur_globale) ; 
-            push("!VAL", 1, profondeur_globale) ;} Parameter tRPAR 
-                {ajout_push($2) ; // prepare frame for callee function
-                ajout_call(get_addr_funct($1)) ; // add call to the called function
-                pop(); // free tmp variables = param ???
-                // $3 = get()// save return value in aux
-                ajout_pop($2) ; // restore the frame for the callee function
-                ajout_copy(addr - 8, get("!VAL")) ; // save return value
-                pop();
-                printf("Appel fonction avec parametre\n") ;}
-  | tID tLPAR {$2 = current_size() ; 
-            push("!ADR", 1, profondeur_globale) ; 
-            push("!VAL", 1, profondeur_globale) ;} tRPAR 
-                {printf("Appel fonction sans paramètre \n") ;}
+  | tID tLPAR Parameter tRPAR                                                                                 {printf("Appel fonction avec parametre\n") ;}
+  | tID tLPAR tRPAR                                                                                           {printf("Appel fonction sans paramètre \n") ;}
   | Expression tADD Expression  { /* instructer ADD last_add_used-1 last_add_used-1 last_add_used a
                                   jout_exp_arith(1, last_addr_used_moins_1, last_addr_used_moins_1, lat_addr_used); */ 
                                   ajout_exp_arith(1, addr - 8, addr - 8, addr - 4) ;
@@ -199,16 +178,13 @@ Expression_Log:
 ;
 
 Parameter:
-  Expression  { printf("Parametre et valeur \n") ; }
-  | Expression tCOMMA Parameter                                                                      
+  Expression                                                                                                  {printf("Parametre et valeur \n") ;}
+  | Expression tCOMMA Parameter                                                                           
 ;
 
-
-
-Return:
-  tRETURN tLPAR Expression tRPAR     { printf("COPY 1\n"); ajout_copy(get("?VAL"), addr - 4) ; pop () ; ajout_ret() ; printf("Return\n") ;}
-  | tRETURN Expression               { printf("COPY 2\n"); ajout_copy(get("?VAL"), addr - 4) ; pop () ; ajout_ret() ; printf("Return\n") ;}
-  // À LA FIN DE LA FONCTION / FICHIER, ON DEVRAIT FAIRE UN INSTRUCTION NOP 0 0 0
+Return: // dans les deux cas, on copie le résultat de l'expression à l'emplacement réservé pour la valeur de return, on pop la variable tmp et on RET
+  tRETURN tLPAR Expression tRPAR            { ajout_copy(get("?VAL"), addr - 4) ; pop () ; ajout_ret() ; printf("Return\n") ;} 
+  | tRETURN Expression                      { ajout_copy(get("?VAL"), addr - 4) ; pop () ; ajout_ret() ; printf("Return\n") ;}
 ;
 
 %%
@@ -223,7 +199,7 @@ int main(void) {
   yyparse();
   printf("\n++++ SUCCESSFULLY PARSED ++++\n");
 
-  printf("\nÉtat de la pile : \n") ;
+  printf("\n Fin : État de la pile : \n") ;
   print_stack() ;
 
   printf("\n Tableau d'instructions ASM : \n") ;

@@ -19,6 +19,12 @@ void ajout_print(int addr_res) ;
 
 void ajout_ret() ;
 
+void ajout_push(int stack_size) ;
+
+void ajout_call(int addr_funct) ;
+
+void ajout_pop(int stack_size) ;
+
 void patch_jmf(int index) ;
 
 void patch_jmp(int index) ;
