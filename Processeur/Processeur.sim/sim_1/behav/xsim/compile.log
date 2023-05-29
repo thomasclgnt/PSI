@@ -342,3 +342,5 @@ INFO: [VRFC 10-163] Analyzing VHDL file "/home/mecaliff/Bureau/4A/S8/PSI/Process
 INFO: [VRFC 10-307] analyzing entity Compteur_IP
 INFO: [VRFC 10-163] Analyzing VHDL file "/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Instruction_Memory.vhd" into library xil_defaultlib
 INFO: [VRFC 10-307] analyzing entity Instruction_Memory
+INFO: [VRFC 10-163] Analyzing VHDL file "/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Instruction_Memory.vhd" into library xil_defaultlib
+INFO: [VRFC 10-307] analyzing entity Instruction_Memory

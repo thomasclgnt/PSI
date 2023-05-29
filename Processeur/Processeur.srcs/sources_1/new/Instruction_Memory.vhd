@@ -63,10 +63,12 @@ begin
             -- 8 => x"0e010400", -- STORE R4, MEM1 ; Stocke la valeur de R4 dans la mémoire1
       -- TESTS JUMPS ET ALÉAS DE BRANCHEMENT
             -- JMP FORWARD
-            1 => x"06000100", -- AFC R0, 1
-            2 => x"07060000", -- JMP @instr=4
-            3 => x"06010300", -- AFC R1, 3
-            4 => x"06020500", -- AFC R2, 5
+            1 => x"06050900", -- AFC R0, 1
+            2 => x"0d000500",
+            3 => x"0e040000",
+            -- 2 => x"07060000", -- JMP @instr=4
+            -- 3 => x"06010300", -- AFC R1, 3
+            -- 4 => x"06020500", -- AFC R2, 5
             -- 4 => x"", -- JMP @instr=2
             others => x"ffffffff"
     ) ;
