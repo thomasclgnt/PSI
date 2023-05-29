@@ -161,8 +161,6 @@ void execute(){
                 break;
         }
 
-        index_rom ++ ;
-
     }
 
     printf("end execution\n \n") ;
