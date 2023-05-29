@@ -50,8 +50,11 @@ void pop(){
 } 
 
 void decrement_depth(){
+    // printf("\n3 État de la pile : \n") ; print_stack() ; printf("\n") ;
+    printf("prof_gloable = %d\n", profondeur_globale) ;
     int prof_aux = stack->profondeur ;
     profondeur_globale -= 1 ;
+    // printf("je décrémente, prof_aux = %d, prof_gloable = %d\n", prof_aux, profondeur_globale) ;
 
     // pop dans la pile jusqu'à ce que prof du truc actuellement pointé soit = nouvelle profondeur
     while(prof_aux > profondeur_globale){
@@ -59,12 +62,12 @@ void decrement_depth(){
         printf("Pop decrease\n") ;
         if (stack != NULL) {
             prof_aux = stack->profondeur;
-            printf("stack ok\n") ;
         } else {
-            printf("argh jsp\n") ;
             prof_aux = profondeur_globale ;
         }
     }
+
+    // printf("\n4 État de la pile : \n") ; print_stack() ; printf("\n") ;
     
 }
 
@@ -74,6 +77,9 @@ int get(char * name) {
     bool res = false ;
     int val_retour = -1 ;
     struct Symbol * stack_aux = stack ;
+
+    printf("Je fait un get de %s\n", name) ;
+    printf("\n COPIE État de la pile : \n") ; print_stack() ; printf("\n") ;
 
     while (!vide && !res){
         if (stack->precedent != NULL){
@@ -99,10 +105,10 @@ void print_stack(){
     while (!vide){
         if (stack != NULL) {
             if (stack->precedent != NULL){
-            printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+            printf("%s, p = %d, addr = %d\n", stack->id, stack->profondeur, stack->adresse) ;
             stack = stack->precedent ;
             } else {
-                printf("%s, p = %d, add = %d\n", stack->id, stack->profondeur, stack->adresse) ;
+                printf("%s, p = %d, addr = %d\n", stack->id, stack->profondeur, stack->adresse) ;
                 vide = true ;
             }
         } else {

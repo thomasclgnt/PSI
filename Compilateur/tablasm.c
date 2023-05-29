@@ -5,6 +5,7 @@
 
 // actions : valeurs
 /*
+0 NOP
 1 add
 2 mul
 3 sub
@@ -17,12 +18,23 @@
 10 : sup
 11 : equ
 12 : pri
+13 : load
+14 : store
+15 : GEQ
+16 : SEQ
+17 : RET
 */
 
-// GEQ, SEQ ? IF ELSE ?
-
 int tab[1024][4] ;
-int index_asm = 0;
+int index_asm = 1 ;
+
+void init_instr() {
+    // on initialise la table d'instrcutions avec un jump à la fonction main
+    tab[0][0] = 7;
+    tab[0][1] = -2; // penser à patch ce jump
+    tab[0][2] = -1;
+    tab[0][3] = -1;
+}
 
 void ajout_exp_arith(int pcode, int addr_res, int addr_op1, int addr_op2){
     
@@ -45,7 +57,7 @@ void ajout_copy(int addr_res, int addr_op) {
         index_asm++;
         printf("COP @res:%d @op:%d\n", addr_res, addr_op) ;
     } else {
-        printf("ERREUR COPIE, L'élément n'est pas dans la pile\n") ;
+        printf("ERREUR COPIE, L'élément d'adresse %d n'est pas dans la pile\n", addr_op) ;
     }
 }
 
@@ -83,6 +95,15 @@ void ajout_print(int addr_res){
     tab[index_asm][2] = -1;
     tab[index_asm][3] = -1;
     printf("PRI @var:%d \n", addr_res) ;
+    index_asm++;
+}
+
+void ajout_ret(){
+    tab[index_asm][0] = 17;
+    tab[index_asm][1] = -1;
+    tab[index_asm][2] = -1;
+    tab[index_asm][3] = -1;
+    printf("RET\n") ;
     index_asm++;
 }
 

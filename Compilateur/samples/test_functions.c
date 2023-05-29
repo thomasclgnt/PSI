@@ -3,5 +3,5 @@ int f(int a) {
 }
 
 void main() {
-    int a = f(2);
+    int b = f(2);
 }
