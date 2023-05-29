@@ -70,7 +70,7 @@ Declaration:
                 patch_jmp(0) ; // on patch le jump d'initialisation
             }                                     
             printf("Declaration \n") ;} 
-      Argument tRPAR                                                                                   {printf("Declaration \n") ;}
+      Argument tRPAR
 ;
 
 Argument:
@@ -165,7 +165,10 @@ Expression:
             push("!VAL", 1, profondeur_globale) ;} Parameter tRPAR 
                     {ajout_push($2) ; // prepare frame for callee function
                     ajout_call(get_addr_funct($1)) ; // add call to the called function
-                    pop(); // free tmp variables = param ???
+                    int nb_param = (current_size() - $2 - 2) ;
+                    for (int i = 0 ; i < nb_param ; i++) {
+                      pop();
+                    } // free tmp variables = nb param ???
                     ajout_pop($2) ; // restore the frame for the callee function
                     ajout_copy(addr - 8, get("!VAL")) ; // save return value
                     pop();
@@ -209,7 +212,7 @@ Expression_Log:
 ;
 
 Parameter:
-  Expression  { printf("Parametre et valeur \n") ; }
+  Expression
   | Expression tCOMMA Parameter                                                                      
 ;
 

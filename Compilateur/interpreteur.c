@@ -183,6 +183,9 @@ void execute(){
             // NEQ
                 neq(tab_rom[index_rom][1], tab_rom[index_rom][2], tab_rom[index_rom][3]);
                 break;
+            default:
+                printf("ERROR : une instruction du fichier d'entrée n'est pas prise en compte par l'interpréteur\n") ;
+                break;
         }
 
         index_rom ++ ;
