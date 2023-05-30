@@ -5,6 +5,7 @@
 
 // actions : valeurs
 /*
+0 NOP
 1 add
 2 mul
 3 sub
@@ -22,13 +23,7 @@
 15 : GEQ
 16 : SEQ
 17 : RET
-18 : PUSH
-19 : CALL
-20 : POP
-21 : NEQ
 */
-
-// GEQ, SEQ ? IF ELSE ?
 
 int tab[1024][4] ;
 int index_asm = 1 ;
@@ -62,7 +57,7 @@ void ajout_copy(int addr_res, int addr_op) {
         index_asm++;
         printf("COP @res:%d @op:%d\n", addr_res, addr_op) ;
     } else {
-        printf("ERREUR COPIE, L'élément n'est pas dans la pile\n") ;
+        printf("ERREUR COPIE, L'élément d'adresse %d n'est pas dans la pile\n", addr_op) ;
     }
 }
 
@@ -109,33 +104,6 @@ void ajout_ret(){
     tab[index_asm][2] = -1;
     tab[index_asm][3] = -1;
     printf("RET\n") ;
-    index_asm++;
-}
-
-void ajout_push(int stack_size){
-    tab[index_asm][0] = 18;
-    tab[index_asm][1] = stack_size;
-    tab[index_asm][2] = -1;
-    tab[index_asm][3] = -1;
-    printf("PUSH %d\n", stack_size) ;
-    index_asm++;
-}
-
-void ajout_call(int addr_funct){
-    tab[index_asm][0] = 19;
-    tab[index_asm][1] = addr_funct;
-    tab[index_asm][2] = -1;
-    tab[index_asm][3] = -1;
-    printf("CALL @%d\n", addr_funct) ;
-    index_asm++;
-}
-
-void ajout_pop(int stack_size){
-    tab[index_asm][0] = 20;
-    tab[index_asm][1] = stack_size;
-    tab[index_asm][2] = -1;
-    tab[index_asm][3] = -1;
-    printf("POP %d\n", stack_size) ;
     index_asm++;
 }
 

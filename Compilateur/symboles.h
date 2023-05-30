@@ -21,6 +21,8 @@ void decrement_depth() ;
 
 int get(char * name) ;
 
+int current_size() ;
+
 void print_stack();
 
 #endif

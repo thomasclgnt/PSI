@@ -3,6 +3,8 @@
 
 // extern int tab ;
 
+void init_instr() ;
+
 void ajout_exp_arith(int pcode, int addr_res, int addr_op1, int addr_op2) ;
 
 void ajout_copy(int addr_res, int addr_op) ;
@@ -14,6 +16,14 @@ void ajout_jump(int num_instr);
 void ajout_jumpf(int addr_test, int num_instr) ;
 
 void ajout_print(int addr_res) ;
+
+void ajout_ret() ;
+
+void ajout_push(int stack_size) ;
+
+void ajout_call(int addr_funct) ;
+
+void ajout_pop(int stack_size) ;
 
 void patch_jmf(int index) ;
 

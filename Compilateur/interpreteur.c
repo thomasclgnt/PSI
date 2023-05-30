@@ -1,34 +1,37 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+
 
 // créer rtabelau pour représenter la RAM
 
 int tab_ram[1024] ;
 int tab_rom[1024][4] ;
 int index_rom = 0 ;
+int ebp = 0 ;
 
 void add(int addr_res, int addr_op1, int addr_op2){
-    tab_ram[addr_res] = tab_ram[addr_op1] + tab_ram[addr_op2] ;
+    tab_ram[addr_res + ebp] = tab_ram[addr_op1 + ebp] + tab_ram[addr_op2 + ebp] ;
 }
 
 void mul(int addr_res, int addr_op1, int addr_op2){
-    tab_ram[addr_res] = tab_ram[addr_op1] * tab_ram[addr_op2] ;
+    tab_ram[addr_res + ebp] = tab_ram[addr_op1 + ebp] * tab_ram[addr_op2 + ebp] ;
 }
 
 void sub(int addr_res, int addr_op1, int addr_op2){
-    tab_ram[addr_res] = tab_ram[addr_op1] - tab_ram[addr_op2] ;
+    tab_ram[addr_res + ebp] = tab_ram[addr_op1 + ebp] - tab_ram[addr_op2 + ebp] ;
 }
 
 void dvd(int addr_res, int addr_op1, int addr_op2){
-    tab_ram[addr_res] = tab_ram[addr_op1] / tab_ram[addr_op2] ;
+    tab_ram[addr_res + ebp] = tab_ram[addr_op1 + ebp] / tab_ram[addr_op2 + ebp] ;
 }
 
 void cop(int addr_res, int addr_op){
-    tab_ram[addr_res] = tab_ram[addr_op] ;
+    tab_ram[addr_res + ebp] = tab_ram[addr_op + ebp] ;
 }
 
 void afc(int addr_res, int val){
-    tab_ram[addr_res] = val ;
+    tab_ram[addr_res + ebp] = val ;
 }
 
 void jmp(int num_instr){
@@ -36,25 +39,78 @@ void jmp(int num_instr){
 }
 
 void jmf(int addr_cond, int num_instr){
-    if (tab_ram[addr_cond] == 0) {
+    if (tab_ram[addr_cond + ebp] == 0) {
         index_rom = num_instr - 1 ;
     }
 }
 
 void inf(int addr_res, int addr_op1, int addr_op2){
-    tab_ram[addr_res] = (tab_ram[addr_op1] < tab_ram[addr_op2]) ? 1 : 0 ;
+    tab_ram[addr_res + ebp] = (tab_ram[addr_op1 + ebp] < tab_ram[addr_op2 + ebp]) ? 1 : 0 ;
 }
 
 void sup(int addr_res, int addr_op1, int addr_op2){
-    tab_ram[addr_res] = (tab_ram[addr_op1] > tab_ram[addr_op2]) ? 1 : 0 ;
+    tab_ram[addr_res + ebp] = (tab_ram[addr_op1 + ebp] > tab_ram[addr_op2 + ebp]) ? 1 : 0 ;
 }
 
 void equ(int addr_res, int addr_op1, int addr_op2){
-    tab_ram[addr_res] = (tab_ram[addr_op1] == tab_ram[addr_op2]) ? 1 : 0 ;
+    tab_ram[addr_res + ebp] = (tab_ram[addr_op1 + ebp] == tab_ram[addr_op2 + ebp]) ? 1 : 0 ;
+}
+
+void geq(int addr_res, int addr_op1, int addr_op2){
+    tab_ram[addr_res + ebp] = (tab_ram[addr_op1 + ebp] >= tab_ram[addr_op2 + ebp]) ? 1 : 0 ;
+}
+
+void seq(int addr_res, int addr_op1, int addr_op2){
+    tab_ram[addr_res + ebp] = (tab_ram[addr_op1 + ebp] <= tab_ram[addr_op2 + ebp]) ? 1 : 0 ;
+}
+
+void neq(int addr_res, int addr_op1, int addr_op2){
+    tab_ram[addr_res + ebp] = (tab_ram[addr_op1 + ebp] != tab_ram[addr_op2 + ebp]) ? 1 : 0 ;
 }
 
 void pri(int addr_res){
-    printf("%d\n", tab_ram[addr_res]) ;
+    printf("%d\n", tab_ram[addr_res + ebp]) ;
+}
+
+void ret(){
+    int addr_retour = tab_ram[ebp] ;
+    if (addr_retour == -1) {
+        printf("\nEnd of program reached.\n") ;
+    } else {
+        index_rom = addr_retour - 1 ;
+    }
+}
+
+void push_asm(int offset){
+    ebp = ebp + (offset * 4) ; // MULTIPLIER L'OFFSET car nos adresses avancent de 4 en 4 (données sur 4 octets);
+}
+
+void call(int addr_appel){
+    tab_ram[ebp] = index_rom + 1 ; // on sauvegarde dans ebp l'adresse de retour
+    index_rom = addr_appel - 1 ; // on saute à la fonction appellée
+}
+
+void pop_asm(int offset){
+    ebp = ebp - (offset * 4) ; // MULTIPLIER L'OFFSET car nos adresses avancent de 4 en 4 (données sur 4 octets)
+}
+
+void init_ram(){
+    tab_ram[0] = -1 ;
+}
+
+void print_memoire(){
+    int row = 30 ;
+    int leave = 1 ;
+
+    printf("\nMémoire :");
+
+    for (int i = 0; i < row; i++) {
+        printf("[%d] %d ", i, tab_ram[i]);
+        printf("\n");
+    }
+
+    printf("\n");
+
 }
 
 void read_file(){
@@ -107,8 +163,14 @@ void execute(){
 
     printf("file read\n") ;
 
+    printf("\nExecution :\n") ;
+
+    init_ram();
+
     // parcourir tab_rom jusqu'au NOP
     while (tab_rom[index_rom][0] != 0){
+
+        // print_memoire() ;
 
         switch (tab_rom[index_rom][0]) {
            case 1:
@@ -159,7 +221,37 @@ void execute(){
            // PRI
                 pri(tab_rom[index_rom][1]) ;
                 break;
+            case 15:
+            // GEQ
+                geq(tab_rom[index_rom][1], tab_rom[index_rom][2], tab_rom[index_rom][3]);
+                break;
+            case 16:
+            // SEQ
+                seq(tab_rom[index_rom][1], tab_rom[index_rom][2], tab_rom[index_rom][3]);
+                break;
+            case 21:
+            // NEQ
+                neq(tab_rom[index_rom][1], tab_rom[index_rom][2], tab_rom[index_rom][3]);
+                break;
+            case 17:
+                ret();
+                break;
+            case 18:
+                push_asm(tab_rom[index_rom][1]);
+                break;
+            case 19:
+                call(tab_rom[index_rom][1]);
+                break;
+            case 20:
+                pop_asm(tab_rom[index_rom][1]);
+                break;
+            default:
+                printf("ERROR : l'instruction %d du fichier d'entrée n'est pas prise en compte par l'interpréteur\n", tab_rom[index_rom][0]) ;
+                break;
         }
+
+        index_rom ++ ;
+        // printf("new index : %d\n", index_rom) ;
 
     }
 

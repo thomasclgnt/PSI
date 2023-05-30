@@ -13,6 +13,13 @@ void inf(int addr_res, int addr_op1, int addr_op2);
 void sup(int addr_res, int addr_op1, int addr_op2);
 void equ(int addr_res, int addr_op1, int addr_op2);
 void pri(int addr_res);
+void ret();
+void push_asm(int offset);
+void call(int addr_appel);
+void pop_asm(int offset);
+void init_ram();
+
+void print_memoire();
 
 void execute();
 
