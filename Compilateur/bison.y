@@ -82,6 +82,7 @@ Argument:
 
 Statement:
   %empty
+  | FunctionCall tSEMI Statement
   | tCONST tINT Initialisation tSEMI Statement                                                                {printf("Constant initialisation \n") ;}
   | tINT Initialisation tSEMI Statement        
   | Assignment tSEMI Statement                                                                        
@@ -160,29 +161,7 @@ Expression:
           ajout_afc(addr - 4, $1) ; //ajout_affect $2 dans cette var tmp 
           }
           // APPELS DE FONCTIONS : JE PUSH !VAL ET !ADR, JE SAVE LA TAILLE ACTUELLE DE LA PILE DANS tLPAR
-  | tID tLPAR {$2 = current_size() ; 
-            push("!ADR", 1, profondeur_globale) ; 
-            push("!VAL", 1, profondeur_globale) ;} Parameter tRPAR 
-                    {ajout_push($2) ; // prepare frame for callee function
-                    ajout_call(get_addr_funct($1)) ; // add call to the called function
-                    int nb_param = (current_size() - $2 - 2) ;
-                    for (int i = 0 ; i < nb_param ; i++) {
-                      pop();
-                    } // free tmp variables = nb param ???
-                    ajout_pop($2) ; // restore the frame for the callee function
-                    ajout_copy(addr - 8, get("!VAL")) ; // save return value
-                    pop();
-                    printf("Appel fonction avec parametre\n") ;}
-  | tID tLPAR {$2 = current_size() ; 
-            push("!ADR", 1, profondeur_globale) ; 
-            push("!VAL", 1, profondeur_globale) ;} tRPAR 
-                    {ajout_push($2) ; // prepare frame for callee function
-                    ajout_call(get_addr_funct($1)) ; // add call to the called function
-                    // PAS DE FREE TMP VARIABLES CAR PAS DE PARAM ????
-                    ajout_pop($2) ; // restore the frame for the callee function
-                    ajout_copy(addr - 8, get("!VAL")) ; // save return value
-                    pop();
-                    printf("Appel fonction sans paramètre \n") ;}
+  | FunctionCall
   | Expression tADD Expression  { /* instructer ADD last_add_used-1 last_add_used-1 last_add_used a
                                   jout_exp_arith(1, last_addr_used_moins_1, last_addr_used_moins_1, lat_addr_used); */ 
                                   ajout_exp_arith(1, addr - 8, addr - 8, addr - 4) ;
@@ -210,6 +189,31 @@ Expression_Log:
   | Expression_Log tOR Expression_Log                                                                         {printf("or || \n") ;}
   | Expression_Log tAND Expression_Log                                                                        {printf("and && \n") ;}
 ;
+
+FunctionCall:
+  tID tLPAR {$2 = current_size() ; 
+            push("!ADR", 1, profondeur_globale) ; 
+            push("!VAL", 1, profondeur_globale) ;} Parameter tRPAR 
+                    {ajout_push($2) ; // prepare frame for callee function
+                    ajout_call(get_addr_funct($1)) ; // add call to the called function
+                    int nb_param = (current_size() - $2 - 2) ;
+                    for (int i = 0 ; i < nb_param ; i++) {
+                      pop();
+                    } // free tmp variables = nb param ???
+                    ajout_pop($2) ; // restore the frame for the callee function
+                    ajout_copy(addr - 8, get("!VAL")) ; // save return value
+                    pop();
+                    printf("Appel fonction avec parametre\n") ;}
+  | tID tLPAR {$2 = current_size() ; 
+            push("!ADR", 1, profondeur_globale) ; 
+            push("!VAL", 1, profondeur_globale) ;} tRPAR 
+                    {ajout_push($2) ; // prepare frame for callee function
+                    ajout_call(get_addr_funct($1)) ; // add call to the called function
+                    // PAS DE FREE TMP VARIABLES CAR PAS DE PARAM ????
+                    ajout_pop($2) ; // restore the frame for the callee function
+                    ajout_copy(addr - 8, get("!VAL")) ; // save return value
+                    pop();
+                    printf("Appel fonction sans paramètre \n") ;}
 
 Parameter:
   Expression
@@ -250,6 +254,6 @@ int main(void) {
 
   execute() ; // interpréteur
 
-  execute_cross(); // cross-assembleur
+  // execute_cross(); // cross-assembleur
 
 }

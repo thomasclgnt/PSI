@@ -1,11 +1,12 @@
-/* TEST 1 :basique
+/* TEST 1 :basique */
 int f(int a) {
     return a + 2;
 }
 
 void main() {
     int a = f(2);
-} */
+    printf(a) ;
+} 
 
 /* TEST 2 : appels récursifs 
 int fact(int a) {
@@ -17,17 +18,20 @@ int fact(int a) {
 } 
 
 int main() {
-    return fact(3) ;
+    int a = fact(4) ;
+    printf(a) ;
+    return a ;
 } */
 
-/* TEST 3 : pas de paramètres */
-int f() {
-    return 1 ;
+/* TEST 3 : pas de paramètres 
+void f() {
+    int a = 1 ;
+    printf(a) ;
 }
 
 void main() {
-    int a = f();
-}
+    f();
+} */
 
 
 /* TEST 4 : plusieurs paramètres 
