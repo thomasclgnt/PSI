@@ -33,7 +33,8 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity Processeur is
 	Port ( CLK : in STD_LOGIC;
-       	RST : in STD_LOGIC
+       	RST : in STD_LOGIC;
+       	sortie : out STD_LOGIC_VECTOR(7 downto 0)
         	);
 end Processeur;
 
@@ -76,8 +77,7 @@ architecture Behavioral of Processeur is
  	end component ;
 	 
  	component Pipeline is
-    	Port ( alea : in STD_LOGIC;
-    	    jump : in STD_LOGIC;
+    	Port ( enable : in STD_LOGIC;
     	    A_in : in STD_LOGIC_VECTOR (7 downto 0);
         	Op_in : in STD_LOGIC_VECTOR (7 downto 0);
         	B_in : in STD_LOGIC_VECTOR (7 downto 0);
@@ -153,10 +153,26 @@ architecture Behavioral of Processeur is
 	signal alea_memre : STD_LOGIC ;
 	signal alea : STD_LOGIC :=  '0'; -- HMMMMM
 	signal instr_arithm : STD_LOGIC ;
+	
+	-- gestion des jumps
+	
 	signal jmp : STD_LOGIC := '0' ;
+	signal jmf : STD_LOGIC := '0' ;
+	signal jump_general : STD_LOGIC := '0' ;
+	
+	signal block_jmp : STD_LOGIC := '0'; 
+	signal propag_jmp : STD_LOGIC := '0';
+	signal block_instr : STD_LOGIC := '0';
+	signal block_lidi : STD_LOGIC := '0';
+	
+	signal jump_MUX1 : STD_LOGIC_VECTOR (7 downto 0);
+	signal jump_MUX2 : STD_LOGIC_VECTOR (7 downto 0);
+	signal jump_LC : STD_LOGIC_VECTOR (7 downto 0);
+	
     
 begin
 
+    sortie <= memre2bancreg.B;
     -- détection des aléas
 	instr_arithm <= '1' when (instruction_Op = x"01" or instruction_Op = x"02" or instruction_Op = x"03") else '0' ;
     lidi_read <= '1' when (instr_arithm = '1' or instruction_Op = x"05" or instruction_Op = x"0e") else '0'; -- instructions de l'ALU, STORE, COPY
@@ -166,14 +182,29 @@ begin
         or (exmem2memre.Op = x"01" or exmem2memre.Op = x"02" or exmem2memre.Op = x"03" or exmem2memre.Op = x"06" or exmem2memre.Op = x"0d" ) else '0';
     
     alea_diex <= '1'
-        when (lidi_read = '1' and diex_write = '1' and instr_arithm = '0' and instruction_B = lidi2diex.A)
+        when (instruction_Op = x"08" and diex_write = '1' and instr_arithm = '0' and instruction_A = lidi2diex.A) -- cas de JMF où la lecture se fait sur l'@cond stockée en A
+        or (lidi_read = '1' and diex_write = '1' and instr_arithm = '0' and instruction_B = lidi2diex.A)
         or (lidi_read = '1' and diex_write = '1' and instr_arithm = '1' and (instruction_B = lidi2diex.A or instruction_C = lidi2diex.A)) else '0';
     alea_exmem <= '1'
-        when (lidi_read = '1' and exmem_write = '1' and instr_arithm = '0' and instruction_B = diex2exmem.A)
+        when (instruction_Op = x"08" and exmem_write = '1' and instr_arithm = '0' and instruction_A = diex2exmem.A) -- cas de JMF où la lecture se fait sur l'@cond stockée en A
+        or (lidi_read = '1' and exmem_write = '1' and instr_arithm = '0' and instruction_B = diex2exmem.A)
         or (lidi_read = '1' and exmem_write = '1' and instr_arithm = '1' and (instruction_B = diex2exmem.A or instruction_C = diex2exmem.A)) else '0';
     alea <= '1' when alea_diex = '1' or  alea_exmem = '1' else '0';
     
-    jmp <= '1' when instruction_Op = x"07" else '0' ;
+    jmf <= '1' when (memre2bancreg.Op = x"08" and memre2bancreg.A = x"00") else '0' ;
+    
+    jmp <= '1' when memre2bancreg.Op = x"07" else '0' ;
+    
+    jump_general <= '1' when jmp = '1' or jmf = '1' else '0' ;
+    
+    block_jmp <= '1' when ((instruction_Op = x"07" or instruction_Op = x"08") and not(memre2bancreg.Op = x"07" or memre2bancreg.Op = x"08"))  else '0' ;
+    -- block_jmp <= '1' when ((instruction_Op = x"07" or memre2bancreg.Op = x"08") and jump_general='0')  else '0' ;
+    
+    propag_jmp <= '1' when (lidi2diex.Op = x"07" or diex2exmem.Op = x"07" or exmem2memre.Op = x"07" or memre2bancreg.Op = x"07"
+                            or lidi2diex.Op = x"08" or diex2exmem.Op = x"08" or exmem2memre.Op = x"08" or memre2bancreg.Op = x"08") else '0' ;
+    
+    block_lidi <= '1' when alea = '1' or propag_jmp = '1' else '0' ;
+    block_instr <= '1' when alea = '1' or block_jmp = '1' else '0' ;
 
     
     -- À FAIRE :
@@ -185,7 +216,7 @@ begin
             
 
 	main_instruction_mem : Instruction_Memory Port map (
-        enable => alea,
+        enable => block_instr,
         addr => IP,
         CLK => CLK,
         OUT_instr => instruction -- sort une instruction sur 32 bits
@@ -198,8 +229,7 @@ begin
 	instruction_Op <= instruction(31 downto 24) ;
     
 	pip_lidi : Pipeline Port map (
-	    alea => alea,
-	    jump => jmp,
+	    enable => block_lidi,
 	    -- rajouter une entrée du style et adapter le comportement de LiDi :
 	    A_in => instruction_A,
     	Op_in => instruction_Op,
@@ -214,9 +244,8 @@ begin
 	 
     
 	pip_diex : Pipeline Port map (
-		alea => '0', -- SE BLOQUE DANS TOUS LES CAS enable => alea_diex,
-        jump => '0', 
-	    A_in => lidi2diex.A,
+		enable => '0', 
+	    A_in => jump_MUX2,
     	Op_in => lidi2diex.Op,
     	B_in => lidi2diex_MUX,
     	C_in => QB_Banc_Reg,
@@ -228,8 +257,7 @@ begin
    );
 	 
 	pip_exmem : Pipeline Port map (
-		alea => '0',
-        jump => '0', 
+		enable => '0',
 	    A_in => diex2exmem.A,
     	Op_in => diex2exmem.Op,
     	B_in => diex2exmem_MUX,
@@ -242,8 +270,7 @@ begin
 	);
 
 	pip_memre : Pipeline Port map (
-	    alea => '0',
-        jump => '0',
+	    enable => '0',
         A_in => exmem2memre.A,
         Op_in => exmem2memre.Op,
         B_in => datamem2memre_MUX,
@@ -259,7 +286,7 @@ begin
 	main_banc_reg : Banc_Registre Port map (addrW => memre2bancreg.A (3 downto 0), --A fait 8 bits et rentre dans @W qui en fait 4
                 	Data => memre2bancreg.B,
                 	W => memre2bancreg_LC,
-                	addrA => lidi2diex.B(3 downto 0),
+                	addrA => jump_MUX1(3 downto 0),
                 	addrB => lidi2diex.C(3 downto 0),
                 	RST => RST,
                 	CLK => CLK, --signal clock du processeur
@@ -283,10 +310,10 @@ begin
 	);
 	
 	main_ip : Compteur_IP Port map ( 
-	           enable => alea,
-	           jmp => jmp,
+	           enable => block_instr, -- si alea ou block jump
+	           jmp => jump_general,
 	           CLK => CLK,
-	           IP_JMP => instruction_A,
+	           IP_JMP => jump_LC,
                IP_Out => IP
     );
 
@@ -312,10 +339,13 @@ diex2exmem_MUX <= Res_ALU when (diex2exmem.Op = x"01" or diex2exmem.Op = x"02" o
 -- en écriture seulement pour le store
 exmem2memre_LC <= '0' when exmem2memre.Op = x"0e" else '1' ;
 
-
 datamem2memre_MUX <= Out_Data_Mem when exmem2memre.Op = x"0d" else exmem2memre.B ;
 
 exmem2datamem_MUX <= exmem2memre.B when exmem2memre.Op = x"0d" else exmem2memre.A ;
-               	 
+
+-- gestion des jumps
+jump_LC <= memre2bancreg.A when memre2bancreg.Op = x"07" else memre2bancreg.B when memre2bancreg.Op = x"08" ;
+jump_MUX1 <= lidi2diex.A when lidi2diex.Op = x"08" else lidi2diex.B ;       	
+jump_MUX2 <= QA_Banc_Reg when lidi2diex.Op = x"08" else lidi2diex.A ;
     
 end Behavioral;

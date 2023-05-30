@@ -53,7 +53,11 @@ begin
     begin
         wait until CLK'event and CLK='1';
         if enable = '0' then
+            if jmp = '0' then
                 aux <= aux + 1 ;
+            else
+                aux <= to_integer(unsigned(IP_JMP)) + 1 ;
+            end if ;
         end if ;
     end process ;
 
