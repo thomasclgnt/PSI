@@ -1,1 +1,0 @@
--wto "33ff9bbadad94d61a45a9a753fc6638e" --incr --debug "typical" --relax --mt "8" -L "xil_defaultlib" -L "secureip" --snapshot "Test_Instruction_Memory_behav" "xil_defaultlib.Test_Instruction_Memory" -log "elaborate.log" 
