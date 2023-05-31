@@ -11,8 +11,6 @@ void cop_cross(int addr_res, int addr_op);
 
 void afc_cross(int addr_res, int val);
 
-void jmp_cross(int num_instr);
-
 void add_instr(int index, int pcode, int addr_res, int addr_op1, int addr_op2);
 
 void read_file_cross();

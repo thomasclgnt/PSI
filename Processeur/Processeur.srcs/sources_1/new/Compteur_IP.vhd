@@ -46,8 +46,8 @@ architecture Behavioral of Compteur_IP is
 signal aux : integer := 0 ;
 
 begin
-    -- IP_Out <= STD_LOGIC_VECTOR(to_unsigned(aux -1, 8)) ;
-    IP_Out <= IP_JMP when jmp = '1' else STD_LOGIC_VECTOR(to_unsigned(aux -1, 8)) ;
+    
+    IP_Out <= IP_JMP when jmp = '1' else STD_LOGIC_VECTOR(to_unsigned(aux - 1, 8)) ;
     
     process
     begin

@@ -14,35 +14,36 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 7443 
+INFO: Helper process launched with PID 3414 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1255.273 ; gain = 83.812 ; free physical = 11658 ; free virtual = 22608
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 1255.277 ; gain = 83.828 ; free physical = 3912 ; free virtual = 14828
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'Processeur' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:42]
-INFO: [Synth 8-3491] module 'Instruction_Memory' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Instruction_Memory.vhd:34' bound to instance 'main_instruction_mem' of component 'Instruction_Memory' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:203]
+INFO: [Synth 8-3491] module 'Instruction_Memory' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Instruction_Memory.vhd:34' bound to instance 'main_instruction_mem' of component 'Instruction_Memory' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:218]
 INFO: [Synth 8-638] synthesizing module 'Instruction_Memory' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Instruction_Memory.vhd:41]
 INFO: [Synth 8-256] done synthesizing module 'Instruction_Memory' (1#1) [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Instruction_Memory.vhd:41]
-INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pip_lidi' of component 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:216]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pip_lidi' of component 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:231]
 INFO: [Synth 8-638] synthesizing module 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:48]
 INFO: [Synth 8-256] done synthesizing module 'Pipeline' (2#1) [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:48]
-INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pip_diex' of component 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:231]
-INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pip_exmem' of component 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:244]
-INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pip_memre' of component 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:257]
-INFO: [Synth 8-3491] module 'Banc_Registre' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Banc_Registre.vhd:34' bound to instance 'main_banc_reg' of component 'Banc_Registre' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:271]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pip_diex' of component 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:246]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pip_exmem' of component 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:259]
+INFO: [Synth 8-3491] module 'Pipeline' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:34' bound to instance 'pip_memre' of component 'Pipeline' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:272]
+INFO: [Synth 8-3491] module 'Banc_Registre' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Banc_Registre.vhd:34' bound to instance 'main_banc_reg' of component 'Banc_Registre' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:286]
 INFO: [Synth 8-638] synthesizing module 'Banc_Registre' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Banc_Registre.vhd:46]
 INFO: [Synth 8-256] done synthesizing module 'Banc_Registre' (3#1) [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Banc_Registre.vhd:46]
-INFO: [Synth 8-3491] module 'ALU' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/ALU.vhd:28' bound to instance 'main_alu' of component 'ALU' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:282]
+INFO: [Synth 8-3491] module 'ALU' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/ALU.vhd:28' bound to instance 'main_alu' of component 'ALU' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:297]
 INFO: [Synth 8-638] synthesizing module 'ALU' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/ALU.vhd:39]
 INFO: [Synth 8-256] done synthesizing module 'ALU' (4#1) [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/ALU.vhd:39]
-INFO: [Synth 8-3491] module 'Data_Memory' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Data_Memory.vhd:34' bound to instance 'main_data_mem' of component 'Data_Memory' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:288]
+INFO: [Synth 8-3491] module 'Data_Memory' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Data_Memory.vhd:34' bound to instance 'main_data_mem' of component 'Data_Memory' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:303]
 INFO: [Synth 8-638] synthesizing module 'Data_Memory' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Data_Memory.vhd:43]
 INFO: [Synth 8-256] done synthesizing module 'Data_Memory' (5#1) [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Data_Memory.vhd:43]
-INFO: [Synth 8-3491] module 'Compteur_IP' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Compteur_IP.vhd:34' bound to instance 'main_ip' of component 'Compteur_IP' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:297]
+INFO: [Synth 8-3491] module 'Compteur_IP' declared at '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Compteur_IP.vhd:34' bound to instance 'main_ip' of component 'Compteur_IP' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:312]
 INFO: [Synth 8-638] synthesizing module 'Compteur_IP' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Compteur_IP.vhd:44]
 INFO: [Synth 8-256] done synthesizing module 'Compteur_IP' (6#1) [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Compteur_IP.vhd:44]
+WARNING: [Synth 8-3936] Found unconnected internal register 'jump_MUX1_reg' and it is trimmed from '8' to '4' bits. [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:289]
 INFO: [Synth 8-256] done synthesizing module 'Processeur' (7#1) [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:42]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1313.898 ; gain = 142.438 ; free physical = 11638 ; free virtual = 22590
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1313.902 ; gain = 142.453 ; free physical = 3894 ; free virtual = 14812
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -55,10 +56,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1313.898 ; gain = 142.438 ; free physical = 11639 ; free virtual = 22591
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1313.902 ; gain = 142.453 ; free physical = 3902 ; free virtual = 14819
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1313.898 ; gain = 142.438 ; free physical = 11639 ; free virtual = 22591
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1313.902 ; gain = 142.453 ; free physical = 3902 ; free virtual = 14819
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a35tcpg236-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -74,22 +75,22 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 1673.758 ; gain = 0.000 ; free physical = 11349 ; free virtual = 22336
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1643.207 ; gain = 0.000 ; free physical = 3600 ; free virtual = 14553
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:22 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11437 ; free virtual = 22425
+Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:22 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3693 ; free virtual = 14647
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tcpg236-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:22 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11437 ; free virtual = 22425
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:22 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3693 ; free virtual = 14647
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:22 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11437 ; free virtual = 22425
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:22 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3695 ; free virtual = 14649
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5544] ROM "registre_reg[0]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "registre_reg[1]" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
@@ -208,9 +209,10 @@ INFO: [Synth 8-5546] ROM "memory_reg[158]" won't be mapped to RAM because it is 
 INFO: [Synth 8-5546] ROM "memory_reg[157]" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "memory_reg[156]" won't be mapped to RAM because it is too sparse
 INFO: [Common 17-14] Message 'Synth 8-5546' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-WARNING: [Synth 8-327] inferring latch for variable 'diex2exmem_LC_reg' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:285]
+WARNING: [Synth 8-327] inferring latch for variable 'diex2exmem_LC_reg' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:300]
+WARNING: [Synth 8-327] inferring latch for variable 'jump_LC_reg' [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Processeur.vhd:316]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:25 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11417 ; free virtual = 22405
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:25 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3664 ; free virtual = 14619
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -223,21 +225,22 @@ Start RTL Component Statistics
 ---------------------------------------------------------------------------------
 Detailed RTL Component Info : 
 +---Adders : 
-	   2 Input      9 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 2     
 	   3 Input      8 Bit       Adders := 1     
 	   2 Input      8 Bit       Adders := 1     
 +---Registers : 
 	               32 Bit    Registers := 1     
 	                8 Bit    Registers := 288   
 +---Muxes : 
-	   5 Input     32 Bit        Muxes := 1     
-	   2 Input      8 Bit        Muxes := 6     
+	 256 Input     32 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 7     
 	   4 Input      8 Bit        Muxes := 1     
-	 256 Input      3 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 1     
 	   3 Input      3 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 276   
+	   2 Input      1 Bit        Muxes := 277   
+	   3 Input      1 Bit        Muxes := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -248,18 +251,19 @@ Hierarchical RTL Component report
 Module Processeur 
 Detailed RTL Component Info : 
 +---Muxes : 
-	   2 Input      8 Bit        Muxes := 2     
+	   2 Input      8 Bit        Muxes := 3     
+	   2 Input      4 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 1     
 	   3 Input      3 Bit        Muxes := 1     
 	   2 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 4     
+	   3 Input      1 Bit        Muxes := 1     
 Module Instruction_Memory 
 Detailed RTL Component Info : 
 +---Registers : 
 	               32 Bit    Registers := 1     
 +---Muxes : 
-	   5 Input     32 Bit        Muxes := 1     
-	 256 Input      3 Bit        Muxes := 1     
+	 256 Input     32 Bit        Muxes := 1     
 Module Pipeline 
 Detailed RTL Component Info : 
 +---Registers : 
@@ -289,6 +293,7 @@ Detailed RTL Component Info :
 Module Compteur_IP 
 Detailed RTL Component Info : 
 +---Adders : 
+	   2 Input      9 Bit       Adders := 1     
 	   2 Input      8 Bit       Adders := 1     
 +---Muxes : 
 	   2 Input      8 Bit        Muxes := 1     
@@ -310,17 +315,8 @@ Start Cross Boundary and Area Optimization
 Warning: Parallel synthesis criteria is not met 
 WARNING: [Synth 8-6014] Unused sequential element pip_exmem/C_out_reg was removed.  [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:66]
 WARNING: [Synth 8-6014] Unused sequential element pip_memre/C_out_reg was removed.  [/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.srcs/sources_1/new/Pipeline.vhd:66]
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[16]' (FDE) to 'main_instruction_mem/OUT_instr_reg[9]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[17]' (FDE) to 'main_instruction_mem/OUT_instr_reg[10]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[18]' (FDE) to 'main_instruction_mem/OUT_instr_reg[24]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[19]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[20]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[21]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[22]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[23]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[14]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[15]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[11]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[12]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[13]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[6]' (FDE) to 'main_instruction_mem/OUT_instr_reg[0]'
@@ -330,21 +326,22 @@ INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[1]' (F
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[2]' (FDE) to 'main_instruction_mem/OUT_instr_reg[3]'
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[3]' (FDE) to 'main_instruction_mem/OUT_instr_reg[4]'
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[4]' (FDE) to 'main_instruction_mem/OUT_instr_reg[5]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[5]' (FDE) to 'main_instruction_mem/OUT_instr_reg[27]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[5]' (FDE) to 'main_instruction_mem/OUT_instr_reg[19]'
 INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[25]' (FDE) to 'main_instruction_mem/OUT_instr_reg[26]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[27]' (FDE) to 'main_instruction_mem/OUT_instr_reg[28]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[28]' (FDE) to 'main_instruction_mem/OUT_instr_reg[29]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[29]' (FDE) to 'main_instruction_mem/OUT_instr_reg[30]'
-INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[31]' (FDE) to 'main_instruction_mem/OUT_instr_reg[30]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[0]' (FDR) to 'pip_lidi/B_out_reg[1]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[1]' (FDR) to 'pip_lidi/B_out_reg[2]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[2]' (FDR) to 'pip_lidi/Op_out_reg[0]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[3]' (FDR) to 'pip_lidi/C_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[24]' (FDE) to 'main_instruction_mem/OUT_instr_reg[19]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[28]' (FDE) to 'main_instruction_mem/OUT_instr_reg[19]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[29]' (FDE) to 'main_instruction_mem/OUT_instr_reg[19]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[31]' (FDE) to 'main_instruction_mem/OUT_instr_reg[19]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[30]' (FDE) to 'main_instruction_mem/OUT_instr_reg[19]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[22]' (FDE) to 'main_instruction_mem/OUT_instr_reg[19]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[23]' (FDE) to 'main_instruction_mem/OUT_instr_reg[19]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[19]' (FDE) to 'main_instruction_mem/OUT_instr_reg[20]'
+INFO: [Synth 8-3886] merging instance 'main_instruction_mem/OUT_instr_reg[20]' (FDE) to 'main_instruction_mem/OUT_instr_reg[21]'
+INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[4]' (FDR) to 'pip_lidi/C_out_reg[0]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[4]' (FDR) to 'pip_lidi/C_out_reg[0]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[5]' (FDR) to 'pip_lidi/C_out_reg[0]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[6]' (FDR) to 'pip_lidi/C_out_reg[0]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[7]' (FDR) to 'pip_lidi/C_out_reg[0]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[4]' (FDR) to 'pip_lidi/C_out_reg[0]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[5]' (FDR) to 'pip_lidi/C_out_reg[0]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[6]' (FDR) to 'pip_lidi/C_out_reg[0]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[7]' (FDR) to 'pip_lidi/C_out_reg[0]'
@@ -354,39 +351,30 @@ INFO: [Synth 8-3886] merging instance 'pip_lidi/B_out_reg[4]' (FDR) to 'pip_lidi
 INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[3]' (FDR) to 'pip_lidi/C_out_reg[0]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[0]' (FDR) to 'pip_lidi/C_out_reg[1]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[1]' (FDR) to 'pip_lidi/C_out_reg[2]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[2]' (FDR) to 'pip_lidi/B_out_reg[3]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/B_out_reg[3]' (FDR) to 'pip_lidi/B_out_reg[7]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/B_out_reg[7]' (FDR) to 'pip_lidi/Op_out_reg[3]'
+INFO: [Synth 8-3886] merging instance 'pip_lidi/C_out_reg[2]' (FDR) to 'pip_lidi/Op_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'pip_lidi/A_out_reg[3]' (FDR) to 'pip_lidi/Op_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'pip_lidi/B_out_reg[7]' (FDR) to 'pip_lidi/Op_out_reg[0]'
+INFO: [Synth 8-3886] merging instance 'pip_lidi/Op_out_reg[0]' (FDR) to 'pip_lidi/Op_out_reg[4]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/Op_out_reg[2]' (FDR) to 'pip_lidi/Op_out_reg[1]'
-INFO: [Synth 8-3886] merging instance 'pip_lidi/Op_out_reg[3]' (FDR) to 'pip_lidi/Op_out_reg[4]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/Op_out_reg[4]' (FDR) to 'pip_lidi/Op_out_reg[5]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/Op_out_reg[5]' (FDR) to 'pip_lidi/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_lidi/Op_out_reg[6]' (FDR) to 'pip_lidi/Op_out_reg[7]'
-INFO: [Synth 8-3886] merging instance 'pip_diex/A_out_reg[2]' (FDR) to 'pip_diex/Op_out_reg[0]'
-INFO: [Synth 8-3886] merging instance 'pip_diex/A_out_reg[3]' (FDR) to 'pip_diex/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_diex/A_out_reg[4]' (FDR) to 'pip_diex/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_diex/A_out_reg[5]' (FDR) to 'pip_diex/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_diex/A_out_reg[6]' (FDR) to 'pip_diex/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_diex/A_out_reg[7]' (FDR) to 'pip_diex/Op_out_reg[6]'
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (\diex2exmem_LC_reg[2] )
+INFO: [Synth 8-3886] merging instance 'pip_diex/Op_out_reg[0]' (FDR) to 'pip_diex/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_diex/Op_out_reg[2]' (FDR) to 'pip_diex/Op_out_reg[1]'
-INFO: [Synth 8-3886] merging instance 'pip_diex/Op_out_reg[3]' (FDR) to 'pip_diex/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_diex/Op_out_reg[4]' (FDR) to 'pip_diex/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_diex/Op_out_reg[5]' (FDR) to 'pip_diex/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_diex/Op_out_reg[6]' (FDR) to 'pip_diex/Op_out_reg[7]'
-INFO: [Synth 8-3886] merging instance 'pip_exmem/A_out_reg[2]' (FDR) to 'pip_exmem/Op_out_reg[0]'
-INFO: [Synth 8-3886] merging instance 'pip_exmem/A_out_reg[3]' (FDR) to 'pip_exmem/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_exmem/A_out_reg[4]' (FDR) to 'pip_exmem/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_exmem/A_out_reg[5]' (FDR) to 'pip_exmem/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_exmem/A_out_reg[6]' (FDR) to 'pip_exmem/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_exmem/A_out_reg[7]' (FDR) to 'pip_exmem/Op_out_reg[6]'
+INFO: [Synth 8-3886] merging instance 'pip_exmem/Op_out_reg[0]' (FDR) to 'pip_exmem/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_exmem/Op_out_reg[2]' (FDR) to 'pip_exmem/Op_out_reg[1]'
-INFO: [Synth 8-3886] merging instance 'pip_exmem/Op_out_reg[3]' (FDR) to 'pip_exmem/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_exmem/Op_out_reg[4]' (FDR) to 'pip_exmem/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_exmem/Op_out_reg[5]' (FDR) to 'pip_exmem/Op_out_reg[6]'
 INFO: [Synth 8-3886] merging instance 'pip_exmem/Op_out_reg[6]' (FDR) to 'pip_exmem/Op_out_reg[7]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/A_out_reg[2]' (FDR) to 'pip_memre/Op_out_reg[0]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[2]' (FDR) to 'pip_memre/Op_out_reg[1]'
+INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[1]' (FDR) to 'pip_memre/Op_out_reg[2]'
+INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[0]' (FDR) to 'pip_memre/Op_out_reg[6]'
+INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[7]' (FDR) to 'pip_memre/Op_out_reg[6]'
+INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[6]' (FDR) to 'pip_memre/Op_out_reg[4]'
+INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[4]' (FDR) to 'pip_memre/Op_out_reg[5]'
 WARNING: [Synth 8-3332] Sequential element (main_data_mem/memory_reg[255][7]) is unused and will be removed from module Processeur.
 WARNING: [Synth 8-3332] Sequential element (main_data_mem/memory_reg[255][6]) is unused and will be removed from module Processeur.
 WARNING: [Synth 8-3332] Sequential element (main_data_mem/memory_reg[255][5]) is unused and will be removed from module Processeur.
@@ -488,27 +476,8 @@ WARNING: [Synth 8-3332] Sequential element (main_data_mem/memory_reg[243][6]) is
 WARNING: [Synth 8-3332] Sequential element (main_data_mem/memory_reg[243][5]) is unused and will be removed from module Processeur.
 WARNING: [Synth 8-3332] Sequential element (main_data_mem/memory_reg[243][4]) is unused and will be removed from module Processeur.
 INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
-INFO: [Synth 8-3886] merging instance 'pip_memre/A_out_reg[6]' (FDR) to 'pip_memre/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/A_out_reg[7]' (FDR) to 'pip_memre/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/A_out_reg[5]' (FDR) to 'pip_memre/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/A_out_reg[4]' (FDR) to 'pip_memre/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/A_out_reg[3]' (FDR) to 'pip_memre/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[4]' (FDR) to 'pip_memre/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[5]' (FDR) to 'pip_memre/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[7]' (FDR) to 'pip_memre/Op_out_reg[6]'
-INFO: [Synth 8-3886] merging instance 'pip_memre/Op_out_reg[6]' (FDR) to 'pip_memre/Op_out_reg[3]'
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (\main_instruction_mem/OUT_instr_reg[26] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\main_banc_reg/registre_reg[15][7] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\main_banc_reg/registre_reg[15][6] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\main_banc_reg/registre_reg[15][0] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\main_banc_reg/registre_reg[15][2] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\main_banc_reg/registre_reg[15][1] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\main_banc_reg/registre_reg[15][3] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\main_banc_reg/registre_reg[15][5] )
-INFO: [Synth 8-3333] propagating constant 0 across sequential element (\main_banc_reg/registre_reg[15][4] )
-INFO: [Synth 8-3333] propagating constant 1 across sequential element (\diex2exmem_LC_reg[0] )
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:28 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11390 ; free virtual = 22384
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:18 ; elapsed = 00:00:30 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3651 ; free virtual = 14612
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -520,13 +489,13 @@ Report RTL Partitions:
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:36 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11281 ; free virtual = 22283
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3542 ; free virtual = 14510
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished Timing Optimization : Time (s): cpu = 00:00:24 ; elapsed = 00:00:38 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3490 ; free virtual = 14466
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -538,7 +507,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:23 ; elapsed = 00:00:36 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished Technology Mapping : Time (s): cpu = 00:00:24 ; elapsed = 00:00:38 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3480 ; free virtual = 14456
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -562,7 +531,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished IO Insertion : Time (s): cpu = 00:00:25 ; elapsed = 00:00:38 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3462 ; free virtual = 14446
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -575,7 +544,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3462 ; free virtual = 14446
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -587,25 +556,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3462 ; free virtual = 14446
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3462 ; free virtual = 14446
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3461 ; free virtual = 14445
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3461 ; free virtual = 14445
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -615,7 +584,7 @@ Static Shift Register Report:
 +------------+------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 |Module Name | RTL Name               | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
 +------------+------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
-|Processeur  | pip_memre/A_out_reg[1] | 3      | 2     | NO           | NO                 | YES               | 2      | 0       | 
+|Processeur  | pip_memre/B_out_reg[7] | 3      | 8     | NO           | NO                 | YES               | 8      | 0       | 
 +------------+------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 
 ---------------------------------------------------------------------------------
@@ -636,54 +605,56 @@ Report Cell Usage:
 |      |Cell   |Count |
 +------+-------+------+
 |1     |BUFG   |     1|
-|2     |CARRY4 |     4|
-|3     |LUT1   |     2|
-|4     |LUT2   |     8|
+|2     |CARRY4 |     2|
+|3     |LUT1   |     1|
+|4     |LUT2   |     1|
 |5     |LUT3   |     8|
-|6     |LUT4   |     9|
-|7     |LUT5   |    22|
-|8     |LUT6   |    33|
-|9     |MUXF7  |     1|
-|10    |SRL16E |     2|
-|11    |FDRE   |   126|
-|12    |IBUF   |     2|
-|13    |OBUF   |     8|
+|6     |LUT4   |    16|
+|7     |LUT5   |    46|
+|8     |LUT6   |    53|
+|9     |MUXF7  |    16|
+|10    |MUXF8  |     8|
+|11    |SRL16E |     8|
+|12    |FDRE   |   197|
+|13    |LD     |     8|
+|14    |IBUF   |     2|
+|15    |OBUF   |     8|
 +------+-------+------+
 
 Report Instance Areas: 
 +------+-----------------------+-------------------+------+
 |      |Instance               |Module             |Cells |
 +------+-----------------------+-------------------+------+
-|1     |top                    |                   |   226|
-|2     |  main_alu             |ALU                |     2|
-|3     |  main_banc_reg        |Banc_Registre      |    88|
-|4     |  main_instruction_mem |Instruction_Memory |     5|
-|5     |  main_ip              |Compteur_IP        |    14|
-|6     |  pip_diex             |Pipeline           |    36|
-|7     |  pip_exmem            |Pipeline_0         |    14|
-|8     |  pip_lidi             |Pipeline_1         |    15|
-|9     |  pip_memre            |Pipeline_2         |    41|
+|1     |top                    |                   |   375|
+|2     |  main_banc_reg        |Banc_Registre      |   185|
+|3     |  main_instruction_mem |Instruction_Memory |    19|
+|4     |  main_ip              |Compteur_IP        |    31|
+|5     |  pip_diex             |Pipeline           |    17|
+|6     |  pip_exmem            |Pipeline_0         |    20|
+|7     |  pip_lidi             |Pipeline_1         |    28|
+|8     |  pip_memre            |Pipeline_2         |    56|
 +------+-----------------------+-------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11269 ; free virtual = 22270
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1643.207 ; gain = 471.758 ; free physical = 3461 ; free virtual = 14445
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 2118 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:21 . Memory (MB): peak = 1673.758 ; gain = 142.438 ; free physical = 11328 ; free virtual = 22330
-Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:37 . Memory (MB): peak = 1673.758 ; gain = 502.297 ; free physical = 11336 ; free virtual = 22337
+Synthesis finished with 0 errors, 0 critical warnings and 2063 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:17 ; elapsed = 00:00:23 . Memory (MB): peak = 1643.207 ; gain = 142.453 ; free physical = 3531 ; free virtual = 14517
+Synthesis Optimization Complete : Time (s): cpu = 00:00:25 ; elapsed = 00:00:39 . Memory (MB): peak = 1643.215 ; gain = 471.758 ; free physical = 3535 ; free virtual = 14521
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 7 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 36 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
-No Unisim elements were transformed.
+  A total of 8 instances were transformed.
+  LD => LDCE: 8 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-249 Infos, 103 Warnings, 0 Critical Warnings and 0 Errors encountered.
+213 Infos, 105 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:38 . Memory (MB): peak = 1673.758 ; gain = 513.938 ; free physical = 11322 ; free virtual = 22323
+synth_design: Time (s): cpu = 00:00:26 ; elapsed = 00:00:40 . Memory (MB): peak = 1643.215 ; gain = 483.391 ; free physical = 3519 ; free virtual = 14514
 WARNING: [Constraints 18-5210] No constraint will be written out.
 INFO: [Common 17-1381] The checkpoint '/home/mecaliff/Bureau/4A/S8/PSI/Processeur/Processeur.runs/synth_1/Processeur.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file Processeur_utilization_synth.rpt -pb Processeur_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.18 . Memory (MB): peak = 1697.770 ; gain = 0.000 ; free physical = 11312 ; free virtual = 22314
-INFO: [Common 17-206] Exiting Vivado at Tue May 30 14:53:53 2023...
+report_utilization: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.11 . Memory (MB): peak = 1667.219 ; gain = 0.000 ; free physical = 3508 ; free virtual = 14513
+INFO: [Common 17-206] Exiting Vivado at Wed May 31 12:33:03 2023...

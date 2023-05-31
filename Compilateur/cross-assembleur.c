@@ -80,9 +80,6 @@ void afc_cross(int addr_res, int val){
     add_instr(index_rom_cross, 14, addr_res, addr_current, -1) ;
 }
 
-void jmp_cross(int num_instr){
-    tab_rom[index_rom_cross][1] = num_instr + 1 ;
-}
 
 void read_file_cross(){
 
@@ -183,23 +180,19 @@ void execute_cross(){
                 break;
            case 3:
            // toutes les instructions de l'ALU
-               ual_cross(3, tab_rom[index_rom_cross][1], tab_rom[index_rom_cross][2], tab_rom[index_rom_cross][3]) ;
-               break;
+                ual_cross(3, tab_rom[index_rom_cross][1], tab_rom[index_rom_cross][2], tab_rom[index_rom_cross][3]) ;
+                break;
            case 5:
            // COP
-               cop_cross(tab_rom[index_rom_cross][1], tab_rom[index_rom_cross][2]);
-               break;
+                cop_cross(tab_rom[index_rom_cross][1], tab_rom[index_rom_cross][2]);
+                break;
            case 6:
            // AFC
-               afc_cross(tab_rom[index_rom_cross][1], tab_rom[index_rom_cross][2]);
-               break;
-           case 7:
-           // JMP
-               jmp_cross(tab_rom[index_rom_cross][1]) ;
-               break;
+                afc_cross(tab_rom[index_rom_cross][1], tab_rom[index_rom_cross][2]);
+                break;
            default:
-               assert(0 && "Erreur : L'instruction n'est pas prise en charge par le processeur\n");
-               break ;
+                assert(0 && "Erreur : L'instruction n'est pas prise en charge par le processeur\n");
+                break ;
         }
 
         index_rom_cross ++ ;

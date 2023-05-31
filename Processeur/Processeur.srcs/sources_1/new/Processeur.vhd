@@ -344,7 +344,7 @@ datamem2memre_MUX <= Out_Data_Mem when exmem2memre.Op = x"0d" else exmem2memre.B
 exmem2datamem_MUX <= exmem2memre.B when exmem2memre.Op = x"0d" else exmem2memre.A ;
 
 -- gestion des jumps
-jump_LC <= memre2bancreg.A when memre2bancreg.Op = x"07" else memre2bancreg.B when memre2bancreg.Op = x"08" ;
+jump_LC <= memre2bancreg.A when memre2bancreg.Op = x"07" else memre2bancreg.B when memre2bancreg.Op = x"08" ; -- en rélaité, plus un MUX qu'un LC
 jump_MUX1 <= lidi2diex.A when lidi2diex.Op = x"08" else lidi2diex.B ;       	
 jump_MUX2 <= QA_Banc_Reg when lidi2diex.Op = x"08" else lidi2diex.A ;
     

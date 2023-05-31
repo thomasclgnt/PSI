@@ -151,8 +151,6 @@ Initialisation:
 
 Expression:
     tID   {printf("tempID is %s\n", $1) ; push("tempID", 1, profondeur_globale) ; //creer var tmp
-          printf("COPY 5\n"); printf("\nÉtat de la pile : \n") ;
-          // print_stack() ; printf("\n") ; 
           printf("je cherche : %s @%d", $1, get($1)) ;
           ajout_copy(addr - 4, get($1)) /* copier $1 dans cette var tm p ; 
           - addr = last adress used */ ; 

@@ -82,7 +82,7 @@ void ret(){
 }
 
 void push_asm(int offset){
-    ebp = ebp + (offset * 4) ; // MULTIPLIER L'OFFSET car nos adresses avancent de 4 en 4 (données sur 4 octets);
+    ebp = ebp + (offset * 4) ; // MULTIPLIER L'OFFSET car nos adresses avancent de 4 en 4 (données sur 4 octets)
 }
 
 void call(int addr_appel){
