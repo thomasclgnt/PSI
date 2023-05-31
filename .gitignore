@@ -6,11 +6,11 @@ lex.c
 bison.output
 bison
 
-/Processeur/processeur_psi.cache/*
-/Processeur/processeur_psi.hw/*
-/Processeur/processeur_psi.ip_user_files/*
-/Processeur/processeur_psi.runs/*
-/Processeur/processeur_psi.sim/*
+/Processeur/Processeur.cache/*
+/Processeur/Processeur.hw/*
+/Processeur/Processeur.ip_user_files/*
+/Processeur/Processeur.runs/*
+/Processeur/Processeur.sim/*
 
 
 
